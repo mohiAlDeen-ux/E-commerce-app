@@ -4,6 +4,7 @@ import 'package:flutter_application_1/presentation/on_board/pages/on_board.dart'
 import 'package:flutter_application_1/presentation/splash/bloc/spash_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_application_1/presentation/splash/bloc/spash_cubit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -26,10 +27,13 @@ class SplashPage extends StatelessWidget {
           }
         },
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Splash"),
+        backgroundColor: Theme.of(context).primaryColor,
+        body: Center(
+          child: SvgPicture.asset(
+            "assets/icons/logo.svg"
           ),
         ),
+      ),
       ),
     );
   }
