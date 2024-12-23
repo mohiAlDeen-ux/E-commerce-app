@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/common/helper/validat/validat.dart';
+import 'package:flutter_application_1/core/constant/constant.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+// ignore: must_be_immutable
+class EmailTextField extends StatelessWidget {
+  void Function(String?)? onSavedFunction;
+
+  EmailTextField({super.key, required this.onSavedFunction});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      onSaved: onSavedFunction,
+      validator: emaildValidator.call,
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        hintText: "Email address",
+        prefixIcon: Padding(
+          padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+          child: SvgPicture.asset(
+            "assets/icons/Message.svg",
+            height: 24,
+            width: 24,
+            colorFilter: ColorFilter.mode(
+                Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.3),
+                BlendMode.srcIn),
+          ),
+        ),
+      ),
+    );
+  }
+}
