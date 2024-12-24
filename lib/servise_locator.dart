@@ -3,6 +3,8 @@ import 'package:flutter_application_1/data/auth/src/auth_api_service.dart';
 import 'package:flutter_application_1/data/auth/src/auth_local_service.dart';
 import 'package:flutter_application_1/data/categories/repository/categories.dart';
 import 'package:flutter_application_1/data/categories/src/categories_api_service.dart';
+import 'package:flutter_application_1/data/preferences/repository/preferences.dart';
+import 'package:flutter_application_1/data/preferences/src/preferences_local_services.dart';
 import 'package:flutter_application_1/data/products/repository/products.dart';
 import 'package:flutter_application_1/data/products/src/products_api_services.dart';
 import 'package:flutter_application_1/domain/auth/repository/auth.dart';
@@ -16,8 +18,10 @@ import 'package:flutter_application_1/domain/auth/usecase/signin_usecase.dart';
 import 'package:flutter_application_1/domain/auth/usecase/signup_usecase.dart';
 import 'package:flutter_application_1/domain/categories/repository/category.dart';
 import 'package:flutter_application_1/domain/categories/usecase/get_categories_usecase.dart';
+import 'package:flutter_application_1/domain/preferences/repository/preferences.dart';
+import 'package:flutter_application_1/domain/preferences/usecase/is_first_time_usecase.dart';
+import 'package:flutter_application_1/domain/preferences/usecase/set_first_time_usecase.dart';
 import 'package:flutter_application_1/domain/product/repository/products.dart';
-import 'package:flutter_application_1/presentation/home/widget/categories.dart';
 
 import 'package:get_it/get_it.dart';
 
@@ -34,6 +38,8 @@ void setupServiceLocator(){
 
   getIt.registerSingleton<ProductsApiServices>(ProductsApiServicesImp());
 
+  getIt.registerSingleton<PreferencesLocalServices>(PreferencesLocalServicesImp());
+
 
   //repository
   getIt.registerSingleton<AuthRepository>(AuthRepositoryImp());
@@ -41,6 +47,8 @@ void setupServiceLocator(){
   getIt.registerSingleton<CategoryRepository>(CategoryRepositoryImp());
 
   getIt.registerSingleton<ProductsRepository>(ProductsRepositoryImp());
+
+  getIt.registerSingleton<PreferencesRepository>(PreferencesRepositoryImp());
 
 
   //usecase
@@ -61,6 +69,10 @@ void setupServiceLocator(){
   getIt.registerSingleton<ResetPasswordPyOldPasswordUseCase>(ResetPasswordPyOldPasswordUseCase());
 
   getIt.registerSingleton<GetCategoriesUsecase>(GetCategoriesUsecase());
-  
+
+  getIt.registerSingleton<IsFirstTimeUsecase>(IsFirstTimeUsecase());
+
+  getIt.registerSingleton<SetFirstTimeUsecase>(SetFirstTimeUsecase());
+
 
 }

@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'ecomace_with_omar Template by The Flutter Way',
+      title: 'ecommerce_with_omar Template by The Flutter Way',
       theme: AppTheme.lightTheme(context),
-      home: SplashPage( ),
+      home: SplashPage(),
     );
   }
 }

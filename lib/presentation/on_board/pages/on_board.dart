@@ -97,6 +97,7 @@ class _MyWidgetState extends State<OnBoardPage> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
+                            
                             context.read<OnBoardCubit>().endOnBoard();
                             //AppNavigator.pushReplacement(context, const MainPage());
                         },
