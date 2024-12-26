@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/button/button_state.dart';
 import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
+import 'package:flutter_application_1/common/bloc/task/task_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
@@ -19,9 +19,9 @@ class BasicReactiveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder < ButtonCubit, ButtonState > (
+    return BlocBuilder < ButtonCubit, TaskState > (
       builder: (context, state) {
-        if (state is ButtonLoadingState) {
+        if (state is LoadingState) {
           return _loading();
         }
         return _initial();

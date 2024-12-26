@@ -1,4 +1,3 @@
-import 'package:flutter_application_1/data/preferences/src/preferences_local_services.dart';
 import 'package:flutter_application_1/domain/auth/usecase/is_logged_in_usecase.dart';
 import 'package:flutter_application_1/domain/preferences/repository/preferences.dart';
 import 'package:flutter_application_1/servise_locator.dart';

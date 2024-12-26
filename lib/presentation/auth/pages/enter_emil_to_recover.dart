@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/button/button_state.dart';
+import 'package:flutter_application_1/common/bloc/task/task_state.dart';
 import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
 import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
 import 'package:flutter_application_1/core/constant/constant.dart';
 import 'package:flutter_application_1/domain/auth/usecase/sent_verification_code_usecase.dart';
+import 'package:flutter_application_1/presentation/auth/bloc/erorr_masage_cubit.dart';
 import 'package:flutter_application_1/presentation/auth/pages/enter_verification_code.dart';
 import 'package:flutter_application_1/presentation/auth/widget/email_text_field.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_application_1/presentation/auth/widget/error_masage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+//import 'package:dartz/dartz.dart';
 
 class EnterEmilToRecover extends StatelessWidget {
   EnterEmilToRecover({super.key});
@@ -27,15 +29,19 @@ class EnterEmilToRecover extends StatelessWidget {
         BlocProvider(
           create: (context) => ButtonCubit(),
         ),
+        BlocProvider(
+          create: (context) => ErrorMasageCubit()
+        ),
       ],
-      child: BlocListener<ButtonCubit, ButtonState>(
+      child: BlocListener<ButtonCubit, TaskState>(
         listener: (context, state) {
-          if(state is ButtonSuccessState){
-            print(email);
+          if(state is SuccessState){
+           //print(email);
            AppNavigator.push(
            context, EnterVerificationCode(email: email!,));
-          }else if(state is ButtonFailureState){
-            print(state.errorMessage);
+          }else if(state is FailureState){
+            print(state.error);
+            context.read<ErrorMasageCubit>().showError(state.error);
           }
         }
         ,
@@ -89,10 +95,11 @@ class EnterEmilToRecover extends StatelessWidget {
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
                                   formKey.currentState!.save();
-                                  context.read<ButtonCubit>().execute(email, SentVerificationCodeUsecase());
+                                  context.read<ButtonCubit>().execute(SentVerificationCodeUsecase(),email!);
                                 }
                               });
                         }),
+                        ErrorMasage()
                       ],
                     ),
                   ),

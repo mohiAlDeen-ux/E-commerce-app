@@ -9,10 +9,12 @@ abstract class AuthLocalService{
 }
 
 class AuthLocalServiceImp extends AuthLocalService{
+ static const _tokenKey = "token";
+
   @override
   Future<bool> isSavedToken() async{
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.get("token");
+    var token = sharedPreferences.get(_tokenKey);
     if(token == null){
       return false;
     }else{
@@ -36,7 +38,7 @@ class AuthLocalServiceImp extends AuthLocalService{
   Future<Either> saveToken(String token) async{
     try{
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      await sharedPreferences.setString("token", token);
+      await sharedPreferences.setString(_tokenKey, token);
       return const Right("success");
     }catch(error){
       return Left(error.toString());

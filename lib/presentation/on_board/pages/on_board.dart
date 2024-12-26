@@ -4,7 +4,6 @@ import 'package:flutter_application_1/common/widget/dot_indicators.dart';
 import 'package:flutter_application_1/core/constant/constant.dart';
 import 'package:flutter_application_1/presentation/auth/pages/signin.dart';
 import 'package:flutter_application_1/presentation/bottomNavBar/pages/buttomNavBar.dart';
-import 'package:flutter_application_1/presentation/home/page/home.dart';
 import 'package:flutter_application_1/presentation/on_board/bloc/on_board_cubit.dart';
 import 'package:flutter_application_1/presentation/on_board/bloc/on_board_state.dart';
 import 'package:flutter_svg/svg.dart';

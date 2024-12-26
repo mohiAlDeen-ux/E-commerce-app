@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/button/button_state.dart';
+import 'package:flutter_application_1/common/bloc/task/task_state.dart';
 import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
 import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
 import 'package:flutter_application_1/core/constant/constant.dart';
@@ -11,7 +9,6 @@ import 'package:flutter_application_1/data/auth/models/confirm_verification_code
 import 'package:flutter_application_1/domain/auth/usecase/confirm_verification_code.dart';
 import 'package:flutter_application_1/domain/auth/usecase/sent_verification_code_usecase.dart';
 import 'package:flutter_application_1/presentation/auth/bloc/erorr_masage_cubit.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/erorr_masager_sate.dart';
 import 'package:flutter_application_1/presentation/auth/bloc/timer_cubit.dart';
 import 'package:flutter_application_1/presentation/auth/bloc/timer_state.dart';
 import 'package:flutter_application_1/presentation/auth/bloc/verification_code_cubit.dart';
@@ -19,7 +16,6 @@ import 'package:flutter_application_1/presentation/auth/pages/reset_password.dar
 import 'package:flutter_application_1/presentation/auth/widget/error_masage.dart';
 import 'package:flutter_application_1/presentation/auth/widget/verification_code_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/timer_cubit.dart';
 
 class EnterVerificationCode extends StatefulWidget {
   String email;
@@ -120,12 +116,12 @@ class _EnterVerificationCodeState extends State<EnterVerificationCode> {
                                     child: BlocProvider(
                                       create: (context) => ButtonCubit(),
                                       child: BlocListener<ButtonCubit,
-                                          ButtonState>(
+                                          TaskState>(
                                         listener: (context, buttonState) {
-                                          if(buttonState is ButtonSuccessState){
+                                          if(buttonState is SuccessState){
                                             context.read<TimerCubit>().reste();
-                                          }else if(buttonState is ButtonFailureState){
-                                            context.read<ErrorMasageCubit>().showError(buttonState.errorMessage);
+                                          }else if(buttonState is FailureState){
+                                            context.read<ErrorMasageCubit>().showError(buttonState.error);
                                           }
                                         },
                                         child: Builder(builder: (context) {
@@ -137,9 +133,8 @@ class _EnterVerificationCodeState extends State<EnterVerificationCode> {
                                                         await context
                                                             .read<ButtonCubit>()
                                                             .execute(
-                                                                widget.email,
-                                                                SentVerificationCodeUsecase());
-                                                        
+                                                                SentVerificationCodeUsecase(),
+                                                                widget.email,);
                                                       },
                                             height: 30,
                                             content: const Text("Resend"),
@@ -155,12 +150,12 @@ class _EnterVerificationCodeState extends State<EnterVerificationCode> {
                                     child: BlocProvider(
                                       create: (context) => ButtonCubit(),
                                       child: BlocListener<ButtonCubit,
-                                          ButtonState>(
+                                          TaskState>(
                                         listener: (context, buttonState) {
-                                          if(buttonState is ButtonSuccessState){
-                                            AppNavigator.push(context, ResetPassword(token: buttonState.returnedData));
-                                          }else if(buttonState is ButtonFailureState){
-                                            context.read<ErrorMasageCubit>().showError(buttonState.errorMessage);
+                                          if(buttonState is SuccessState){
+                                            AppNavigator.push(context, ResetPassword(token: buttonState.data));
+                                          }else if(buttonState is FailureState){
+                                            context.read<ErrorMasageCubit>().showError(buttonState.error);
                                           }
                                         },
                                         child: Builder(builder: (context) {
@@ -171,10 +166,10 @@ class _EnterVerificationCodeState extends State<EnterVerificationCode> {
                                                       .join("");
                                               if (code.length == 6) {
                                                 context.read<ButtonCubit>().execute(
+                                                    ConfirmVerificationCodeUsecase(),
                                                     ConfirmVerificationCodeReq(
                                                         email: widget.email,
-                                                        code: code),
-                                                    ConfirmVerificationCodeUsecase());
+                                                        code: code),);
                                               } else {
                                                 context.read<ErrorMasageCubit>().showError("please enter the corect code");
                                               }

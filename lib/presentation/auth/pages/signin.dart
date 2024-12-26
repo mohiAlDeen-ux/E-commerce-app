@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/button/button_state.dart';
+import 'package:flutter_application_1/common/bloc/task/task_state.dart';
 import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
 import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
 import 'package:flutter_application_1/core/constant/constant.dart';
+import 'package:flutter_application_1/data/auth/models/user_signin_req.dart';
 import 'package:flutter_application_1/domain/auth/usecase/signin_usecase.dart';
-import 'package:flutter_application_1/domain/auth/usecase/signup_usecase.dart';
 import 'package:flutter_application_1/presentation/auth/bloc/erorr_masage_cubit.dart';
 import 'package:flutter_application_1/presentation/auth/pages/enter_emil_to_recover.dart';
 import 'package:flutter_application_1/presentation/auth/pages/signup.dart';
 import 'package:flutter_application_1/presentation/auth/widget/error_masage.dart';
 import 'package:flutter_application_1/presentation/auth/widget/siginin_forms.dart';
-import 'package:flutter_application_1/servise_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Signin extends StatefulWidget {
@@ -70,12 +69,13 @@ class _SigninState extends State<Signin> {
                     height:
                         size.height > 700 ? size.height * 0.1 : defaultPadding,
                   ),
-                  BlocListener<ButtonCubit, ButtonState>(
+                  BlocListener<ButtonCubit, TaskState>(
                     listener: (context, state) {
-                      if (state is ButtonFailureState) {
-                        context.read<ErrorMasageCubit>().showError(state.errorMessage);
-                      } else if (state is ButtonSuccessState) {
+                      if (state is FailureState) {
+                        context.read<ErrorMasageCubit>().showError(state.error);
+                      } else if (state is SuccessState) {
                         //Navigatior
+                        context.read<ErrorMasageCubit>().showError("test");
                       }
                     },
                     child: Builder(builder: (context) {
@@ -86,7 +86,7 @@ class _SigninState extends State<Signin> {
                             signinForm.getReq().fold((error) {}, (signinReq) {
                               context
                                   .read<ButtonCubit>()
-                                  .execute(signinReq, SigninUsecase());
+                                  .execute(SigninUsecase(),signinReq);
                             });
                           });
                     }),

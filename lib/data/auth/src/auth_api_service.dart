@@ -20,15 +20,23 @@ abstract class AuthApiService{
 
 class AuthApiServiceImp extends AuthApiService{
   @override
-  Future<Either> getUser(String token) {
+  Future<Either> getUser(String token) async{
     Uri url = Uri.parse(UrlsConstant.getUser);
 
-    throw UnimplementedError();
+    await Future.delayed(const Duration(seconds: 2));
+
+    return const Left("UnimplementedError");
+
   }
 
   @override
   Future<Either> signin(UserSigninReq params) async{
     Uri url = Uri.parse(UrlsConstant.login);
+
+    await Future.delayed(Duration(seconds: 2));
+    return Left("eeee");
+
+
     try{
       http.Response response =  await http.post(url,body: params.toMap());
       if(response.statusCode != 200){
@@ -46,6 +54,7 @@ class AuthApiServiceImp extends AuthApiService{
   @override
   Future<Either> signup(UserCreationalReq params) async{
     Uri url = Uri.parse(UrlsConstant.signup);
+
 
     try{
       http.Response response =  await http.post(url,body: params.toMap());
@@ -83,7 +92,7 @@ class AuthApiServiceImp extends AuthApiService{
 
     await Future.delayed(const Duration(seconds: 2));
 
-    return const Right("UnimplementedError");
+    return const Left("UnimplementedError");
   }
   
   @override

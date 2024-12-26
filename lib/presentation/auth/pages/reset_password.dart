@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/button/button_state.dart';
+import 'package:flutter_application_1/common/bloc/task/task_state.dart';
 import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/common/helper/validat/validat.dart';
 import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
 import 'package:flutter_application_1/core/constant/constant.dart';
 import 'package:flutter_application_1/data/auth/models/reset_password_py_token_req.dart';
 import 'package:flutter_application_1/domain/auth/usecase/reset_password_py_token.dart';
 import 'package:flutter_application_1/presentation/auth/bloc/erorr_masage_cubit.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/erorr_masager_sate.dart';
 import 'package:flutter_application_1/presentation/auth/widget/error_masage.dart';
-import 'package:flutter_application_1/presentation/auth/widget/password_text_field.dart';
 import 'package:flutter_application_1/presentation/auth/widget/reset_password_forms.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -38,12 +35,12 @@ class ResetPassword extends StatelessWidget {
           create: (context) => ErrorMasageCubit(),
         ),
       ],
-      child: BlocListener<ButtonCubit, ButtonState>(
+      child: BlocListener<ButtonCubit, TaskState>(
         listener: (context, buttonState) {
-          if(buttonState is ButtonSuccessState){
+          if(buttonState is SuccessState){
             print("navigator in reset password page to home page");
-          }else if(buttonState is ButtonFailureState){
-            print("an expexted error");
+          }else if(buttonState is FailureState){
+            context.read<ErrorMasageCubit>().showError(buttonState.error.toString());
           }
         },
         child: Scaffold(
@@ -98,8 +95,8 @@ class ResetPassword extends StatelessWidget {
                                     }
                                   }, (returnedPassword) {
                                     context.read<ButtonCubit>().execute(
-                                        ResetPasswordPyTokenReq(token: token, newPassword: returnedPassword) ,
-                                        ResetPasswordPyTokenUseCase());
+                                        ResetPasswordPyTokenUseCase(),
+                                        ResetPasswordPyTokenReq(token: token, newPassword: returnedPassword) );
                                   });
                                 },
                                 content: const Text("Change Password"));

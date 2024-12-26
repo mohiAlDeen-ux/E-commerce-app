@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/constant/constant.dart';
 import 'package:flutter_application_1/presentation/home/widget/categories.dart';
 import 'package:flutter_application_1/presentation/home/widget/offers_carousel.dart';
+import 'package:flutter_application_1/presentation/home/widget/popular_products.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -19,6 +20,12 @@ class HomePage extends StatelessWidget {
         ),
         SliverToBoxAdapter(
           child: Categories(),
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(height: defaultPadding,),
+        ),
+        SliverToBoxAdapter(
+          child: PopularProducts(),
         )
       ],),
     );

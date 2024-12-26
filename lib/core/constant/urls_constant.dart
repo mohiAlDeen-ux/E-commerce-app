@@ -1,5 +1,3 @@
-import 'package:flutter_application_1/presentation/auth/pages/reset_password.dart';
-
 class UrlsConstant{
   static const String baseUrl = "http://192.168.1.11:8000/api";
   static const String login = "$baseUrl/login";

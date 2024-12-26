@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/button/button_state.dart';
+import 'package:flutter_application_1/common/bloc/task/task_state.dart';
 import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
 import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
 import 'package:flutter_application_1/core/config/theme/app_colors.dart';
@@ -15,7 +15,7 @@ import 'package:flutter_application_1/presentation/auth/widget/error_masage.dart
 import 'package:flutter_application_1/presentation/auth/widget/siginup_forms.dart';
 import 'package:flutter_application_1/presentation/on_board/pages/on_board.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dartz/dartz.dart' as dartz;
+import 'package:dartz/dartz.dart' show Either;
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -105,14 +105,14 @@ class _SignupState extends State<Signup> {
                       ],
                     ),
                     const SizedBox(height: defaultPadding * 2),
-                    BlocListener<ButtonCubit, ButtonState>(
+                    BlocListener<ButtonCubit, TaskState>(
                         listener: (context, state) {
-                      if (state is ButtonSuccessState) {
+                      if (state is SuccessState) {
                         //AppNavigator
-                      } else if (state is ButtonFailureState) {
+                      } else if (state is FailureState) {
                         context
                             .read<ErrorMasageCubit>()
-                            .showError(state.errorMessage);
+                            .showError(state.error);
                       }
                     }, child: Builder(builder: (context) {
                       return BlocBuilder<CheckboxCubit, bool>(
@@ -121,14 +121,14 @@ class _SignupState extends State<Signup> {
                               height: 30,
                               content: const Text("Continue"),
                               onPressed: checkboxState ?() {
-                                dartz.Either<String, UserCreationalReq> req =
+                                Either<String, UserCreationalReq> req =
                                     _signUpForm.getReq();
                                 req.fold((error) {
                                   // print("erorr3");
                                 }, (data) {
                                   context
                                       .read<ButtonCubit>()
-                                      .execute(data, SignupUsecase());
+                                      .execute(SignupUsecase(),data);
                                 });
                               } : null);
                         },

@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_application_1/data/preferences/src/preferences_local_services.dart';
 import 'package:flutter_application_1/servise_locator.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -18,7 +17,7 @@ class PreferencesRepositoryImp extends PreferencesRepository{
     return savedVersion.fold((error){
       return true;
     }, (savedVersionValue){
-      return savedVersionValue == savedVersion;
+      return savedVersionValue == currentVersion;
     });
   }
 
