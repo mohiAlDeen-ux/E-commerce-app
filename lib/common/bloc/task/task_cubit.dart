@@ -3,16 +3,19 @@ import 'package:flutter_application_1/core/usecase/usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:dartz/dartz.dart";
 
-class TaskCubit extends Cubit<TaskState>{
+abstract class TaskCubit extends Cubit<TaskState>{
   TaskCubit():super(InitialState());
 
 
-  Future<void> execute<Type,Params>(UseCase<Type,Params> useCase, Params params) async{
+  Future<void> execute<Type,Params>(UseCase<Type,Params> useCase, [Params? params]) async{
     emit(LoadingState());
-    
+    Type data;
     try{
-      Type data = await useCase.call(params: params);
-      print(Type.toString());
+      if(params == null){
+        data = await useCase.call();
+      }else{
+        data = await useCase.call(params: params);
+      }
       if(Type.toString() == "Either<dynamic, dynamic>"){
         (data as Either).fold((error){
           emit(FailureState(error.toString()));

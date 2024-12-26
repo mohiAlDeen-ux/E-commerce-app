@@ -22,6 +22,7 @@ import 'package:flutter_application_1/domain/preferences/repository/preferences.
 import 'package:flutter_application_1/domain/preferences/usecase/is_first_time_usecase.dart';
 import 'package:flutter_application_1/domain/preferences/usecase/set_first_time_usecase.dart';
 import 'package:flutter_application_1/domain/product/repository/products.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_popular_products_usecase.dart';
 
 import 'package:get_it/get_it.dart';
 
@@ -74,5 +75,6 @@ void setupServiceLocator(){
 
   getIt.registerSingleton<SetFirstTimeUsecase>(SetFirstTimeUsecase());
 
+  getIt.registerSingleton<GetPopularProductsUsecase>(GetPopularProductsUsecase());
 
 }

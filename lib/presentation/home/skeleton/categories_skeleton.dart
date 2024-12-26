@@ -17,7 +17,7 @@ class CategoriesSkeleton extends StatelessWidget {
       itemCount: 6,
       itemBuilder: (context ,index) => Padding(
         padding: EdgeInsets.only(left: index == 0?defaultPadding:defaultPadding/4),
-        child: Skeleton(layer: 3,height:double.infinity ,width: getRandomNumber(50,100).toDouble(),),
+        child: Skeleton(height:double.infinity ,width: getRandomNumber(50,100).toDouble(),),
         ),
       );
   }

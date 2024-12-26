@@ -1,3 +1,4 @@
+import "package:flutter_application_1/domain/categories/usecase/get_categories_usecase.dart";
 import "package:flutter_application_1/presentation/home/bloc/categories/categories_display_event.dart";
 import "package:flutter_application_1/presentation/home/bloc/categories/categories_display_state.dart";
 import "package:flutter_application_1/domain/categories/repository/category.dart";
@@ -13,7 +14,7 @@ class CategoriesDisplayBloc extends Bloc<CategoriesDisplayEvent,CategoriesDispla
 
 
   void _appStarted(GetCategoriesEvent event, Emitter<CategoriesDisplayState> emit)async{
-    final categories = await getIt.call<CategoryRepository>().getCategories();
+    final categories = await getIt.call<GetCategoriesUsecase>().call();
     categories.fold((error){
       emit(CategoriesFailurState(error));
     }, (returnedCategories){
