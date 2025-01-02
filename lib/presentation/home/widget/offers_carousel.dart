@@ -48,7 +48,24 @@ class _OffersCarouselState extends State<OffersCarousel> {
   @override
   void initState() {
     _pageController = PageController(initialPage: 0);
-    _timer = Timer.periodic(const Duration(seconds: 5), (_){
+    _startAutoFlipTimer();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void _startAutoFlipTimer() {
+      try{
+        _timer.cancel();
+      }catch(error){
+
+      }
+         _timer = Timer.periodic(const Duration(seconds: 5), (_){
       if (pageIndex < offers.length - 1){
         pageIndex += 1;
       }else{
@@ -60,15 +77,7 @@ class _OffersCarouselState extends State<OffersCarousel> {
       duration: const Duration(milliseconds: 350),
       curve: Curves.bounceInOut);
     });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    _timer.cancel();
-    super.dispose();
-  }
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +94,7 @@ class _OffersCarouselState extends State<OffersCarousel> {
           },
           onPageChanged: (index){
             setState(() {
+              _startAutoFlipTimer();
               pageIndex = index;
             });
           },

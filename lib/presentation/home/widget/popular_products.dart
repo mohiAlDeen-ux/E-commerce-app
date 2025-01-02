@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/common/bloc/task/task_state.dart';
+import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
 import 'package:flutter_application_1/core/constant/constant.dart';
 import 'package:flutter_application_1/core/usecase/usecase.dart';
 import 'package:flutter_application_1/domain/product/entity/product_entity.dart';
 import 'package:flutter_application_1/domain/product/usecase/get_popular_products_usecase.dart';
 import 'package:flutter_application_1/presentation/home/skeleton/products_skelton.dart';
 import 'package:flutter_application_1/presentation/home/widget/product_card.dart';
+import 'package:flutter_application_1/presentation/product/pages/product_detail_screen.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 import '../bloc/products/popular_product_cubit.dart';
 
@@ -39,7 +41,7 @@ class PopularProducts extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) { 
                         return Padding(
                           padding: EdgeInsets.only(left: defaultPadding, right: index == _products.length - 1?defaultPadding:0 ),
-                          child: ProductCard(productEntity: _products[index], press: () {}),
+                          child: ProductCard(productEntity: _products[index], press: () => AppNavigator.push(context,ProductDetailScreen(productEntity:_products[index]))),
                           );
                       },
                     ),
