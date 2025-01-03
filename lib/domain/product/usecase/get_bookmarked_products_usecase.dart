@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_application_1/domain/product/repository/products.dart';
 import 'package:flutter_application_1/servise_locator.dart';
 
-class GetTopSelingProductsUsecase extends UseCase<Either,dynamic>{
+class GetBookmarkedProductsUsecase extends UseCase<Either,dynamic>{
   @override
-  Future<Either> call({params}) async{
-    return getIt.call<ProductsRepository>().getTopSellingProducts();
+  Future<Either> call({params}) {
+    return getIt.call<ProductsRepository>().getBookmarkedProducts();
   }
 
 }

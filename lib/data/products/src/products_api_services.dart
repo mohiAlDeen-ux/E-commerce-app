@@ -11,6 +11,7 @@ abstract class ProductsApiServices{
   Future<Either> addProductToBookmark(String id);
   Future<Either> removeProductFromBookmark(String id);
   Future<Either> isAvaliable(String id);
+  Future<Either> getBookmarkedProducts();
 
 }
 
@@ -64,6 +65,12 @@ class ProductsApiServicesImp extends ProductsApiServices{
   @override
   Future<Either> isAvaliable(String id) {
     // TODO: implement isAvaliable
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<Either> getBookmarkedProducts() {
+    // TODO: implement getBookmarkedProduct
     throw UnimplementedError();
   }
 

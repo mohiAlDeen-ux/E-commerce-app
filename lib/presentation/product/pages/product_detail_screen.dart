@@ -11,6 +11,8 @@ import 'package:flutter_application_1/presentation/product/bloc/book_mark_state.
 import 'package:flutter_application_1/presentation/product/bloc/familiar_product_cubit.dart';
 import 'package:flutter_application_1/presentation/product/bloc/product_avaliable_cubit.dart';
 import 'package:flutter_application_1/presentation/product/bloc/product_cubit.dart';
+import 'package:flutter_application_1/presentation/product/widget/cart_button.dart';
+import 'package:flutter_application_1/presentation/product/widget/notify_me_card.dart';
 import 'package:flutter_application_1/presentation/product/widget/product_images.dart';
 import 'package:flutter_application_1/presentation/product/widget/product_info.dart';
 import 'package:flutter_application_1/presentation/product/widget/product_list_tile.dart';
@@ -22,6 +24,8 @@ class ProductDetailScreen extends StatelessWidget {
   ProductDetailScreen({super.key, required this.productEntity});
 
   ProductEntity productEntity;
+    late ScrollController _scrollController = ScrollController(); 
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +48,19 @@ class ProductDetailScreen extends StatelessWidget {
       ],
       child: SafeArea(
         child: Scaffold(
+          bottomNavigationBar: BlocBuilder<ProductAvaliableCubit, TaskState>(
+            builder: (context, state) {
+              if(state is SuccessState){
+                if(state.data){
+                  return CartButton(price: productEntity.price, press: (){});
+                }else{
+                  return NotifyMeCard(isNotify: false,onChanged: (isCheck){});
+                }
+              }else{
+                return const SizedBox();
+              }
+            },
+          ),
           body: BlocBuilder<ProductCubit, TaskState>(
             builder: (context, productState) {
               if (productState is SuccessState ||
@@ -164,6 +181,8 @@ class ProductDetailScreen extends StatelessWidget {
                           child: SizedBox(
                             height: 220,
                             child: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              controller: _scrollController,
                               scrollDirection: Axis.horizontal,
                               itemCount: 5,
                               itemBuilder: (context, index) => Padding(

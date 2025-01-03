@@ -22,11 +22,14 @@ import 'package:flutter_application_1/domain/preferences/repository/preferences.
 import 'package:flutter_application_1/domain/preferences/usecase/is_first_time_usecase.dart';
 import 'package:flutter_application_1/domain/preferences/usecase/set_first_time_usecase.dart';
 import 'package:flutter_application_1/domain/product/repository/products.dart';
-import 'package:flutter_application_1/domain/product/usecase/add_product_to_bookmark.dart';
+import 'package:flutter_application_1/domain/product/usecase/add_product_to_bookmark_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_bookmarked_products_usecase.dart';
 import 'package:flutter_application_1/domain/product/usecase/get_familiar_product_usecase.dart';
 import 'package:flutter_application_1/domain/product/usecase/get_popular_products_usecase.dart';
 import 'package:flutter_application_1/domain/product/usecase/get_product_py_id_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/remove_product_from_bookmark.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_products_py_category_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_top_seling_products_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/remove_product_from_bookmark_usecase.dart';
 
 import 'package:get_it/get_it.dart';
 
@@ -85,9 +88,15 @@ void setupServiceLocator(){
 
   getIt.registerSingleton<GetFamiliarProductUsecase>(GetFamiliarProductUsecase());
 
-  getIt.registerSingleton<AddProductToBookmark>(AddProductToBookmark());
+  getIt.registerSingleton<AddProductToBookmarkUsecase>(AddProductToBookmarkUsecase());
 
-  getIt.registerSingleton<RemoveProductFromBookmark>(RemoveProductFromBookmark());
+  getIt.registerSingleton<RemoveProductFromBookmarkUsecase>(RemoveProductFromBookmarkUsecase());
+  
+  getIt.registerSingleton<GetBookmarkedProductsUsecase>(GetBookmarkedProductsUsecase());
+
+  getIt.registerSingleton<GetTopSelingProductsUsecase>(GetTopSelingProductsUsecase());
+
+  getIt.registerSingleton<GetProductsPyCategoryUsecase>(GetProductsPyCategoryUsecase());
 
 
 }

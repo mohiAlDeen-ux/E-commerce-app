@@ -10,4 +10,5 @@ abstract class ProductsRepository{
   Future<Either> addProductToBookmark(String id);
   Future<Either> removeProductFromBookmark(String id);
   Future<Either> isAvaliable(String id);
+  Future<Either> getBookmarkedProducts();
 }

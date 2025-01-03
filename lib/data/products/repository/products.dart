@@ -190,7 +190,7 @@ class ProductsRepositoryImp extends ProductsRepository {
   
   @override
   Future<Either> removeProductFromBookmark(String id) async{
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 5));
     Either response = await getIt.call<ProductsApiServices>().removeProductFromBookmark(id);
     // here must refrech the cash if Right
     return response;
@@ -199,7 +199,42 @@ class ProductsRepositoryImp extends ProductsRepository {
   
   @override
   Future<Either> isAvaliable(String id) async{
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 5));
     return const Right(true);
+  }
+  
+  @override
+  Future<Either> getBookmarkedProducts() async{
+    await Future.delayed(const Duration(seconds: 5));
+    return Right([
+      ProductEntity(
+      bookmark: true,
+      id: "2",
+      images: ["https://i.imgur.com/q9oF9Yq.png"],
+      title: "Mountain Beta Warehouse",
+      brandName: "Lipsy london",
+      price: 800,
+    ),
+    ProductEntity(
+      bookmark: true,
+      id: "3",
+      images: ["https://i.imgur.com/MsppAcx.png"],
+      title: "FS - Nike Air Max 270 Really React",
+      brandName: "Lipsy london",
+      price: 650.62,
+      priceAfetDiscount: 390.36,
+      dicountpercent: 40,
+    ),
+    ProductEntity(
+      bookmark: true,
+      id: "4",
+      images: ["https://i.imgur.com/JfyZlnO.png"],
+      title: "Green Poplin Ruched Front",
+      brandName: "Lipsy london",
+      price: 1264,
+      priceAfetDiscount: 1200.8,
+      dicountpercent: 5,
+    ),
+    ]);
   }
 }
