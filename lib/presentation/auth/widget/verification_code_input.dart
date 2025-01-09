@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/verification_code_cubit.dart';
+import '../bloc/verification_code_cubit.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class VerificationCodeInput extends StatefulWidget {

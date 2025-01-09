@@ -1,6 +1,6 @@
-import 'package:flutter_application_1/core/usecase/usecase.dart';
-import 'package:flutter_application_1/domain/auth/repository/auth.dart';
-import 'package:flutter_application_1/servise_locator.dart';
+import '../../../core/usecase/usecase.dart';
+import '../repository/auth.dart';
+import '../../../servise_locator.dart';
 
 class IsLoggedInUsecase extends UseCase<bool,dynamic>{
   @override

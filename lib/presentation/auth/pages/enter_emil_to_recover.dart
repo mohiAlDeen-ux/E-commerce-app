@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
-import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/domain/auth/usecase/sent_verification_code_usecase.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/erorr_masage_cubit.dart';
-import 'package:flutter_application_1/presentation/auth/pages/enter_verification_code.dart';
-import 'package:flutter_application_1/presentation/auth/widget/email_text_field.dart';
-import 'package:flutter_application_1/presentation/auth/widget/error_masage.dart';
+import '../../../common/bloc/button/button_cubit.dart';
+import '../../../common/bloc/task/task_state.dart';
+import '../../../common/helper/navigation/app_navigator.dart';
+import '../../../common/widget/basic_reactive_button.dart';
+import '../../../core/constant/constant.dart';
+import '../../../domain/auth/usecase/sent_verification_code_usecase.dart';
+import '../../../common/bloc/error_masage/erorr_masage_cubit.dart';
+import 'enter_verification_code.dart';
+import '../widget/email_text_field.dart';
+import '../../../common/widget/error_masage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:dartz/dartz.dart';
 

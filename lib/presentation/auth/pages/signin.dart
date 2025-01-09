@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
-import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/data/auth/models/user_signin_req.dart';
-import 'package:flutter_application_1/domain/auth/usecase/signin_usecase.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/erorr_masage_cubit.dart';
-import 'package:flutter_application_1/presentation/auth/pages/enter_emil_to_recover.dart';
-import 'package:flutter_application_1/presentation/auth/pages/signup.dart';
-import 'package:flutter_application_1/presentation/auth/widget/error_masage.dart';
-import 'package:flutter_application_1/presentation/auth/widget/siginin_forms.dart';
+import '../../../common/bloc/button/button_cubit.dart';
+import '../../../common/bloc/task/task_state.dart';
+import '../../../common/helper/navigation/app_navigator.dart';
+import '../../../common/widget/basic_reactive_button.dart';
+import '../../../core/constant/constant.dart';
+import '../../../data/auth/models/user_signin_req.dart';
+import '../../../domain/auth/usecase/signin_usecase.dart';
+import '../../../common/bloc/error_masage/erorr_masage_cubit.dart';
+import 'enter_emil_to_recover.dart';
+import 'signup.dart';
+import '../../../common/widget/error_masage.dart';
+import '../widget/siginin_forms.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Signin extends StatefulWidget {

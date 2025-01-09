@@ -1,20 +1,20 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
-import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/data/auth/models/confirm_verification_code_req.dart';
-import 'package:flutter_application_1/domain/auth/usecase/confirm_verification_code.dart';
-import 'package:flutter_application_1/domain/auth/usecase/sent_verification_code_usecase.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/erorr_masage_cubit.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/timer_cubit.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/timer_state.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/verification_code_cubit.dart';
-import 'package:flutter_application_1/presentation/auth/pages/reset_password.dart';
-import 'package:flutter_application_1/presentation/auth/widget/error_masage.dart';
-import 'package:flutter_application_1/presentation/auth/widget/verification_code_input.dart';
+import '../../../common/bloc/button/button_cubit.dart';
+import '../../../common/bloc/task/task_state.dart';
+import '../../../common/helper/navigation/app_navigator.dart';
+import '../../../common/widget/basic_reactive_button.dart';
+import '../../../core/constant/constant.dart';
+import '../../../data/auth/models/confirm_verification_code_req.dart';
+import '../../../domain/auth/usecase/confirm_verification_code.dart';
+import '../../../domain/auth/usecase/sent_verification_code_usecase.dart';
+import '../../../common/bloc/error_masage/erorr_masage_cubit.dart';
+import '../bloc/timer_cubit.dart';
+import '../bloc/timer_state.dart';
+import '../bloc/verification_code_cubit.dart';
+import 'reset_password.dart';
+import '../../../common/widget/error_masage.dart';
+import '../widget/verification_code_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EnterVerificationCode extends StatefulWidget {

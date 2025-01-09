@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/common/widget/dot_indicators.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/presentation/auth/pages/signin.dart';
-import 'package:flutter_application_1/presentation/bottomNavBar/pages/buttomNavBar.dart';
-import 'package:flutter_application_1/presentation/on_board/bloc/on_board_cubit.dart';
-import 'package:flutter_application_1/presentation/on_board/bloc/on_board_state.dart';
+import '../../../common/helper/navigation/app_navigator.dart';
+import '../../../common/widget/dot_indicators.dart';
+import '../../../core/constant/constant.dart';
+import '../../auth/pages/signin.dart';
+import '../../bottomNavBar/pages/buttomNavBar.dart';
+import '../bloc/on_board_cubit.dart';
+import '../bloc/on_board_state.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_application_1/presentation/on_board/widget/onbording_content.dart';
+import '../widget/onbording_content.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnBoardPage extends StatefulWidget {

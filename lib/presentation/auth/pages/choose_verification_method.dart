@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/presentation/auth/widget/email_text_field.dart';
+import '../../../common/helper/navigation/app_navigator.dart';
+import '../../../core/constant/constant.dart';
+import '../widget/email_text_field.dart';
 
 class ChooseVerificationMethod extends StatelessWidget {
   const ChooseVerificationMethod({super.key});

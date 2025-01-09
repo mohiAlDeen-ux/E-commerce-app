@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
 
+import '../../constant/constant.dart';
 import 'app_colors.dart';
 
 const InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(

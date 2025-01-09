@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/common/helper/validat/validat.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
+import '../../../common/helper/validat/validat.dart';
+import '../../../core/constant/constant.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 // ignore: must_be_immutable

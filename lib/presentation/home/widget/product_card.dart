@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/widget/netword_image_with_loader.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/domain/product/entity/product_entity.dart';
 
+import '../../../common/widget/netword_image_with_loader.dart';
 import '../../../core/config/theme/app_colors.dart';
+import '../../../core/constant/constant.dart';
+import '../../../domain/product/entity/product_entity.dart';
 
 
 class ProductCard extends StatelessWidget {

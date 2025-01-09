@@ -1,7 +1,7 @@
-import "package:flutter_application_1/domain/preferences/repository/preferences.dart";
-import "package:flutter_application_1/servise_locator.dart";
+import "../repository/preferences.dart";
+import "../../../servise_locator.dart";
 
-import 'package:flutter_application_1/core/usecase/usecase.dart';
+import '../../../core/usecase/usecase.dart';
 
 class IsFirstTimeUsecase extends UseCase<bool,dynamic>{
   @override

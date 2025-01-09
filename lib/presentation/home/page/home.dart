@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/presentation/home/widget/categories.dart';
-import 'package:flutter_application_1/presentation/home/widget/offers_carousel.dart';
-import 'package:flutter_application_1/presentation/home/widget/popular_products.dart';
+import '../../../core/constant/constant.dart';
+import '../widget/categories.dart';
+import '../widget/offers_carousel.dart';
+import '../widget/popular_products.dart';
+import '../widget/top_selling_product.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -26,7 +27,19 @@ class HomePage extends StatelessWidget {
         ),
         SliverToBoxAdapter(
           child: PopularProducts(),
-        )
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(height: defaultPadding,),
+        ),
+        SliverToBoxAdapter(
+          child: TopSellingProduct(),
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(height: defaultPadding,),
+        ),
+        SliverToBoxAdapter(
+          child: TopSellingProduct(),
+        ),
       ],),
     );
   }

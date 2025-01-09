@@ -1,8 +1,8 @@
-import "package:flutter_application_1/domain/categories/usecase/get_categories_usecase.dart";
-import "package:flutter_application_1/presentation/home/bloc/categories/categories_display_event.dart";
-import "package:flutter_application_1/presentation/home/bloc/categories/categories_display_state.dart";
-import "package:flutter_application_1/domain/categories/repository/category.dart";
-import "package:flutter_application_1/servise_locator.dart";
+import "../../../../domain/categories/usecase/get_categories_usecase.dart";
+import "categories_display_event.dart";
+import "categories_display_state.dart";
+import "../../../../domain/categories/repository/category.dart";
+import "../../../../servise_locator.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class CategoriesDisplayBloc extends Bloc<CategoriesDisplayEvent,CategoriesDisplayState>{

@@ -1,9 +1,9 @@
-import 'package:flutter_application_1/data/categories/models/categories_models.dart';
-import 'package:flutter_application_1/data/categories/src/categories_api_service.dart';
-import 'package:flutter_application_1/domain/categories/entity/categories_entity.dart';
-import 'package:flutter_application_1/domain/categories/repository/category.dart';
+import '../models/categories_models.dart';
+import '../src/categories_api_service.dart';
+import '../../../domain/categories/entity/categories_entity.dart';
+import '../../../domain/categories/repository/category.dart';
 import "package:dartz/dartz.dart";
-import 'package:flutter_application_1/servise_locator.dart';
+import '../../../servise_locator.dart';
 
 class CategoryRepositoryImp extends CategoryRepository{
   List<CategoryEntity> cachedCategory= [

@@ -1,8 +1,8 @@
-import 'package:flutter_application_1/core/usecase/usecase.dart';
+import '../../../core/usecase/usecase.dart';
 import "package:dartz/dartz.dart";
-import 'package:flutter_application_1/data/auth/models/reset_password_py_token_req.dart';
-import 'package:flutter_application_1/domain/auth/repository/auth.dart';
-import 'package:flutter_application_1/servise_locator.dart';
+import '../../../data/auth/models/reset_password_py_token_req.dart';
+import '../repository/auth.dart';
+import '../../../servise_locator.dart';
 
 class ResetPasswordPyTokenUseCase extends UseCase<Either,ResetPasswordPyTokenReq> {  
   @override

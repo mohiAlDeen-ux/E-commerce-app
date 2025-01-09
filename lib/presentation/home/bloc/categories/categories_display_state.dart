@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/domain/categories/entity/categories_entity.dart';
+import '../../../../domain/categories/entity/categories_entity.dart';
 
 abstract class CategoriesDisplayState{}
 

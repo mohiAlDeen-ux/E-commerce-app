@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/data/products/models/full_product_model.dart';
-import 'package:flutter_application_1/data/products/models/product_model.dart';
-import 'package:flutter_application_1/data/products/src/products_api_services.dart';
-import 'package:flutter_application_1/domain/product/entity/full_product_entity.dart';
-import 'package:flutter_application_1/domain/product/entity/product_entity.dart';
-import 'package:flutter_application_1/domain/product/repository/products.dart';
-import 'package:flutter_application_1/servise_locator.dart';
+import '../models/full_product_model.dart';
+import '../models/product_model.dart';
+import '../src/products_api_services.dart';
+import '../../../domain/product/entity/full_product_entity.dart';
+import '../../../domain/product/entity/product_entity.dart';
+import '../../../domain/product/repository/products.dart';
+import '../../../servise_locator.dart';
 
 class ProductsRepositoryImp extends ProductsRepository {
   late List<ProductEntity> _popularProducts = [
@@ -75,7 +75,50 @@ class ProductsRepositoryImp extends ProductsRepository {
     ),
   ];
 
-  late List<ProductEntity> _topSellingProducts = [];
+  late final List<ProductEntity> _topSellingProducts = [
+    ProductEntity(
+      bookmark: true,
+      id: "5",
+      images: ["https://i.imgur.com/tXyOMMG.png"],
+      title: "Green Poplin Ruched Front",
+      brandName: "Lipsy london",
+      price: 650.62,
+      priceAfetDiscount: 390.36,
+      dicountpercent: 40,
+    ),
+    ProductEntity(
+      bookmark: false,
+      id: "6",
+      images: ["https://i.imgur.com/h2LqppX.png"],
+      title: "white satin corset top",
+      brandName: "Lipsy london",
+      price: 1264,
+      priceAfetDiscount: 1200.8,
+      dicountpercent: 5,
+    ),
+    ProductEntity(
+      bookmark: false,
+      id: "1",
+      images: [
+        "https://i.imgur.com/CGCyp1d.png",
+        "https://i.imgur.com/AkzWQuJ.png",
+        "https://i.imgur.com/J7mGZ12.png"
+      ],
+      title: "Mountain Warehouse for Women",
+      brandName: "Lipsy london",
+      price: 540,
+      priceAfetDiscount: 420,
+      dicountpercent: 20,
+    ),
+    ProductEntity(
+      bookmark: true,
+      id: "2",
+      images: ["https://i.imgur.com/q9oF9Yq.png"],
+      title: "Mountain Beta Warehouse",
+      brandName: "Lipsy london",
+      price: 800,
+    ),
+  ];
 
   final Map<String, FullProductEntity> _producDetail = {
     "1": FullProductEntity(
@@ -155,7 +198,7 @@ class ProductsRepositoryImp extends ProductsRepository {
   Future<Either> getProductPyId(String id) async {
     //for testing
     await Future.delayed(const Duration(seconds: 5));
-    return Right(_producDetail["1"]) ;
+    return Right(_producDetail["1"]);
 
     if (_producDetail.containsKey(id)) {
       return Right(_producDetail[id]);
@@ -176,65 +219,77 @@ class ProductsRepositoryImp extends ProductsRepository {
   }
 
   @override
-  Future<Either> getTopSellingProducts() {
-    return getIt.call<ProductsApiServices>().getTopSelingProducts();
-  }
-  
-  @override
-  Future<Either> addProductToBookmark(String id) async{
-    await Future.delayed(Duration(seconds: 5));
-    Either response = await getIt.call<ProductsApiServices>().addProductToBookmark(id);
-    // here must refrech the cash if Right
-    return response;
-  }
-  
-  @override
-  Future<Either> removeProductFromBookmark(String id) async{
-    await Future.delayed(const Duration(seconds: 5));
-    Either response = await getIt.call<ProductsApiServices>().removeProductFromBookmark(id);
-    // here must refrech the cash if Right
-    return response;
+  Future<Either> getTopSellingProducts() async {
+    if (_topSellingProducts.isEmpty) {
+      return (await getIt.call<ProductsApiServices>().getTopSelingProducts())
+          .fold((error) {
+        return Left(error);
+      }, (products) {
+        _popularProducts =
+            products.map((element) => element.toEntity()).toList();
+        return Right(_popularProducts);
+      });
+    }
 
+    return Right(_topSellingProducts);
   }
-  
+
   @override
-  Future<Either> isAvaliable(String id) async{
+  Future<Either> addProductToBookmark(String id) async {
+    await Future.delayed(Duration(seconds: 5));
+    Either response =
+        await getIt.call<ProductsApiServices>().addProductToBookmark(id);
+    // here must refrech the cash if Right
+    return response;
+  }
+
+  @override
+  Future<Either> removeProductFromBookmark(String id) async {
+    await Future.delayed(const Duration(seconds: 5));
+    Either response =
+        await getIt.call<ProductsApiServices>().removeProductFromBookmark(id);
+    // here must refrech the cash if Right
+    return response;
+  }
+
+  @override
+  Future<Either> isAvaliable(String id) async {
     await Future.delayed(const Duration(seconds: 5));
     return const Right(true);
   }
-  
+
   @override
-  Future<Either> getBookmarkedProducts() async{
+  Future<Either> getBookmarkedProducts() async {
     await Future.delayed(const Duration(seconds: 5));
     return Right([
       ProductEntity(
-      bookmark: true,
-      id: "2",
-      images: ["https://i.imgur.com/q9oF9Yq.png"],
-      title: "Mountain Beta Warehouse",
-      brandName: "Lipsy london",
-      price: 800,
-    ),
-    ProductEntity(
-      bookmark: true,
-      id: "3",
-      images: ["https://i.imgur.com/MsppAcx.png"],
-      title: "FS - Nike Air Max 270 Really React",
-      brandName: "Lipsy london",
-      price: 650.62,
-      priceAfetDiscount: 390.36,
-      dicountpercent: 40,
-    ),
-    ProductEntity(
-      bookmark: true,
-      id: "4",
-      images: ["https://i.imgur.com/JfyZlnO.png"],
-      title: "Green Poplin Ruched Front",
-      brandName: "Lipsy london",
-      price: 1264,
-      priceAfetDiscount: 1200.8,
-      dicountpercent: 5,
-    ),
+        bookmark: true,
+        id: "2",
+        images: ["https://i.imgur.com/q9oF9Yq.png"],
+        title: "Mountain Beta Warehouse",
+        brandName: "Lipsy london",
+        price: 800,
+      ),
+      ProductEntity(
+        bookmark: true,
+        id: "3",
+        images: ["https://i.imgur.com/MsppAcx.png"],
+        title: "FS - Nike Air Max 270 Really React",
+        brandName: "Lipsy london",
+        price: 650.62,
+        priceAfetDiscount: 390.36,
+        dicountpercent: 40,
+      ),
+      ProductEntity(
+        bookmark: true,
+        id: "4",
+        images: ["https://i.imgur.com/JfyZlnO.png"],
+        title: "Green Poplin Ruched Front",
+        brandName: "Lipsy london",
+        price: 1264,
+        priceAfetDiscount: 1200.8,
+        dicountpercent: 5,
+      ),
     ]);
   }
 }

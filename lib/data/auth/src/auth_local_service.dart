@@ -5,6 +5,7 @@ abstract class AuthLocalService{
   Future<bool> isSavedToken();
   Future<Either> removeToken();
   Future<Either> saveToken(String token);
+  Future<Either> getToken();
 
 }
 
@@ -42,6 +43,17 @@ class AuthLocalServiceImp extends AuthLocalService{
       return const Right("success");
     }catch(error){
       return Left(error.toString());
+    }
+  }
+  
+  @override
+  Future<Either> getToken() async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.get(_tokenKey);
+    if(token == null){
+      return const Left("dont have save token");
+    }else{
+      return Right(token);
     }
   }
 

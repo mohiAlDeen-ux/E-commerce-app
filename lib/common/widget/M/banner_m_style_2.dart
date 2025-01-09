@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/widget/banner_discount_tag.dart';
-import 'package:flutter_application_1/core/config/theme/app_colors.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../core/config/theme/app_colors.dart';
+import '../../../core/constant/constant.dart';
+import '../banner_discount_tag.dart';
 import 'banner_m.dart';
 
 

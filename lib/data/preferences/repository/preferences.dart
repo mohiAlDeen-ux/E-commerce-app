@@ -1,7 +1,8 @@
-import 'package:flutter_application_1/data/preferences/src/preferences_local_services.dart';
-import 'package:flutter_application_1/servise_locator.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:flutter_application_1/domain/preferences/repository/preferences.dart';
+
+import '../../../domain/preferences/repository/preferences.dart';
+import '../../../servise_locator.dart';
+import '../src/preferences_local_services.dart';
 
 
 

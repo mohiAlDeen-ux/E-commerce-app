@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter_application_1/presentation/auth/bloc/timer_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'timer_state.dart';
 
 class TimerCubit extends Cubit<TimerState>{
   late Timer _timer;

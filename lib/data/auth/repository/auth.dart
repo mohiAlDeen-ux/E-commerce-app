@@ -1,29 +1,46 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_application_1/data/auth/models/confirm_verification_code_req.dart';
-import 'package:flutter_application_1/data/auth/models/reset_password_py_old_password_req.dart';
-import 'package:flutter_application_1/data/auth/models/reset_password_py_token_req.dart';
-import 'package:flutter_application_1/data/auth/models/user.dart';
-import 'package:flutter_application_1/data/auth/models/user_creational_req.dart';
-import 'package:flutter_application_1/data/auth/models/user_signin_req.dart';
-import 'package:flutter_application_1/domain/auth/repository/auth.dart';
-import 'package:flutter_application_1/servise_locator.dart';
+import '../models/set_user_info_req.dart';
+import '../models/confirm_verification_code_req.dart';
+import '../models/reset_password_py_old_password_req.dart';
+import '../models/reset_password_py_token_req.dart';
+import '../models/user.dart';
+import '../models/user_creational_req.dart';
+import '../models/user_signin_req.dart';
+import '../../../domain/auth/entity/gender.dart';
+import '../../../domain/auth/repository/auth.dart';
+import '../../../servise_locator.dart';
 import '../src/auth_api_service.dart';
 import '../src/auth_local_service.dart';
 
 class AuthRepositoryImp extends AuthRepository {
-  UserModel? user;
+  UserModel? user = UserModel(
+    profileImage: "https://i.imgur.com/IXnwbLk.png",
+    email: "mohamedali@gmail.com",
+    userName: "Mohamed Ali",
+    isPro: true,
+    birthDate: DateTime.now(),
+    gender: GenderType.male,
+    phoneNumber: "+1234567890"
+    );
 
   @override
-  Future<Either> getUser(String token) async{
+  Future<Either> getUser() async{
+    await Future.delayed(const Duration(seconds: 5));
     if(user != null){
-      return Right(user);
+      return Right(user!.toEntity());
     }
-    return (await getIt.call<AuthApiService>().getUser(token)).fold((error){
+    Either token = await getIt.call<AuthLocalService>().getToken();
+    return token.fold((error){
+      return Left(error);
+    }, (returnedToken) async{
+      return (await getIt.call<AuthApiService>().getUser(returnedToken)).fold((error){
       return Left(error);
     }, (returndUser){
       user = returndUser;
-      return returndUser;
+      return Right(user!.toEntity());
     });
+    });
+    
   }
 
   @override
@@ -81,5 +98,12 @@ class AuthRepositoryImp extends AuthRepository {
   @override
   Future<Either> resetPasswordPyToken(ResetPasswordPyTokenReq params) async{
     return await getIt.call<AuthApiService>().resetPasswordPyToken(params);
+  }
+
+  @override
+  Future<Either> setUserInfo(SetUserInfoReq userInfo) async{
+    await Future.delayed(const Duration(seconds: 5));
+    return const Right("error in server");
+   return await getIt.call<AuthApiService>().setUserInfo(userInfo);
   }
 }

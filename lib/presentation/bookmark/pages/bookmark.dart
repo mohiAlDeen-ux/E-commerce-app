@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
-import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/presentation/bookmark/skeleton/bookmarks_skeleton.dart';
-import 'package:flutter_application_1/presentation/home/widget/product_card.dart';
-import 'package:flutter_application_1/presentation/product/pages/product_detail_screen.dart';
+import '../../../common/bloc/task/task_state.dart';
+import '../../../common/helper/navigation/app_navigator.dart';
+import '../../../core/constant/constant.dart';
+import '../skeleton/bookmarks_skeleton.dart';
+import '../../home/widget/product_card.dart';
+import '../../product/pages/product_detail_screen.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 
 import '../bloc/bookmark_cubit.dart';

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
-import 'package:flutter_application_1/common/widget/skeleton.dart';
-import 'package:flutter_application_1/core/config/theme/app_colors.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
+import '../../../common/bloc/task/task_state.dart';
+import '../../../common/widget/skeleton.dart';
+import '../../../core/config/theme/app_colors.dart';
+import '../../../core/constant/constant.dart';
 
-import 'package:flutter_application_1/presentation/product/bloc/product_avaliable_cubit.dart';
-import 'package:flutter_application_1/presentation/product/bloc/product_cubit.dart';
+import '../bloc/product_avaliable_cubit.dart';
+import '../bloc/product_cubit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -107,9 +107,9 @@ class ProductInfo extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                       const Skeleton(),
-                      SizedBox(height: defaultPadding /2,),
+                      const SizedBox(height: defaultPadding /2,),
                       const Skeleton(),
-                      SizedBox(height: defaultPadding /2,),
+                      const SizedBox(height: defaultPadding /2,),
                       Skeleton(width: MediaQuery.of(context).size.width * 8/10)
                     ],)
                   ],

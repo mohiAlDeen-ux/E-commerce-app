@@ -1,19 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
-import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
-import 'package:flutter_application_1/core/config/theme/app_colors.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/data/auth/models/user_creational_req.dart';
-import 'package:flutter_application_1/domain/auth/usecase/signup_usecase.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/checkbox_cubit.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/erorr_masage_cubit.dart';
-import 'package:flutter_application_1/presentation/auth/pages/signin.dart';
-import 'package:flutter_application_1/presentation/auth/widget/error_masage.dart';
-import 'package:flutter_application_1/presentation/auth/widget/siginup_forms.dart';
-import 'package:flutter_application_1/presentation/on_board/pages/on_board.dart';
+import '../../../common/bloc/button/button_cubit.dart';
+import '../../../common/bloc/task/task_state.dart';
+import '../../../common/helper/navigation/app_navigator.dart';
+import '../../../common/widget/basic_reactive_button.dart';
+import '../../../core/config/theme/app_colors.dart';
+import '../../../core/constant/constant.dart';
+import '../../../data/auth/models/user_creational_req.dart';
+import '../../../domain/auth/usecase/signup_usecase.dart';
+import '../bloc/checkbox_cubit.dart';
+import '../../../common/bloc/error_masage/erorr_masage_cubit.dart';
+import 'signin.dart';
+import '../../../common/widget/error_masage.dart';
+import '../widget/siginup_forms.dart';
+import '../../on_board/pages/on_board.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart' show Either;
 
@@ -63,9 +63,7 @@ class _SignupState extends State<Signup> {
                     const SizedBox(height: defaultPadding),
                     _signUpForm.build(context),
                     //const SizedBox(height: defaultPadding),
-                    ErrorMasage(
-                      altWidget: const SizedBox(height: defaultPadding),
-                    ),
+                    const ErrorMasage(),
                     Row(
                       children: [
                         BlocBuilder<CheckboxCubit, bool>(

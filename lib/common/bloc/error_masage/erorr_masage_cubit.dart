@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_application_1/presentation/auth/bloc/erorr_masager_sate.dart';
+import 'erorr_masager_sate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ErrorMasageCubit extends Cubit<ErrorMasageState>{

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
-import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/core/usecase/usecase.dart';
-import 'package:flutter_application_1/domain/product/entity/product_entity.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_popular_products_usecase.dart';
-import 'package:flutter_application_1/presentation/home/skeleton/products_skelton.dart';
-import 'package:flutter_application_1/presentation/home/widget/product_card.dart';
-import 'package:flutter_application_1/presentation/product/pages/product_detail_screen.dart';
+import '../../../common/bloc/task/task_state.dart';
+import '../../../common/helper/navigation/app_navigator.dart';
+import '../../../core/constant/constant.dart';
+import '../../../core/usecase/usecase.dart';
+import '../../../domain/product/entity/product_entity.dart';
+import '../../../domain/product/usecase/get_popular_products_usecase.dart';
+import '../skeleton/products_skelton.dart';
+import 'product_card.dart';
+import '../../product/pages/product_detail_screen.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 import '../bloc/products/popular_product_cubit.dart';
 

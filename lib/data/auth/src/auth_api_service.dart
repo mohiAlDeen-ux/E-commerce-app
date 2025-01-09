@@ -1,12 +1,13 @@
 import "package:dartz/dartz.dart";
+import "../models/set_user_info_req.dart";
 import "package:http/http.dart" as http;
 
-import "package:flutter_application_1/core/constant/urls_constant.dart";
-import "package:flutter_application_1/data/auth/models/confirm_verification_code_req.dart";
-import "package:flutter_application_1/data/auth/models/reset_password_py_old_password_req.dart";
-import "package:flutter_application_1/data/auth/models/reset_password_py_token_req.dart";
-import "package:flutter_application_1/data/auth/models/user_creational_req.dart";
-import "package:flutter_application_1/data/auth/models/user_signin_req.dart";
+import "../../../core/constant/urls_constant.dart";
+import "../models/confirm_verification_code_req.dart";
+import "../models/reset_password_py_old_password_req.dart";
+import "../models/reset_password_py_token_req.dart";
+import "../models/user_creational_req.dart";
+import "../models/user_signin_req.dart";
 
 abstract class AuthApiService{
   Future<Either> signin(UserSigninReq params);
@@ -16,6 +17,7 @@ abstract class AuthApiService{
   Future<Either> resetPasswordPyOldPassword(ResetPasswordPyOldPasswordReq params);
   Future<Either> confirmVerificationCode(ConfirmVerificationCodeReq params);
   Future<Either> sentVerificationCode(String email);
+  Future<Either> setUserInfo(SetUserInfoReq userInfo);
 }
 
 class AuthApiServiceImp extends AuthApiService{
@@ -98,6 +100,12 @@ class AuthApiServiceImp extends AuthApiService{
   @override
   Future<Either> resetPasswordPyOldPassword(ResetPasswordPyOldPasswordReq params) {
     // TODO: implement resetPasswordPyOldPassword
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<Either> setUserInfo(SetUserInfoReq userInfo) {
+    // TODO: implement setUserInfo
     throw UnimplementedError();
   }
 

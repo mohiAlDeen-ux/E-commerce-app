@@ -1,7 +1,8 @@
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
-import 'package:flutter_application_1/core/usecase/usecase.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:dartz/dartz.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../core/usecase/usecase.dart';
+import 'task_state.dart';
 
 abstract class TaskCubit extends Cubit<TaskState>{
   TaskCubit():super(InitialState());

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/presentation/home/bloc/categories/categories_display_bloc.dart';
-import 'package:flutter_application_1/presentation/home/bloc/categories/categories_display_event.dart';
-import 'package:flutter_application_1/presentation/home/bloc/categories/categories_display_state.dart';
-import 'package:flutter_application_1/presentation/home/skeleton/categories_skeleton.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../core/constant/constant.dart';
+import '../bloc/categories/categories_display_bloc.dart';
+import '../bloc/categories/categories_display_event.dart';
+import '../bloc/categories/categories_display_state.dart';
+import '../skeleton/categories_skeleton.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});

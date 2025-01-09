@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/widget/skeleton.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/presentation/home/skeleton/products_skelton.dart';
+import '../../../common/widget/skeleton.dart';
+import '../../../core/constant/constant.dart';
+import '../../home/skeleton/products_skelton.dart';
 
 class BookmarksSkeleton extends StatelessWidget {
   const BookmarksSkeleton({super.key});

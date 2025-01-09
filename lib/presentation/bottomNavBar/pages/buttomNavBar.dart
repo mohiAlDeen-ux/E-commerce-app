@@ -1,17 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/config/theme/app_colors.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/presentation/bookmark/pages/bookmark.dart';
-import 'package:flutter_application_1/presentation/bottomNavBar/bloc/nav_cubit.dart';
-import 'package:flutter_application_1/presentation/bottomNavBar/bloc/nav_state.dart';
 import 'package:animations/animations.dart';
-import 'package:flutter_application_1/presentation/card/pages/card.dart';
-import 'package:flutter_application_1/presentation/discover/pages/discover.dart';
-import 'package:flutter_application_1/presentation/home/page/home.dart';
-import 'package:flutter_application_1/presentation/profile/pages/profile.dart';
-
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../core/config/theme/app_colors.dart';
+import '../../../core/constant/constant.dart';
+import '../../bookmark/pages/bookmark.dart';
+import '../../card/pages/card.dart';
+import '../../discover/pages/discover.dart';
+import '../../home/page/home.dart';
+import '../../profile/pages/profile.dart';
+import '../bloc/nav_cubit.dart';
+import '../bloc/nav_state.dart';
 
 class BottomNavBarPage extends StatelessWidget {
   BottomNavBarPage({super.key});

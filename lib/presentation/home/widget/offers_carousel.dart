@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/widget/M/banner_m_style_1.dart';
-import 'package:flutter_application_1/common/widget/M/banner_m_style_2.dart';
-import 'package:flutter_application_1/common/widget/M/banner_m_style_3.dart';
-import 'package:flutter_application_1/common/widget/M/banner_m_style_4.dart';
-import 'package:flutter_application_1/common/widget/dot_indicators.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
+import '../../../common/widget/M/banner_m_style_1.dart';
+import '../../../common/widget/M/banner_m_style_2.dart';
+import '../../../common/widget/M/banner_m_style_3.dart';
+import '../../../common/widget/M/banner_m_style_4.dart';
+import '../../../common/widget/dot_indicators.dart';
+import '../../../core/constant/constant.dart';
 
 class OffersCarousel extends StatefulWidget {
   const OffersCarousel({super.key});

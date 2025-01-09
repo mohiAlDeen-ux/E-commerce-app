@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_application_1/core/constant/urls_constant.dart';
-import 'package:flutter_application_1/data/categories/models/categories_models.dart';
+import '../../../core/constant/urls_constant.dart';
+import '../models/categories_models.dart';
 import "package:http/http.dart" as http;
 import "package:dartz/dartz.dart";
 

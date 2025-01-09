@@ -1,16 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
-import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/data/auth/models/reset_password_py_token_req.dart';
-import 'package:flutter_application_1/domain/auth/usecase/reset_password_py_token.dart';
-import 'package:flutter_application_1/presentation/auth/bloc/erorr_masage_cubit.dart';
-import 'package:flutter_application_1/presentation/auth/widget/error_masage.dart';
-import 'package:flutter_application_1/presentation/auth/widget/reset_password_forms.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../common/bloc/button/button_cubit.dart';
+import '../../../common/bloc/task/task_state.dart';
+import '../../../common/helper/navigation/app_navigator.dart';
+import '../../../common/widget/basic_reactive_button.dart';
+import '../../../core/constant/constant.dart';
+import '../../../data/auth/models/reset_password_py_token_req.dart';
+import '../../../domain/auth/usecase/reset_password_py_token.dart';
+import '../../../common/bloc/error_masage/erorr_masage_cubit.dart';
+import '../../../common/widget/error_masage.dart';
+import '../widget/reset_password_forms.dart';
 
 class ResetPassword extends StatelessWidget {
   String token;

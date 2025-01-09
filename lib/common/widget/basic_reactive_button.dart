@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
+import '../bloc/button/button_cubit.dart';
+import '../bloc/task/task_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
