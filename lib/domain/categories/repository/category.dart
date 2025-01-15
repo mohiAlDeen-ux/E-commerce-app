@@ -4,4 +4,5 @@ import '../entity/categories_entity.dart';
 
 abstract class CategoryRepository {
   Future<Either<String,List<CategoryEntity>>> getCategories();
+  Future<Either<String,dynamic>> getFullCategories();
 }

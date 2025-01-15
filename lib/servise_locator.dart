@@ -1,3 +1,5 @@
+import 'package:flutter_application_1/domain/categories/usecase/get_full_categories_usecase.dart';
+
 import 'domain/auth/usecase/set_user_info_usecase.dart';
 
 import 'data/auth/repository/auth.dart';
@@ -101,6 +103,8 @@ void setupServiceLocator(){
   getIt.registerSingleton<GetProductsPyCategoryUsecase>(GetProductsPyCategoryUsecase());
 
   getIt.registerSingleton<SetUserInfoUsecase>(SetUserInfoUsecase());
+
+  getIt.registerSingleton<GetFullCategoriesUsecase>(GetFullCategoriesUsecase());
 
 
 }

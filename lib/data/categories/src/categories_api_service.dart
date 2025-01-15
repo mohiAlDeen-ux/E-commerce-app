@@ -7,6 +7,8 @@ import "package:dartz/dartz.dart";
 
 abstract class CategoriesApiService{
   Future<Either<String,List<CategoryModels>>>  getCategories();
+  Future<Either<String, dynamic>> getFullCategories();
+
 }
 
 class CategoriesApiServiceImp extends CategoriesApiService{
@@ -24,5 +26,10 @@ class CategoriesApiServiceImp extends CategoriesApiService{
     }catch(error){
       return const Left("network error");
     }
+  }
+  
+  @override
+  Future<Either<String, dynamic>> getFullCategories() {
+    throw UnimplementedError();
   }
 }

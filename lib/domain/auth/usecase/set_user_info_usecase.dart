@@ -1,7 +1,6 @@
 import '../../../core/usecase/usecase.dart';
 import '../../../data/auth/models/set_user_info_req.dart';
 import 'package:dartz/dartz.dart';
-import '../../../data/auth/src/auth_api_service.dart';
 import '../repository/auth.dart';
 import '../../../servise_locator.dart';
 
