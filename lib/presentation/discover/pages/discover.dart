@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/common/bloc/task/task_state.dart';
 import 'package:flutter_application_1/core/constant/constant.dart';
 import 'package:flutter_application_1/domain/categories/entity/full_categories_entity.dart';
+import 'package:flutter_application_1/generated/l10n.dart';
 import 'package:flutter_application_1/presentation/discover/bloc/full_categoriy_cubit.dart';
 import 'package:flutter_application_1/presentation/discover/widget/expansion_category.dart';
 import 'package:flutter_application_1/presentation/discover/widget/search_form.dart';
@@ -29,7 +30,7 @@ class DiscoverPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     horizontal: defaultPadding, vertical: defaultPadding / 2),
                 child: Text(
-                  "Categories",
+                  S.of(context).category,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ),

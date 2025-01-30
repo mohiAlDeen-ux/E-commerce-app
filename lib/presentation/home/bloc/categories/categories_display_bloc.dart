@@ -1,7 +1,6 @@
 import "../../../../domain/categories/usecase/get_categories_usecase.dart";
 import "categories_display_event.dart";
 import "categories_display_state.dart";
-import "../../../../domain/categories/repository/category.dart";
 import "../../../../servise_locator.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 

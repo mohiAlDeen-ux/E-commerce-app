@@ -7,13 +7,14 @@ class CartButton extends StatelessWidget {
   const CartButton({
     super.key,
     required this.price,
-    this.title = "Buy Now",
-    this.subTitle = "Unit price",
+    required this.title,
+    required this.subTitle,
     required this.press,
   });
 
+  final String title;
+  final String subTitle;
   final double price;
-  final String title, subTitle;
   final VoidCallback press;
 
   @override
@@ -69,7 +70,7 @@ class CartButton extends StatelessWidget {
                       height: double.infinity,
                       color: Colors.black.withOpacity(0.15),
                       child: Text(
-                        title,
+                       title,
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall!

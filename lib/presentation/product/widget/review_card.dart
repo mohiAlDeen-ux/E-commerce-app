@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../common/bloc/task/task_state.dart';
-import '../../../common/widget/skeleton.dart';
 import '../../../core/config/theme/app_colors.dart';
 import '../../../core/constant/constant.dart';
 import '../../../domain/product/entity/full_product_entity.dart';

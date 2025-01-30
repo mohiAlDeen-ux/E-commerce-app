@@ -31,4 +31,11 @@ abstract class TaskCubit extends Cubit<TaskState>{
     }  
   }
 
+  @override
+  void emit(TaskState state) {
+  if (!isClosed) {
+    super.emit(state);
+  }
+  }
+
 }

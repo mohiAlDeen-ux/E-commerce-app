@@ -14,7 +14,7 @@ import '../../../common/widget/error_masage.dart';
 import '../widget/reset_password_forms.dart';
 
 class ResetPassword extends StatelessWidget {
-  String token;
+  final String token;
 
   ResetPassword({super.key, required this.token});
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../common/widget/skeleton.dart';
+import 'package:flutter_application_1/presentation/home/skeleton/product_card_skelton.dart';
 import '../../../core/constant/constant.dart';
 import '../../home/skeleton/products_skelton.dart';
 
@@ -21,7 +21,7 @@ class BookmarksSkeleton extends StatelessWidget {
                 ),
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    return ProductsSkelton();
+                    return const ProductCardSkelton();
                   },
                   childCount: 20,
                 ),

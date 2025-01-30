@@ -1,4 +1,6 @@
 import 'package:flutter_application_1/domain/categories/usecase/get_full_categories_usecase.dart';
+import 'package:flutter_application_1/domain/preferences/usecase/get_language_usecase.dart';
+import 'package:flutter_application_1/domain/preferences/usecase/set_language_usecase.dart';
 
 import 'domain/auth/usecase/set_user_info_usecase.dart';
 
@@ -105,6 +107,10 @@ void setupServiceLocator(){
   getIt.registerSingleton<SetUserInfoUsecase>(SetUserInfoUsecase());
 
   getIt.registerSingleton<GetFullCategoriesUsecase>(GetFullCategoriesUsecase());
+
+  getIt.registerSingleton<SetLanguageUsecase>(SetLanguageUsecase());
+
+  getIt.registerSingleton<GetLanguageUsecase>(GetLanguageUsecase());
 
 
 }

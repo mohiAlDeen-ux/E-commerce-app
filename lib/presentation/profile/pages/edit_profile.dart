@@ -6,6 +6,7 @@ import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
 import 'package:flutter_application_1/common/bloc/error_masage/erorr_masage_cubit.dart';
 import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
 import 'package:flutter_application_1/common/widget/error_masage.dart';
+import 'package:flutter_application_1/generated/l10n.dart';
 import 'package:flutter_application_1/presentation/profile/widget/profile_image_with_edit_button.dart';
 import 'package:flutter_application_1/presentation/profile/widget/select_photo_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,7 +95,7 @@ class EditProfile extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Text("Profile",
+                    Text(S.of(context).profile,
                         style: Theme.of(context).textTheme.titleSmall),
                     Expanded(
                       child: Row(
@@ -139,7 +140,7 @@ class EditProfile extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Center(
                     child: Text(
-                  "Edit Photo",
+                  S.of(context).edit_photo,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge
@@ -177,7 +178,6 @@ class EditProfile extends StatelessWidget {
                       context.read<ErrorMasageCubit>().showError(state.error);
                     }else if(state is SuccessState){
                       context.read<UserCubit>().getUser();
-                     //print("in mid");
                       AppNavigator.pop(context);
                     }
                   },
@@ -194,7 +194,7 @@ class EditProfile extends StatelessWidget {
                             .execute(getIt.call<SetUserInfoUsecase>(), data);
                       });
                     },
-                    content: const Text("Done"),
+                    content: Text(S.of(context).save),
                   ),
                 );
               }),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/common/assets/assets_depend_on_direction.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DividerListTile extends StatelessWidget {
+  
   const DividerListTile({
     super.key,
     this.isShowForwordArrow = true,
@@ -28,7 +30,7 @@ class DividerListTile extends StatelessWidget {
           title: title,
           trailing: isShowForwordArrow
               ? SvgPicture.asset(
-                  "assets/icons/miniRight.svg",
+                  AssetsDependOnDirection.getRow(context),
                   colorFilter: ColorFilter.mode(
                       Theme.of(context).iconTheme.color!.withOpacity(0.4),
                       BlendMode.srcIn),
@@ -80,7 +82,7 @@ class DividerListTileWithTrilingText extends StatelessWidget {
                 const Spacer(),
                 Text(trilingText),
                 SvgPicture.asset(
-                  "assets/icons/miniRight.svg",
+                  AssetsDependOnDirection.getRow(context),
                   colorFilter: ColorFilter.mode(
                       Theme.of(context).iconTheme.color!.withOpacity(0.4),
                       BlendMode.srcIn),

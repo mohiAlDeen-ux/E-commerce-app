@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/generated/l10n.dart';
 import '../../../common/helper/validat/validat.dart';
 import '../../../core/constant/constant.dart';
 
-// ignore: must_be_immutable
 class UserNameTextFileld extends StatelessWidget {
   final String initialValue;
 
@@ -18,14 +18,13 @@ void Function(String?) onSavedFunction;
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.name,
             initialValue: initialValue,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(
                 borderSide: BorderSide(),
               ),
-              //floatingLabelBehavior: FloatingLabelBehavior.auto, // Show label only when focused
-              //labelText: "User Name",
-              hintText: "User Name",
-              prefixIcon: Padding(
+
+              hintText: S.of(context).user_name,
+              prefixIcon: const Padding(
                 padding:
                     EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
                 child: Icon(

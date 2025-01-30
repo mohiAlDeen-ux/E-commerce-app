@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/generated/l10n.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -29,9 +30,9 @@ class PhoneNumberTextFiled extends StatelessWidget {
       },
       initialValue: initialValue,
       disableLengthCheck:false,
-      decoration: const InputDecoration(
-        hintText: 'Phone Number',
-        border: OutlineInputBorder(
+      decoration:  InputDecoration(
+        hintText: S.of(context).phone_number,
+        border: const OutlineInputBorder(
           borderSide: BorderSide(),
         ),
       ),

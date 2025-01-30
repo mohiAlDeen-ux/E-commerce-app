@@ -34,7 +34,7 @@ class ExpansionCategory extends StatelessWidget {
         style: const TextStyle(fontSize: 14),
       ),
       textColor: Theme.of(context).textTheme.bodyLarge!.color,
-      childrenPadding: const EdgeInsets.only(left: defaultPadding * 3.5),
+      childrenPadding: Directionality.of(context) == TextDirection.rtl? const EdgeInsets.only(right: defaultPadding * 3.5) : const EdgeInsets.only(left: defaultPadding * 3.5),
       children: List.generate(
         subCategory.length,
         (index) => Column(

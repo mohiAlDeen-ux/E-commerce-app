@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/generated/l10n.dart';
 import '../../../common/helper/validat/validat.dart';
 import '../../../core/constant/constant.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,7 +21,7 @@ class EmailTextField extends StatelessWidget {
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        hintText: "Email address",
+        hintText: S.of(context).email,
         prefixIcon: Padding(
           padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
           child: SvgPicture.asset(

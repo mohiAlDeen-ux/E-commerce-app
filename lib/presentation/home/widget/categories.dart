@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/generated/l10n.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -24,7 +25,7 @@ class _CategoriesState extends State<Categories> {
         children: [
           Padding(
             padding: const EdgeInsets.all(defaultPadding),
-            child: Text("Categories",style: Theme.of(context).textTheme.titleSmall,),
+            child: Text(S.of(context).category,style: Theme.of(context).textTheme.titleSmall,),
           ),
           BlocProvider(
             create: (context) => CategoriesDisplayBloc()..add(GetCategoriesEvent()),
@@ -38,50 +39,57 @@ class _CategoriesState extends State<Categories> {
                   return ListView.builder(
                         itemCount: state.categories.length,
                           scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => Padding(
-                            padding: EdgeInsets.only(
-                              left: index == 0? defaultPadding : 0,
-                              right: index == state.categories.length - 1?defaultPadding:defaultPadding/4),
-                            child: InkWell(
-                              onTap: () {
-                                context.read<CategoriesDisplayBloc>().add(SelectCategoriesEvent(index));
-                              },
-                              borderRadius: BorderRadius.circular(30),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-                                height: 36,
-                                    decoration: BoxDecoration(
-                                      color: state.selectedIndex == index? Theme.of(context).primaryColor :Colors.transparent,
-                                      border: Border.all(
-                                        color: state.selectedIndex == index? Colors.transparent :Theme.of(context).dividerColor),
-                                      borderRadius: const BorderRadius.all(Radius.circular(30)),
-                                    ),
-                                    
-                                    child: Center(
-                                      child: Row(
-                                        children: [
-                                          if(state.categories[index].categoryImage != "")
-                                            SvgPicture.asset(
-                                              state.categories[index].categoryImage,
-                                              height: 20,
-                                              colorFilter: ColorFilter.mode(
-                                                index == state.selectedIndex ? Colors.white : Theme.of(context).iconTheme.color!,
-                                                BlendMode.srcIn,
-                                              ),
-                                            ),
-                                          if (state.categories[index].categoryImage != "") const SizedBox(width: defaultPadding / 2),
-                                          Text(
-                                              state.categories[index].categoryName,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
-                                                color: state.selectedIndex == index? Colors.white :Theme.of(context).textTheme.bodyLarge!.color,
-                                              ),),
-                                        ],
-                                      ),
-                                    ),
-                                    ),
-                            ),
+                          itemBuilder: (context, index) => Row(
+                            children: [
+                              if(index == 0)
+                              const SizedBox(width: defaultPadding / 2,),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  right: defaultPadding/4),
+                                child: InkWell(
+                                  onTap: () {
+                                    context.read<CategoriesDisplayBloc>().add(SelectCategoriesEvent(index));
+                                  },
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+                                    height: 36,
+                                        decoration: BoxDecoration(
+                                          color: state.selectedIndex == index? Theme.of(context).primaryColor :Colors.transparent,
+                                          border: Border.all(
+                                            color: state.selectedIndex == index? Colors.transparent :Theme.of(context).dividerColor),
+                                          borderRadius: const BorderRadius.all(Radius.circular(30)),
+                                        ),
+                                        
+                                        child: Center(
+                                          child: Row(
+                                            children: [
+                                              if(state.categories[index].categoryImage != "")
+                                                SvgPicture.asset(
+                                                  state.categories[index].categoryImage,
+                                                  height: 20,
+                                                  colorFilter: ColorFilter.mode(
+                                                    index == state.selectedIndex ? Colors.white : Theme.of(context).iconTheme.color!,
+                                                    BlendMode.srcIn,
+                                                  ),
+                                                ),
+                                              if (state.categories[index].categoryImage != "") const SizedBox(width: defaultPadding / 2),
+                                              Text(
+                                                  state.categories[index].categoryName,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: state.selectedIndex == index? Colors.white :Theme.of(context).textTheme.bodyLarge!.color,
+                                                  ),),
+                                            ],
+                                          ),
+                                        ),
+                                        ),
+                                ),
+                              ),
+                              if(index == state.categories.length - 1)
+                              const SizedBox(width: defaultPadding / 2,),
+                            ],
                           ),
                     
                   );

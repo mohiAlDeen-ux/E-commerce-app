@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:intl/intl.dart";
 
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
 import '../../../core/constant/constant.dart';
-import '../../../domain/auth/entity/user_entity.dart';
 import '../bloc/user_cubit.dart';
 import '../widget/profile_card.dart';
 import 'edit_profile.dart';
@@ -39,7 +39,7 @@ class UserInfo extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Text("Profile",
+                          Text(S.of(context).profile,
                               style: Theme.of(context).textTheme.titleSmall),
                           Expanded(
                             child: Row(
@@ -57,7 +57,7 @@ class UserInfo extends StatelessWidget {
                                             ));
                                             }
                                     },
-                                    child: const Text("Edit"),
+                                    child: Text(S.of(context).edit),
                                   );
                                 }),
                               ],
@@ -83,14 +83,14 @@ class UserInfo extends StatelessWidget {
                     ),
                     SliverToBoxAdapter(
                       child: ProfileInfoListTile(
-                        infoName: "Name",
+                        infoName: S.of(context).name,
                         value: Text(state is SuccessState ? state.data.userName: "",
                             style: Theme.of(context).textTheme.titleSmall),
                       ),
                     ),
                     SliverToBoxAdapter(
                       child: ProfileInfoListTile(
-                        infoName: "Date of birth",
+                        infoName: S.of(context).date_of_birth,
                         value: Text(
                             state is SuccessState ? DateFormat.yMMMd('en_US')
                                 .format(state.data.birthDate)
@@ -100,21 +100,21 @@ class UserInfo extends StatelessWidget {
                     ),
                     SliverToBoxAdapter(
                       child: ProfileInfoListTile(
-                        infoName: "Phone number",
+                        infoName: S.of(context).phone_number,
                         value: Text(state is SuccessState ? state.data.phoneNumber:" ",
                             style: Theme.of(context).textTheme.titleSmall),
                       ),
                     ),
                     SliverToBoxAdapter(
                       child: ProfileInfoListTile(
-                        infoName: "Gender",
+                        infoName: S.of(context).gender,
                         value: Text(state is SuccessState ? GenderType.values[GenderType.values.indexOf(state.data.gender)].toShortString():"", //what is this
                             style: Theme.of(context).textTheme.titleSmall),
                       ),
                     ),
                     SliverToBoxAdapter(
                       child: ProfileInfoListTile(
-                        infoName: "Email",
+                        infoName: S.of(context).email,
                         value: Text(state is SuccessState ? state.data.email:"",
                             style: Theme.of(context).textTheme.titleSmall),
                       ),
@@ -122,14 +122,14 @@ class UserInfo extends StatelessWidget {
                     SliverToBoxAdapter(
                       child: ProfileInfoListTile(
                         showBottomDivider: false,
-                        infoName: "Password",
+                        infoName: S.of(context).password,
                         value: TextButton(
                           onPressed: () {},
                           style: const ButtonStyle(
                               padding: WidgetStatePropertyAll(EdgeInsets.zero)),
-                          child: const Text(
-                            "Change Passowrd",
-                            style: TextStyle(),
+                          child: Text(
+                            S.of(context).change_password,
+                            style: const TextStyle(),
                           ),
                         ),
                       ),

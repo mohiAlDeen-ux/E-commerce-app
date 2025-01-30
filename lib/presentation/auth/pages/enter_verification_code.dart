@@ -18,8 +18,8 @@ import '../widget/verification_code_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EnterVerificationCode extends StatefulWidget {
-  String email;
-  EnterVerificationCode({super.key, required this.email});
+  final String email;
+  const EnterVerificationCode({super.key, required this.email});
 
   @override
   State<EnterVerificationCode> createState() => _EnterVerificationCodeState();

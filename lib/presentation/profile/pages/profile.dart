@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/common/bloc/language/language_cubit.dart';
+import 'package:flutter_application_1/domain/auth/entity/gender.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_application_1/generated/l10n.dart';
 
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
@@ -24,28 +27,24 @@ class ProfilePage extends StatelessWidget {
         BlocProvider(
           create: (context) => UserCubit()..getUser(),
         ),
-
       ],
       child: Scaffold(
         body: ListView(
           children: [
-            Builder(
-              builder: (context) {
-                return ProfileCard(
-                  //proLableText: "Sliver",
-                  press: () {
-                    AppNavigator.push(
-                      context,
-                        BlocProvider.value(
-                          value: BlocProvider.of<UserCubit>(context),
-                          child: const UserInfo(),
-                        ),
-                      
-                    );
-                  },
-                );
-              }
-            ),
+            Builder(builder: (context) {
+              return ProfileCard(
+                //proLableText: "Sliver",
+                press: () {
+                  AppNavigator.push(
+                    context,
+                    BlocProvider.value(
+                      value: BlocProvider.of<UserCubit>(context),
+                      child: const UserInfo(),
+                    ),
+                  );
+                },
+              );
+            }),
 
             BlocBuilder<UserCubit, TaskState>(
               builder: (context, state) {
@@ -58,7 +57,7 @@ class ProfilePage extends StatelessWidget {
                           vertical: defaultPadding * 1.5),
                       child: GestureDetector(
                         onTap: () {},
-                        child:  const AspectRatio(
+                        child: const AspectRatio(
                           aspectRatio: 1.8,
                           child: NetworkImageWithLoader(
                             src: "https://i.imgur.com/dz0BBom.png",
@@ -75,42 +74,45 @@ class ProfilePage extends StatelessWidget {
                 }
               },
             ),
+            const SizedBox(
+              height: defaultPadding,
+            ),
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
               child: Text(
-                "Account",
+                S.of(context).account,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
             const SizedBox(height: defaultPadding / 2),
             ProfileMenuListTile(
-              text: "Orders",
+              text: S.of(context).orders,
               svgSrc: "assets/icons/Order.svg",
               press: () {},
             ),
             ProfileMenuListTile(
-              text: "Returns",
+              text: S.of(context).returns,
               svgSrc: "assets/icons/Return.svg",
               press: () {},
             ),
             ProfileMenuListTile(
-              text: "Wishlist",
+              text: S.of(context).wishlist,
               svgSrc: "assets/icons/Wishlist.svg",
               press: () {},
             ),
             ProfileMenuListTile(
-              text: "Addresses",
+              text: S.of(context).addresses,
               svgSrc: "assets/icons/Address.svg",
               press: () {},
             ),
             ProfileMenuListTile(
-              text: "Payment",
+              text: S.of(context).payment,
               svgSrc: "assets/icons/card.svg",
               press: () {},
             ),
             ProfileMenuListTile(
-              text: "Wallet",
+              text: S.of(context).wallet,
               svgSrc: "assets/icons/Wallet.svg",
               press: () {},
             ),
@@ -119,18 +121,18 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   horizontal: defaultPadding, vertical: defaultPadding / 2),
               child: Text(
-                "Personalization",
+                S.of(context).personalization,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
             DividerListTileWithTrilingText(
               svgSrc: "assets/icons/Notification.svg",
-              title: "Notification",
-              trilingText: "Off",
+              title: S.of(context).notification,
+              trilingText: S.of(context).off,
               press: () {},
             ),
             ProfileMenuListTile(
-              text: "Preferences",
+              text: S.of(context).preferences,
               svgSrc: "assets/icons/Preferences.svg",
               press: () {},
             ),
@@ -139,17 +141,78 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   horizontal: defaultPadding, vertical: defaultPadding / 2),
               child: Text(
-                "Settings",
+                S.of(context).settings,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
             ProfileMenuListTile(
-              text: "Language",
+              text: S.of(context).language,
               svgSrc: "assets/icons/Language.svg",
-              press: () {},
+              press: () async {
+                await showModalBottomSheet(
+                    context: context,
+                    builder: (context) => SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.6,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(defaultPadding),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: defaultPadding),
+                                  child: Text(
+                                    "Select Language",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                            color:
+                                                Theme.of(context).primaryColor),
+                                  ),
+                                ),
+                              ),
+                              const Divider(),
+                              Expanded(
+                                child: ListView.builder(
+                                  itemCount: S.delegate.supportedLocales.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    final localCode = S.delegate
+                                        .supportedLocales[index].languageCode;
+                                    late final localName;
+                                    switch (localCode) {
+                                      case 'ar':
+                                        localName = "عربي";
+                                      case 'en':
+                                        localName = "ُEnglish";
+                                    }
+                                    return Column(
+                                      children: [
+                                        ListTile(
+                                          title: Text(localName),
+                                          onTap: () {
+                                            context
+                                                .read<LanguageCubit>()
+                                                .setLanguage(localCode);
+
+                                            AppNavigator.pop(context);
+                                          },
+                                        ),
+                                        const Divider(
+                                          height: 5,
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ));
+              },
             ),
             ProfileMenuListTile(
-              text: "Location",
+              text: S.of(context).location,
               svgSrc: "assets/icons/Location.svg",
               press: () {},
             ),
@@ -158,17 +221,17 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   horizontal: defaultPadding, vertical: defaultPadding / 2),
               child: Text(
-                "Help & Support",
+                S.of(context).help_and_support,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
             ProfileMenuListTile(
-              text: "Get Help",
+              text: S.of(context).get_help,
               svgSrc: "assets/icons/Help.svg",
               press: () {},
             ),
             ProfileMenuListTile(
-              text: "FAQ",
+              text: S.of(context).faq,
               svgSrc: "assets/icons/FAQ.svg",
               press: () {},
               isShowDivider: false,
@@ -188,9 +251,10 @@ class ProfilePage extends StatelessWidget {
                   BlendMode.srcIn,
                 ),
               ),
-              title: const Text(
-                "Log Out",
-                style: TextStyle(color: errorColor, fontSize: 14, height: 1),
+              title: Text(
+                S.of(context).log_out,
+                style:
+                    const TextStyle(color: errorColor, fontSize: 14, height: 1),
               ),
             )
           ],

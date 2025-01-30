@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import '../../../domain/product/entity/product_entity.dart';
 import '../../../domain/product/usecase/add_product_to_bookmark_usecase.dart';
 import '../../../domain/product/usecase/remove_product_from_bookmark_usecase.dart';

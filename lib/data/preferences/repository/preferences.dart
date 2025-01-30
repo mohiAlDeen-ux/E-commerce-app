@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:dartz/dartz.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../domain/preferences/repository/preferences.dart';
@@ -8,8 +11,6 @@ import '../src/preferences_local_services.dart';
 
 class PreferencesRepositoryImp extends PreferencesRepository{
 
-  
-
   @override
   Future<bool> isFirstTime() async{
     final currentVersion = (await PackageInfo.fromPlatform()).version;
@@ -18,7 +19,7 @@ class PreferencesRepositoryImp extends PreferencesRepository{
     return savedVersion.fold((error){
       return true;
     }, (savedVersionValue){
-      return savedVersionValue == currentVersion;
+      return savedVersionValue != currentVersion;
     });
   }
 
@@ -27,6 +28,21 @@ class PreferencesRepositoryImp extends PreferencesRepository{
     final currentVersion = (await PackageInfo.fromPlatform()).version;
 
     getIt.call<PreferencesLocalServices>().saveVersion(currentVersion);
+  }
+
+  @override
+  Future<String> getLanguage() async{
+    final  language = await getIt.call<PreferencesLocalServices>().getLanguage();
+    return language.fold((error){
+      return PlatformDispatcher.instance.locale.languageCode;
+    }, (language){
+      return language;
+    });
+  }
+
+  @override
+  Future<void> setLanguage(String language) async{
+    await getIt.call<PreferencesLocalServices>().setLanguage(language);
   }
   
 }

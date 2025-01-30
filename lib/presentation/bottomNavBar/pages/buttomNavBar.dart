@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -151,31 +152,31 @@ class BottomNavBarPage extends StatelessWidget {
                     icon: svgIcon("assets/icons/Shop.svg"),
                     activeIcon:
                         svgIcon("assets/icons/Shop.svg", color: primaryColor),
-                    label: "Shop",
+                    label: S.of(context).home_page_label,
                   ),
                   BottomNavigationBarItem(
                     icon: svgIcon("assets/icons/Category.svg"),
                     activeIcon: svgIcon("assets/icons/Category.svg",
                         color: primaryColor),
-                    label: "Discover",
+                    label: S.of(context).discover_page_label,
                   ),
                   BottomNavigationBarItem(
                     icon: svgIcon("assets/icons/Bookmark.svg"),
                     activeIcon: svgIcon("assets/icons/Bookmark.svg",
                         color: primaryColor),
-                    label: "Bookmark",
+                    label: S.of(context).bookmark_page_label,
                   ),
                   BottomNavigationBarItem(
                     icon: svgIcon("assets/icons/Bag.svg"),
                     activeIcon:
                         svgIcon("assets/icons/Bag.svg", color: primaryColor),
-                    label: "Cart",
+                    label: S.of(context).cart_page_label,
                   ),
                   BottomNavigationBarItem(
                     icon: svgIcon("assets/icons/Profile.svg"),
                     activeIcon: svgIcon("assets/icons/Profile.svg",
                         color: primaryColor),
-                    label: "Profile",
+                    label: S.of(context).profile_page_label,
                   ),
                 ],
               ),

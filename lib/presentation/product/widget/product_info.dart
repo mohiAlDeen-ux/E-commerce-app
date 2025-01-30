@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/generated/l10n.dart';
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/widget/skeleton.dart';
 import '../../../core/config/theme/app_colors.dart';
@@ -49,7 +50,8 @@ class ProductInfo extends StatelessWidget {
                     ),
                     const SizedBox(height: defaultPadding),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      textDirection: TextDirection.ltr,
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         if(isAvaliableState is LoadingState)
                         const Skeleton(width: 120,height: 33,layer: 2,radious: defaultPadding/2,)
@@ -64,8 +66,8 @@ class ProductInfo extends StatelessWidget {
                           ),
                           child: Text(
                             isAvaliableState.data
-                                ? "Available in stock"
-                                : "Currently unavailable",
+                                ? S.of(context).available_in_stock
+                                : S.of(context).currently_unavailable,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall!
@@ -84,7 +86,7 @@ class ProductInfo extends StatelessWidget {
                               "${productState.data.rating} ",
                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
-                            Text("(${productState.data.numOfReviews} Reviews)")
+                            Text("(${productState.data.numOfReviews} ${S.of(context).reviews})")
                           ],),
                         )
                       ],
@@ -93,7 +95,7 @@ class ProductInfo extends StatelessWidget {
                       height: defaultPadding,
                     ),
                     Text(
-                      "Product Info",
+                      S.of(context).product_info,
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!
