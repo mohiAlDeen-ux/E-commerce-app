@@ -39,14 +39,23 @@
     "change_password":"Change password",
     "bay_now":"Buy Now",
     "unit_price":"Unit price",
+    "total_price":"Total Price",
     "reviews":"Reviews",
     "available_in_stock":"Available in stock",
     "currently_unavailable":"Currently unavailable",
     "you_may_also_like":"You may also like",
     "product_details":"Product Details",
     "product_info":"Product info",
-    "shipping_information":"Shipping Information"
-
+    "shipping_information":"Shipping Information",
+    "quantity":"Quantity",
+    "select":"Select",
+    "color":"Color",
+    "size":"Size",
+    "add_to_cart":"Add to cart",
+    "size_guide":"Size guide",
+    "check_stores":"Check stores",
+    "store_pickup_availability":"Store pickup availability",
+    "select_a_size_to_check_store_doc":"Select a size to check store availability and In-Store pickup options."
     
 
 }

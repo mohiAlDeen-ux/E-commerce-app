@@ -450,6 +450,16 @@ class S {
     );
   }
 
+  /// `Total Price`
+  String get total_price {
+    return Intl.message(
+      'Total Price',
+      name: 'total_price',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Reviews`
   String get reviews {
     return Intl.message(
@@ -515,6 +525,96 @@ class S {
     return Intl.message(
       'Shipping Information',
       name: 'shipping_information',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quantity`
+  String get quantity {
+    return Intl.message(
+      'Quantity',
+      name: 'quantity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select`
+  String get select {
+    return Intl.message(
+      'Select',
+      name: 'select',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Color`
+  String get color {
+    return Intl.message(
+      'Color',
+      name: 'color',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Size`
+  String get size {
+    return Intl.message(
+      'Size',
+      name: 'size',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add to cart`
+  String get add_to_cart {
+    return Intl.message(
+      'Add to cart',
+      name: 'add_to_cart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Size guide`
+  String get size_guide {
+    return Intl.message(
+      'Size guide',
+      name: 'size_guide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check stores`
+  String get check_stores {
+    return Intl.message(
+      'Check stores',
+      name: 'check_stores',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Store pickup availability`
+  String get store_pickup_availability {
+    return Intl.message(
+      'Store pickup availability',
+      name: 'store_pickup_availability',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a size to check store availability and In-Store pickup options.`
+  String get select_a_size_to_check_store_doc {
+    return Intl.message(
+      'Select a size to check store availability and In-Store pickup options.',
+      name: 'select_a_size_to_check_store_doc',
       desc: '',
       args: [],
     );

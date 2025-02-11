@@ -39,11 +39,21 @@
     "change_password":"تغيير كلمة المرور",
     "bay_now":"اشتر الآن",
     "unit_price":"سعر القطعة",
+    "total_price":"السعر الإجمالي",
     "reviews":"المراجعات",
     "available_in_stock":"متاح في المستودع",
     "currently_unavailable":"غير متاح حاليا",
     "you_may_also_like":"قد يعجبك ايضا",
     "product_details":"تفاصيل المنتج",
     "product_info":"معلومات المنتج",
-    "shipping_information":"معلومات التسوق"
+    "shipping_information":"معلومات التسوق",
+    "quantity":"الكمية",
+    "select":"أختر",
+    "color":"اللون",
+    "size":"الحجم",
+    "add_to_cart":"اضف إلى السلة",
+    "size_guide":"دليل المقاسات",
+    "check_stores":"التحقق من المتاجر",
+    "store_pickup_availability":"إمكانية الاستلام من المتجر",
+    "select_a_size_to_check_store_doc":".حدد المقاس للتحقق من توفر المنتج في المتجر وخيارات الاستلام داخل المتجر"
 }

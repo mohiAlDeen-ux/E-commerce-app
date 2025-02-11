@@ -1,4 +1,5 @@
-class FullProductEntity{
+class RatingInformatioinEntity{
+  final String id;
   final double rating;
   final int numOfReviews;
   final int numOfFiveStar;
@@ -8,7 +9,8 @@ class FullProductEntity{
   final int numOfOneStar;
   final String description;
 
- FullProductEntity({
+ const RatingInformatioinEntity({
+    required this.id,
     required this.rating,
     required this.numOfReviews,
     required this.numOfFiveStar,

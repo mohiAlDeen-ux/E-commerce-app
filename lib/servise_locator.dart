@@ -1,6 +1,13 @@
+import 'package:flutter_application_1/data/products/src/products_cache_services.dart';
 import 'package:flutter_application_1/domain/categories/usecase/get_full_categories_usecase.dart';
 import 'package:flutter_application_1/domain/preferences/usecase/get_language_usecase.dart';
 import 'package:flutter_application_1/domain/preferences/usecase/set_language_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_cached_paying_information_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_cached_popular_products_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_cached_rating_information_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_cached_top_selling_products_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_product_pying_information_usecase.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'domain/auth/usecase/set_user_info_usecase.dart';
 
@@ -32,7 +39,7 @@ import 'domain/product/usecase/add_product_to_bookmark_usecase.dart';
 import 'domain/product/usecase/get_bookmarked_products_usecase.dart';
 import 'domain/product/usecase/get_familiar_product_usecase.dart';
 import 'domain/product/usecase/get_popular_products_usecase.dart';
-import 'domain/product/usecase/get_product_py_id_usecase.dart';
+import 'domain/product/usecase/get_product_rating_information_usecase.dart';
 import 'domain/product/usecase/get_products_py_category_usecase.dart';
 import 'domain/product/usecase/get_top_seling_products_usecase.dart';
 import 'domain/product/usecase/remove_product_from_bookmark_usecase.dart';
@@ -41,7 +48,10 @@ import 'package:get_it/get_it.dart';
 
 GetIt getIt = GetIt.instance;
 
-void setupServiceLocator(){
+Future<void> setupServiceLocator() async{
+  // helper
+  final sharedPreferences = await SharedPreferences.getInstance();
+  getIt.registerSingleton<SharedPreferences>(sharedPreferences);
 
   //service
   getIt.registerSingleton<AuthApiService>(AuthApiServiceImp());
@@ -53,6 +63,9 @@ void setupServiceLocator(){
   getIt.registerSingleton<ProductsApiServices>(ProductsApiServicesImp());
 
   getIt.registerSingleton<PreferencesLocalServices>(PreferencesLocalServicesImp());
+
+  getIt.registerSingleton<ProductsCacheServices>(ProductsCacheServicesImp());
+
 
 
   //repository
@@ -90,7 +103,7 @@ void setupServiceLocator(){
 
   getIt.registerSingleton<GetPopularProductsUsecase>(GetPopularProductsUsecase());
 
-  getIt.registerSingleton<GetProductPyIdUsecase>(GetProductPyIdUsecase());
+  getIt.registerSingleton<GetProductRatingInformationUsecase>(GetProductRatingInformationUsecase());
 
   getIt.registerSingleton<GetFamiliarProductUsecase>(GetFamiliarProductUsecase());
 
@@ -111,6 +124,16 @@ void setupServiceLocator(){
   getIt.registerSingleton<SetLanguageUsecase>(SetLanguageUsecase());
 
   getIt.registerSingleton<GetLanguageUsecase>(GetLanguageUsecase());
+
+  getIt.registerSingleton<GetProductPayingInformationUsecase>(GetProductPayingInformationUsecase());
+
+  getIt.registerSingleton<GetCachedTopSellingProductsUsecase>(GetCachedTopSellingProductsUsecase());
+
+  getIt.registerSingleton<GetCachedPopularProductsUsecase>(GetCachedPopularProductsUsecase());
+
+  getIt.registerSingleton<GetCachedRatingInformationUsecase>(GetCachedRatingInformationUsecase());
+
+  getIt.registerSingleton<GetCachedPayingInformationUsecase>(GetCachedPayingInformationUsecase());
 
 
 }

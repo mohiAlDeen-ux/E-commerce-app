@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/product/bloc/rating_information_state.dart';
 import '../../../common/bloc/task/task_state.dart';
 import '../../../core/config/theme/app_colors.dart';
 import '../../../core/constant/constant.dart';
-import '../../../domain/product/entity/full_product_entity.dart';
-import '../bloc/product_cubit.dart';
+import '../../../domain/product/entity/rating_informatioin_entity.dart';
+import '../bloc/product_rating_information_cubit.dart';
 import '../skeleton/review_card_skeleton.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -14,10 +15,10 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductCubit, TaskState>(
-      builder: (context, state) {
-        if (state is SuccessState) {
-          FullProductEntity product = state.data as FullProductEntity;
+    return BlocBuilder<ProductRatingInformationsCubit, RatingInformationState>(
+      builder: (context, ratingInformationState) {
+        if (ratingInformationState is! LoadingRatingInformationsState) {
+          RatingInformatioinEntity product = ratingInformationState.ratingInformatioinEntity!;
           return Container(
             padding: const EdgeInsets.all(defaultPadding),
             width: double.infinity,

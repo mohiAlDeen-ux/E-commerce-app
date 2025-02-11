@@ -13,10 +13,9 @@ import 'servise_locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupServiceLocator();
+  await setupServiceLocator();
 
   final languageCode =  await getIt.call<GetLanguageUsecase>().call();
-  print(languageCode);
   final locale = Locale(languageCode);
 
   runApp(MyApp(

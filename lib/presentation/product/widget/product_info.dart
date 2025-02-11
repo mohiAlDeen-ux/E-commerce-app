@@ -1,33 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/generated/l10n.dart';
-import '../../../common/bloc/task/task_state.dart';
+import 'package:flutter_application_1/presentation/product/bloc/rating_information_state.dart';
 import '../../../common/widget/skeleton.dart';
 import '../../../core/config/theme/app_colors.dart';
 import '../../../core/constant/constant.dart';
 
-import '../bloc/product_avaliable_cubit.dart';
-import '../bloc/product_cubit.dart';
+import '../bloc/product_rating_information_cubit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class ProductInfo extends StatelessWidget {
   final String brand;
   final String title;
+  final bool isAvaliable;
 
   const ProductInfo({
     super.key,
     required this.brand,
     required this.title,
+    required this.isAvaliable,
   });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductAvaliableCubit, TaskState>(
-      builder: (context, isAvaliableState) {
-        return BlocBuilder<ProductCubit, TaskState>(
-          builder: (context, productState) {
-            if(productState is FailureState || isAvaliableState is FailureState){
+        return BlocBuilder<ProductRatingInformationsCubit, RatingInformationState>(
+          builder: (context, ratingInformationState) {
+            if(ratingInformationState is FailureRatingInformationsStateWithoutData){  // this state not happen
               return const SliverToBoxAdapter(child: Text("errorrr r r r r r r r "));
             }else{
               return SliverToBoxAdapter(
@@ -53,19 +51,16 @@ class ProductInfo extends StatelessWidget {
                       textDirection: TextDirection.ltr,
                       //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if(isAvaliableState is LoadingState)
-                        const Skeleton(width: 120,height: 33,layer: 2,radious: defaultPadding/2,)
-                        else if(isAvaliableState is SuccessState)
                         Container(
                           padding: const EdgeInsets.all(defaultPadding / 2),
                           decoration: BoxDecoration(
-                            color: isAvaliableState.data ? successColor : errorColor,
+                            color: isAvaliable ? successColor : errorColor,
                             borderRadius: const BorderRadius.all(
                               Radius.circular(defaultBorderRadious / 2),
                             ),
                           ),
                           child: Text(
-                            isAvaliableState.data
+                            isAvaliable
                                 ? S.of(context).available_in_stock
                                 : S.of(context).currently_unavailable,
                             style: Theme.of(context)
@@ -77,16 +72,16 @@ class ProductInfo extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        if(productState is SuccessState)
+                        if(ratingInformationState is! LoadingRatingInformationsState) //
                         Container(
                           child: Row(children: [
                             SvgPicture.asset("assets/icons/Star_filled.svg"),
                             const SizedBox(width: defaultPadding / 4),
                             Text(
-                              "${productState.data.rating} ",
+                              "${ratingInformationState.ratingInformatioinEntity!.rating} ",
                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
-                            Text("(${productState.data.numOfReviews} ${S.of(context).reviews})")
+                            Text("(${ratingInformationState.ratingInformatioinEntity!.numOfReviews} ${S.of(context).reviews})")
                           ],),
                         )
                       ],
@@ -102,8 +97,8 @@ class ProductInfo extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: defaultPadding / 2),
-                    if(productState is SuccessState)
-                    Text(productState.data.description, style: const TextStyle(height: 1.4))
+                    if(ratingInformationState is! LoadingRatingInformationsState)
+                    Text(ratingInformationState.ratingInformatioinEntity!.description, style: const TextStyle(height: 1.4))
                     else
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,7 +116,6 @@ class ProductInfo extends StatelessWidget {
             }
           },
         );
-      },
-    );
+
   }
 }

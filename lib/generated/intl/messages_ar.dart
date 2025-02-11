@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Language_name": MessageLookupByLibrary.simpleMessage("عربي"),
         "account": MessageLookupByLibrary.simpleMessage("الحساب"),
+        "add_to_cart": MessageLookupByLibrary.simpleMessage("اضف إلى السلة"),
         "addresses": MessageLookupByLibrary.simpleMessage("العناوين"),
         "available_in_stock":
             MessageLookupByLibrary.simpleMessage("متاح في المستودع"),
@@ -34,6 +35,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "category": MessageLookupByLibrary.simpleMessage("الفئآت"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
+        "check_stores":
+            MessageLookupByLibrary.simpleMessage("التحقق من المتاجر"),
+        "color": MessageLookupByLibrary.simpleMessage("اللون"),
         "currently_unavailable":
             MessageLookupByLibrary.simpleMessage("غير متاح حاليا"),
         "date_of_birth": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
@@ -66,12 +70,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "profile_page_label":
             MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+        "quantity": MessageLookupByLibrary.simpleMessage("الكمية"),
         "returns": MessageLookupByLibrary.simpleMessage("العائدات"),
         "reviews": MessageLookupByLibrary.simpleMessage("المراجعات"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+        "select": MessageLookupByLibrary.simpleMessage("أختر"),
+        "select_a_size_to_check_store_doc": MessageLookupByLibrary.simpleMessage(
+            ".حدد المقاس للتحقق من توفر المنتج في المتجر وخيارات الاستلام داخل المتجر"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "shipping_information":
             MessageLookupByLibrary.simpleMessage("معلومات التسوق"),
+        "size": MessageLookupByLibrary.simpleMessage("الحجم"),
+        "size_guide": MessageLookupByLibrary.simpleMessage("دليل المقاسات"),
+        "store_pickup_availability":
+            MessageLookupByLibrary.simpleMessage("إمكانية الاستلام من المتجر"),
+        "total_price": MessageLookupByLibrary.simpleMessage("السعر الإجمالي"),
         "unit_price": MessageLookupByLibrary.simpleMessage("سعر القطعة"),
         "user_name": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
         "wallet": MessageLookupByLibrary.simpleMessage("محفظة"),

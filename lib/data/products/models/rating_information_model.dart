@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:flutter_application_1/domain/product/entity/full_product_entity.dart';
+import 'package:flutter_application_1/domain/product/entity/rating_informatioin_entity.dart';
 
-class FullProductModel {
+class RatingInformationModel {
+  final String id;
   final double rating;
   final int numOfReviews;
   final int numOfFiveStar;
@@ -13,7 +14,9 @@ class FullProductModel {
   final int numOfOneStar;
   final String description;
 
- FullProductModel({
+
+ RatingInformationModel({
+    required this.id,
     required this.rating,
     required this.numOfReviews,
     required this.numOfFiveStar,
@@ -21,13 +24,14 @@ class FullProductModel {
     required this.numOfThreeStar,
     required this.numOfTwoStar,
     required this.numOfOneStar,
-    required this.description,
+    required this.description
   });
 
 
 
-  factory FullProductModel.fromMap(Map<String, dynamic> map) {
-    return FullProductModel(
+  factory RatingInformationModel.fromMap(Map<String, dynamic> map) {
+    return RatingInformationModel(
+      id: map['id'] as String,
       rating: map['rating'] as double,
       numOfReviews: map['numOfReviews'] as int,
       numOfFiveStar: map['numOfFiveStar'] as int,
@@ -39,21 +43,40 @@ class FullProductModel {
     );
   }
 
-  factory FullProductModel.fromJson(String source) => FullProductModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'rating': rating,
+      'numOfReviews': numOfReviews,
+      'numOfFiveStar': numOfFiveStar,
+      'numOfFourStar': numOfFourStar,
+      'numOfThreeStar': numOfThreeStar,
+      'numOfTwoStar': numOfTwoStar,
+      'numOfOneStar': numOfOneStar,
+      'description': description,
+    };
+  }
+
+  factory RatingInformationModel.fromJson(String source) => RatingInformationModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+
+  String toJson() => json.encode(toMap());
+  
 }
 
 
-extension ProductXModel on FullProductModel{
-    FullProductEntity toEntity(){
-    return FullProductEntity(
+extension RatingInformatioinXModel on RatingInformationModel{
+    RatingInformatioinEntity toEntity(){
+    return RatingInformatioinEntity(
+      id:id,
       numOfReviews: numOfReviews,
       numOfFiveStar: numOfFiveStar,
       numOfFourStar: numOfFourStar,
       numOfThreeStar: numOfThreeStar,
       numOfTwoStar: numOfTwoStar,
       numOfOneStar: numOfOneStar,
+      rating: rating, 
       description: description,
-      rating: rating,
       );
   }
 }

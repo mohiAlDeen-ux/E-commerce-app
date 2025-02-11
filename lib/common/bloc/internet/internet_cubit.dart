@@ -10,6 +10,7 @@ part 'internet_state.dart';
 enum ConnectionType {
   Wifi,
   Mobile,
+  ethernet,
 }
 
 
@@ -26,10 +27,12 @@ class InternetCubit extends Cubit<InternetState> {
         emitInternetConnected(ConnectionType.Wifi);
       } else if (connectivityResult == ConnectivityResult.mobile) {
         emitInternetConnected(ConnectionType.Mobile);
+      }else if(connectivityResult == ConnectivityResult.ethernet){
+            emitInternetConnected(ConnectionType.ethernet);
       } else if (connectivityResult == ConnectivityResult.none) {
         emitInternetDisconnected();
       }
-          }
+      }
     });
   }
 

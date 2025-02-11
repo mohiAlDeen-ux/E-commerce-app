@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Language_name": MessageLookupByLibrary.simpleMessage("English"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "add_to_cart": MessageLookupByLibrary.simpleMessage("Add to cart"),
         "addresses": MessageLookupByLibrary.simpleMessage("Addresses"),
         "available_in_stock":
             MessageLookupByLibrary.simpleMessage("Available in stock"),
@@ -33,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "category": MessageLookupByLibrary.simpleMessage("Categories"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("Change password"),
+        "check_stores": MessageLookupByLibrary.simpleMessage("Check stores"),
+        "color": MessageLookupByLibrary.simpleMessage("Color"),
         "currently_unavailable":
             MessageLookupByLibrary.simpleMessage("Currently unavailable"),
         "date_of_birth": MessageLookupByLibrary.simpleMessage("Date of birth"),
@@ -65,12 +68,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "product_info": MessageLookupByLibrary.simpleMessage("Product info"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "profile_page_label": MessageLookupByLibrary.simpleMessage("Profile"),
+        "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
         "returns": MessageLookupByLibrary.simpleMessage("Returns"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "select": MessageLookupByLibrary.simpleMessage("Select"),
+        "select_a_size_to_check_store_doc": MessageLookupByLibrary.simpleMessage(
+            "Select a size to check store availability and In-Store pickup options."),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "shipping_information":
             MessageLookupByLibrary.simpleMessage("Shipping Information"),
+        "size": MessageLookupByLibrary.simpleMessage("Size"),
+        "size_guide": MessageLookupByLibrary.simpleMessage("Size guide"),
+        "store_pickup_availability":
+            MessageLookupByLibrary.simpleMessage("Store pickup availability"),
+        "total_price": MessageLookupByLibrary.simpleMessage("Total Price"),
         "unit_price": MessageLookupByLibrary.simpleMessage("Unit price"),
         "user_name": MessageLookupByLibrary.simpleMessage("User Name"),
         "wallet": MessageLookupByLibrary.simpleMessage("Wallet"),

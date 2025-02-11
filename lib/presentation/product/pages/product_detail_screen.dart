@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/common/widget/custom_modal_bottom_sheet.dart';
 import 'package:flutter_application_1/generated/l10n.dart';
+import 'package:flutter_application_1/presentation/product/bloc/rating_information_state.dart';
+import 'package:flutter_application_1/presentation/product/pages/product_buy_now_screen.dart';
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
 import '../../../core/constant/constant.dart';
@@ -9,8 +12,7 @@ import '../../home/widget/product_card.dart';
 import '../bloc/book_mark_cubit.dart';
 import '../bloc/book_mark_state.dart';
 import '../bloc/familiar_product_cubit.dart';
-import '../bloc/product_avaliable_cubit.dart';
-import '../bloc/product_cubit.dart';
+import '../bloc/product_rating_information_cubit.dart';
 import '../widget/cart_button.dart';
 import '../widget/notify_me_card.dart';
 import '../widget/product_images.dart';
@@ -31,11 +33,7 @@ class ProductDetailScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ProductCubit()..getProduct(productEntity.id),
-        ),
-        BlocProvider(
-          create: (context) =>
-              ProductAvaliableCubit()..isAvaliable(productEntity.id),
+          create: (context) => ProductRatingInformationsCubit()..getRatingInformation(productEntity.id),
         ),
         BlocProvider(
           create: (context) =>
@@ -46,26 +44,22 @@ class ProductDetailScreen extends StatelessWidget {
         ),
       ],
       child: Scaffold(
-        bottomNavigationBar: BlocBuilder<ProductAvaliableCubit, TaskState>(
-          builder: (context, state) {
-            if (state is SuccessState) {
-              if (state.data) {
-                return CartButton(
-                  price: productEntity.price,
-                  title: S.of(context).bay_now,
-                  subTitle: S.of(context).unit_price,
-                  press: () {});
-              } else {
-                return NotifyMeCard(isNotify: false, onChanged: (isCheck) {});
-              }
-            } else {
-              return const SizedBox();
-            }
-          },
-        ),
-        body: BlocBuilder<ProductCubit, TaskState>(
+        bottomNavigationBar: productEntity.isAvaliable
+            ? CartButton(
+                price: productEntity.price,
+                title: S.of(context).bay_now,
+                subTitle: S.of(context).unit_price,
+                press: () {
+                  customModalBottomSheet(
+                    context,
+                    height: MediaQuery.of(context).size.height * 0.92,
+                    child: ProductBuyNowScreen(id:productEntity.id,image: productEntity.images[0],price: productEntity.price, title: productEntity.title,),
+                  );
+                })
+            : NotifyMeCard(isNotify: false, onChanged: (isCheck) {}),
+        body: BlocBuilder<ProductRatingInformationsCubit, RatingInformationState>(
           builder: (context, productState) {
-            if (productState is SuccessState || productState is LoadingState) {
+            if (productState is! FailureRatingInformationsStateWithoutData) {
               return CustomScrollView(
                 slivers: [
                   BlocConsumer<BookMarkCubit, BookMarkState>(
@@ -122,6 +116,7 @@ class ProductDetailScreen extends StatelessWidget {
                     return ProductInfo(
                       brand: productEntity.brandName,
                       title: productEntity.title,
+                      isAvaliable: productEntity.isAvaliable,
                     );
                   }),
                   ProductListTile(
@@ -197,7 +192,7 @@ class ProductDetailScreen extends StatelessWidget {
                         child: SizedBox(
                           height: 220,
                           child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             controller: _scrollController,
                             scrollDirection: Axis.horizontal,
                             itemCount: 5,
@@ -215,7 +210,8 @@ class ProductDetailScreen extends StatelessWidget {
                 ],
               );
             } else {
-              return const Center(child: CircularProgressIndicator.adaptive());
+              print(productState.error); // here i dont have any data 
+              return const Center(child: Text("you are not connected or somethig worng happen.."));
             }
           },
         ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/common/assets/assets_depend_on_direction.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 
 class ProductListTile extends StatelessWidget {
   const ProductListTile({
@@ -30,7 +32,7 @@ class ProductListTile extends StatelessWidget {
             ),
             title: Text(title),
             trailing: SvgPicture.asset(
-              "assets/icons/miniRight.svg",
+              AssetsDependOnDirection.getRow(context),
               color: Theme.of(context).textTheme.bodyMedium!.color,
             ),
           ),
