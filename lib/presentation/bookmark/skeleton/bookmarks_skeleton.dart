@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/home/skeleton/product_card_skelton.dart';
 import '../../../core/constant/constant.dart';
-import '../../home/skeleton/products_skelton.dart';
 
 class BookmarksSkeleton extends StatelessWidget {
   const BookmarksSkeleton({super.key});

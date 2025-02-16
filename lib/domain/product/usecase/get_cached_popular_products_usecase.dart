@@ -1,11 +1,13 @@
+import 'package:flutter_application_1/domain/product/entity/product_entity.dart';
+
 import '../../../core/usecase/usecase.dart';
 import '../repository/products.dart';
 import '../../../servise_locator.dart';
 import 'package:dartz/dartz.dart';
 
-class GetCachedPopularProductsUsecase extends UseCase<Either,int>{
+class GetCachedPopularProductsUsecase extends UseCase<List<ProductEntity>,dynamic>{
   @override
-  Future<Either> call({int? params}) async{
-    return await getIt.call<ProductsRepository>().getCachePopularProducts(params!);
+  Future<List<ProductEntity>> call({params}) {
+    return  getIt.call<ProductsRepository>().getCachePopularProducts();
   }
 }

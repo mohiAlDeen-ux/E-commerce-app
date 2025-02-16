@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Language_name": MessageLookupByLibrary.simpleMessage("English"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "add_to_cart": MessageLookupByLibrary.simpleMessage("Add to cart"),
+        "added_to_cart": MessageLookupByLibrary.simpleMessage("Added to cart"),
         "addresses": MessageLookupByLibrary.simpleMessage("Addresses"),
         "available_in_stock":
             MessageLookupByLibrary.simpleMessage("Available in stock"),
@@ -34,8 +35,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "category": MessageLookupByLibrary.simpleMessage("Categories"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("Change password"),
+        "check_out": MessageLookupByLibrary.simpleMessage("Checkout"),
         "check_stores": MessageLookupByLibrary.simpleMessage("Check stores"),
+        "click_the_checkout_button_to_complete_the_purchase_process":
+            MessageLookupByLibrary.simpleMessage(
+                "Click the checkout button to complete the purchase process."),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
+        "continue_shopping":
+            MessageLookupByLibrary.simpleMessage("Continue shopping"),
         "currently_unavailable":
             MessageLookupByLibrary.simpleMessage("Currently unavailable"),
         "date_of_birth": MessageLookupByLibrary.simpleMessage("Date of birth"),

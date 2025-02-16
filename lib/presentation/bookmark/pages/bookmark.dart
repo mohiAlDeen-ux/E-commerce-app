@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/product/bloc/familiar_product_cubit.dart';
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
 import '../../../core/constant/constant.dart';
@@ -40,10 +41,11 @@ class BookmarkPage extends StatelessWidget {
                               return ProductCard(
                                 productEntity: state.data[index],
                                 press: () {
-                                  AppNavigator.push(
-                                      context,
-                                      ProductDetailScreen(
-                                          productEntity: state.data[index]));
+                                   AppNavigator.push(
+                            context,  BlocProvider(
+                               create: (context) => FamiliarProductCubit(productId:  state.data[index]),
+                                child: ProductDetailScreen(productEntity:  state.data[index]),
+                              ));
                                 },
                               );
                             },

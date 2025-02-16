@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Language_name": MessageLookupByLibrary.simpleMessage("عربي"),
         "account": MessageLookupByLibrary.simpleMessage("الحساب"),
         "add_to_cart": MessageLookupByLibrary.simpleMessage("اضف إلى السلة"),
+        "added_to_cart":
+            MessageLookupByLibrary.simpleMessage("تمت الإضافة إلى السلة"),
         "addresses": MessageLookupByLibrary.simpleMessage("العناوين"),
         "available_in_stock":
             MessageLookupByLibrary.simpleMessage("متاح في المستودع"),
@@ -35,9 +37,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "category": MessageLookupByLibrary.simpleMessage("الفئآت"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
+        "check_out": MessageLookupByLibrary.simpleMessage("الدفع"),
         "check_stores":
             MessageLookupByLibrary.simpleMessage("التحقق من المتاجر"),
+        "click_the_checkout_button_to_complete_the_purchase_process":
+            MessageLookupByLibrary.simpleMessage(
+                "انقر فوق زر الدفع لإكمال عملية الشراء"),
         "color": MessageLookupByLibrary.simpleMessage("اللون"),
+        "continue_shopping":
+            MessageLookupByLibrary.simpleMessage("متابعة التسوق"),
         "currently_unavailable":
             MessageLookupByLibrary.simpleMessage("غير متاح حاليا"),
         "date_of_birth": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),

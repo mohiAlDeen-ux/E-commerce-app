@@ -58,7 +58,7 @@ class ProductModel {
       id: map['id'] as String,
       brandName: map['brandName'] as String,
       title: map['title'] as String,
-      images: List<String>.from((map['images'] as List<String>)),
+      images: List<String>.from((map['images'] as List<dynamic>)),
       price: map['price'] as double,
       priceAfetDiscount: map['priceAfetDiscount'] != null ? map['priceAfetDiscount'] as double : null,
       dicountpercent: map['dicountpercent'] != null ? map['dicountpercent'] as int : null,

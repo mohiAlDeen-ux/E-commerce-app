@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/common/widget/custom_modal_bottom_sheet.dart';
 import 'package:flutter_application_1/common/widget/netword_image_with_loader.dart';
 import 'package:flutter_application_1/core/constant/constant.dart';
+import 'package:flutter_application_1/domain/product/entity/product_entity.dart';
 import 'package:flutter_application_1/generated/l10n.dart';
 import 'package:flutter_application_1/presentation/product/bloc/chose_cubit.dart';
 import 'package:flutter_application_1/presentation/product/bloc/paying_informatoin_state.dart';
 import 'package:flutter_application_1/presentation/product/bloc/product_paying_information_cubit.dart';
+import 'package:flutter_application_1/presentation/product/bloc/product_rating_information_cubit.dart';
 import 'package:flutter_application_1/presentation/product/bloc/quantity_cubit.dart';
+import 'package:flutter_application_1/presentation/product/pages/added_to_cart_message_screen.dart';
 import 'package:flutter_application_1/presentation/product/widget/cart_button.dart';
 import 'package:flutter_application_1/presentation/product/widget/product_list_tile.dart';
 import 'package:flutter_application_1/presentation/product/widget/product_quantity.dart';
@@ -16,16 +20,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductBuyNowScreen extends StatefulWidget {
-  final price;
-  final String title;
-  final String id;
-  final String image;
-  const ProductBuyNowScreen(
-      {super.key,
-      required this.id,
-      required this.title,
-      required this.price,
-      required this.image});
+  final ProductEntity productEntity;
+  const ProductBuyNowScreen({super.key, required this.productEntity});
 
   @override
   _ProductBuyNowScreenState createState() => _ProductBuyNowScreenState();
@@ -34,11 +30,14 @@ class ProductBuyNowScreen extends StatefulWidget {
 class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
   @override
   Widget build(BuildContext context) {
+    //final productRatingInfo = context.read<ProductRatingInformationsCubit>().state.ratingInformatioinEntity;
     return MultiBlocProvider(
       providers: [
+        
         BlocProvider(
-          create: (context) =>
-              ProductPayingInformationsCubit()..getPayingInformation(widget.id),
+          
+          create: (context) => ProductPayingInformationsCubit()
+            ..getPayingInformation(widget.productEntity.id),
           //if loading or initial : skeleton
           //if leaded imidial: page with indicator
           //if loaded : page with data without indicator
@@ -65,10 +64,16 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
           }
           return Scaffold(
             bottomNavigationBar: CartButton(
-              price: widget.price, //here i must multiply with count
+              price:
+                  widget.productEntity.price * context.watch<QuantityCubit>().state, 
               title: S.of(context).add_to_cart,
               subTitle: S.of(context).total_price,
-              press: () {},
+              press: () {
+                customModalBottomSheet(
+                  context,
+                  child: const AddedToCartMessageScreen(),
+                );
+              },
             ),
             body: Column(
               children: [
@@ -80,7 +85,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                     children: [
                       const BackButton(),
                       Text(
-                        widget.title,
+                        widget.productEntity.title,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       IconButton(
@@ -102,7 +107,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                           child: AspectRatio(
                             aspectRatio: 1.05,
                             child: NetworkImageWithLoader(
-                              src: widget.image,
+                              src: widget.productEntity.images[0],
                               radius: 0,
                             ),
                           ),
@@ -114,10 +119,10 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Expanded(
+                               Expanded(
                                 child: UnitPrice(
-                                  price: 145,
-                                  priceAfterDiscount: 134.7,
+                                  price: widget.productEntity.price,
+                                  priceAfterDiscount: widget.productEntity.priceAfetDiscount,
                                 ),
                               ),
                               ProductQuantity(
@@ -137,33 +142,32 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                       SliverToBoxAdapter(
                         child: BlocProvider(
                           create: (context) => ChoseCubit(),
-                          child: Builder(
-                            builder: (context) {
-                              return SelectedColors(
-                                colors: payingInformationsState
-                                    .payingInformationEntity!.colors,
-                                selectedColorIndex: context.watch<ChoseCubit>().state,
-                                press: (value) {context.read<ChoseCubit>().chose(value);},
-                              );
-                            }
-                          ),
+                          child: Builder(builder: (context) {
+                            return SelectedColors(
+                              colors: payingInformationsState
+                                  .payingInformationEntity!.colors,
+                              selectedColorIndex:
+                                  context.watch<ChoseCubit>().state,
+                              press: (value) {
+                                context.read<ChoseCubit>().chose(value);
+                              },
+                            );
+                          }),
                         ),
                       ),
                       SliverToBoxAdapter(
                         child: BlocProvider(
                           create: (context) => ChoseCubit(),
-                          child: Builder(
-                            builder: (context) {
-                              return SelectedSize(
-                                sizes: payingInformationsState
-                                    .payingInformationEntity!.sizes,
-                                selectedIndex: context.watch<ChoseCubit>().state,
-                                press: (value) {
-                                  context.read<ChoseCubit>().chose(value);
-                                },
-                              );
-                            }
-                          ),
+                          child: Builder(builder: (context) {
+                            return SelectedSize(
+                              sizes: payingInformationsState
+                                  .payingInformationEntity!.sizes,
+                              selectedIndex: context.watch<ChoseCubit>().state,
+                              press: (value) {
+                                context.read<ChoseCubit>().chose(value);
+                              },
+                            );
+                          }),
                         ),
                       ),
                       SliverPadding(

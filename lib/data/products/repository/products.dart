@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data/products/models/get_familiar_product_req.dart';
 import 'package:flutter_application_1/data/products/models/get_product_py_category_req.dart';
 import 'package:flutter_application_1/data/products/models/paying_information_model.dart';
 import 'package:flutter_application_1/data/products/models/product_model.dart';
@@ -11,9 +12,13 @@ import '../../../domain/product/repository/products.dart';
 import '../../../servise_locator.dart';
 
 class ProductsRepositoryImp extends ProductsRepository {
-  final globalexpiryDate = const Duration(seconds: 10);
+  final globalExpiryDate = const Duration(seconds: 10);
+  final globalExpiryDateForDelete = const Duration(days: 2);
+
+  bool forTast = true;
 
   final List<ProductModel> _popularProducts = [
+
     ProductModel(
       isAvaliable: true,
       bookmark: false,
@@ -96,7 +101,92 @@ class ProductsRepositoryImp extends ProductsRepository {
     ),
   ];
 
+final List<ProductModel> _flashSellProducts = [
+
+    ProductModel(
+      isAvaliable: true,
+      bookmark: false,
+      id: "1",
+      images: [
+        "https://i.imgur.com/CGCyp1d.png",
+        "https://i.imgur.com/AkzWQuJ.png",
+        "https://i.imgur.com/J7mGZ12.png"
+      ],
+      title: "Mountain Warehouse for Women",
+      brandName: "Lipsy london",
+      price: 540,
+      priceAfetDiscount: 420,
+      dicountpercent: 20,
+      category: "",
+      subCategory: "",
+    ),
+    ProductModel(
+      isAvaliable: true,
+      bookmark: true,
+      id: "2",
+      images: ["https://i.imgur.com/q9oF9Yq.png"],
+      title: "Mountain Beta Warehouse",
+      brandName: "Lipsy london flash",
+      price: 800,
+      category: "",
+      subCategory: "",
+    ),
+    ProductModel(
+      isAvaliable: true,
+      bookmark: true,
+      id: "3",
+      images: ["https://i.imgur.com/MsppAcx.png"],
+      title: "FS - Nike Air Max 270 Really React",
+      brandName: "Lipsy london",
+      price: 650.62,
+      priceAfetDiscount: 390.36,
+      dicountpercent: 40,
+      category: "",
+      subCategory: "",
+    ),
+    ProductModel(
+      isAvaliable: false,
+      bookmark: true,
+      id: "4",
+      images: ["https://i.imgur.com/JfyZlnO.png"],
+      title: "Green Poplin Ruched Front",
+      brandName: "Lipsy london",
+      price: 1264,
+      priceAfetDiscount: 1200.8,
+      dicountpercent: 5,
+      category: "",
+      subCategory: "",
+    ),
+    ProductModel(
+      isAvaliable: false,
+      bookmark: true,
+      id: "5",
+      images: ["https://i.imgur.com/tXyOMMG.png"],
+      title: "Green Poplin Ruched Front",
+      brandName: "Lipsy london",
+      price: 650.62,
+      priceAfetDiscount: 390.36,
+      dicountpercent: 40,
+      category: "",
+      subCategory: "",
+    ),
+    ProductModel(
+      isAvaliable: true,
+      bookmark: false,
+      id: "6",
+      images: ["https://i.imgur.com/h2LqppX.png"],
+      title: "white satin corset top",
+      brandName: "Lipsy london",
+      price: 1264,
+      priceAfetDiscount: 1200.8,
+      dicountpercent: 5,
+      category: "",
+      subCategory: "",
+    ),
+  ];
+
   final List<ProductModel> _topSellingProducts = [
+
     ProductModel(
       isAvaliable: false,
       bookmark: true,
@@ -153,6 +243,47 @@ class ProductsRepositoryImp extends ProductsRepository {
     ),
   ];
 
+  final List<ProductModel> familiarProducs = [
+      ProductModel(
+        isAvaliable: true,
+        id: "4",
+        images: ["https://i.imgur.com/JfyZlnO.png"],
+        title: "Green Poplin Ruched Front",
+        brandName: "Lipsy london",
+        price: 1264,
+        priceAfetDiscount: 1200.8,
+        dicountpercent: 5,
+        bookmark: false,
+        category: "",
+        subCategory: "",
+      ),
+      ProductModel(
+        isAvaliable: true,
+        id: "5",
+        images: ["https://i.imgur.com/tXyOMMG.png"],
+        title: "Green Poplin Ruched Front",
+        brandName: "Lipsy london",
+        price: 650.62,
+        priceAfetDiscount: 390.36,
+        dicountpercent: 40,
+        bookmark: true,
+        category: "",
+        subCategory: "",
+      ),
+      ProductModel(
+        isAvaliable: false,
+        id: "6",
+        images: ["https://i.imgur.com/h2LqppX.png"],
+        title: "white satin corset top",
+        brandName: "Lipsy london",
+        price: 1264,
+        priceAfetDiscount: 1200.8,
+        dicountpercent: 5,
+        bookmark: false,
+        category: "",
+        subCategory: "",
+      ),
+    ];
 
   final fakeRatingInformationModel = RatingInformationModel(
       id: "1",
@@ -174,63 +305,38 @@ class ProductsRepositoryImp extends ProductsRepository {
     );
 
   @override
-  Future<Either> getFlashSaleProducts(int page) async {
-    return getIt.call<ProductsApiServices>().getFlashSaleProducts();
+  Future<Either> getFlashSellProducts(int page) async {
+    //return getIt.call<ProductsApiServices>().getFlashSaleProducts();
+    final flashSellProducts = _flashSellProducts;
+    getIt.call<ProductsCacheServices>().cacheFlashSellProduct(flashSellProducts,page);
+    return Right(flashSellProducts.map((model)=>model.toEntity()).toList());
   }
 
   @override
   Future<Either> getPopularProducts(int page) async {
+    print("in page$page");
+    if(page == 1){
+          if(forTast){
+              forTast = false;
+              return const Left("error");
+          }
+    }
+    if(page == 6){
+      return const Left("error in page 6");
+    }
+    
+    print("inserver");
     final popularProducts = _popularProducts;
     getIt.call<ProductsCacheServices>().cachePopularProduct(popularProducts,page);
     return Right(popularProducts.map((model)=>model.toEntity()).toList());
   }
 
   @override
-  Future<Either> getFamiliarProduct(String id) async {
-    await Future.delayed(const Duration(seconds: 5));
-
-    //for test
-    return Right([
-      ProductEntity(
-        isAvaliable: true,
-        id: "4",
-        images: ["https://i.imgur.com/JfyZlnO.png"],
-        title: "Green Poplin Ruched Front",
-        brandName: "Lipsy london",
-        price: 1264,
-        priceAfetDiscount: 1200.8,
-        dicountpercent: 5,
-        bookmark: false,
-        category: "",
-        subCategory: "",
-      ),
-      ProductEntity(
-        isAvaliable: true,
-        id: "5",
-        images: ["https://i.imgur.com/tXyOMMG.png"],
-        title: "Green Poplin Ruched Front",
-        brandName: "Lipsy london",
-        price: 650.62,
-        priceAfetDiscount: 390.36,
-        dicountpercent: 40,
-        bookmark: true,
-        category: "",
-        subCategory: "",
-      ),
-      ProductEntity(
-        isAvaliable: false,
-        id: "6",
-        images: ["https://i.imgur.com/h2LqppX.png"],
-        title: "white satin corset top",
-        brandName: "Lipsy london",
-        price: 1264,
-        priceAfetDiscount: 1200.8,
-        dicountpercent: 5,
-        bookmark: false,
-        category: "",
-        subCategory: "",
-      ),
-    ]);
+  Future<Either> getFamiliarProduct(GetFamiliarProductReq getFamiliarProduct) async {
+    await Future.delayed(const Duration(seconds: 2));
+    final familiarProducts = familiarProducs.map((product) => product.toEntity());
+    await getIt.call<ProductsCacheServices>().cacheFamiliarProduct(familiarProducs,getFamiliarProduct.page,getFamiliarProduct.productId);
+    return Right(familiarProducts);
   }
 
   @override
@@ -325,24 +431,36 @@ class ProductsRepositoryImp extends ProductsRepository {
   }
   
   @override
-  Future<Either> getCacheFlashSaleProducts(int page) {
-    // TODO: implement getCacheFlashSaleProducts not exist in cach
-    throw UnimplementedError();
+  Future<List<ProductEntity>> getCacheFlashSellProducts() async{
+    final cachedFlashSellProduct = getIt.call<ProductsCacheServices>().getAllFlashSellProduct();
+    if(cachedFlashSellProduct.isEmpty){
+      return const [];
+    }
+    final cachedFlashSellProductTimestamp = getIt.call<ProductsCacheServices>().getTimeStampOfFlashSellProduct(1);
+    final isValidTime = getIt.call<ProductsCacheServices>().isValidTimeStamp(cachedFlashSellProductTimestamp!, globalExpiryDateForDelete);
+
+    if(isValidTime){
+      return cachedFlashSellProduct.map((model)=>model.toEntity()).toList();
+    }else{
+      getIt.call<ProductsCacheServices>().clearFlashSellProduct();
+      return const [];
+    }
   }
   
   @override
-  Future<Either> getCachePopularProducts(int page) async{
-   final cachedPopularProduct = getIt.call<ProductsCacheServices>().getPopularProduct(page);
+  Future<List<ProductEntity>> getCachePopularProducts() async{
+    final cachedPopularProduct = getIt.call<ProductsCacheServices>().getAllPopularProduct();
     if(cachedPopularProduct.isEmpty){
-      return const Left([]);
+      return const [];
     }
-    final cachedPopularProductTimestamp = getIt.call<ProductsCacheServices>().getTimeStampOfPopularProduct(page);
-    final isValidTime = getIt.call<ProductsCacheServices>().isValidTimeStamp(cachedPopularProductTimestamp!, globalexpiryDate);
+    final cachedPopularProductTimestamp = getIt.call<ProductsCacheServices>().getTimeStampOfPopularProduct(1);
+    final isValidTime = getIt.call<ProductsCacheServices>().isValidTimeStamp(cachedPopularProductTimestamp!, globalExpiryDateForDelete);
 
     if(isValidTime){
-      return Right(cachedPopularProduct.map((model)=>model.toEntity()));
+      return cachedPopularProduct.map((model)=>model.toEntity()).toList();
     }else{
-      return Left(cachedPopularProduct.map((model)=>model.toEntity()));
+      getIt.call<ProductsCacheServices>().clearPopularProduct();
+      return const [];
     }
   }
   
@@ -353,7 +471,7 @@ class ProductsRepositoryImp extends ProductsRepository {
       return const Left(null);
     }
     final cachedProductPyingInformationTimestamp = getIt.call<ProductsCacheServices>().getTimeStampOfPayingInformation(id);
-    final isValidTime = getIt.call<ProductsCacheServices>().isValidTimeStamp(cachedProductPyingInformationTimestamp!, globalexpiryDate);
+    final isValidTime = getIt.call<ProductsCacheServices>().isValidTimeStamp(cachedProductPyingInformationTimestamp!, globalExpiryDate);
 
     if(isValidTime){
       return Right(cachedProductPayingInformation.toEntity());
@@ -369,7 +487,7 @@ class ProductsRepositoryImp extends ProductsRepository {
       return const Left(null);
     }
     final cachedProductRatingInformationTimestamp = getIt.call<ProductsCacheServices>().getTimeStampOfRatingInformation(id);
-    final isValidTime = getIt.call<ProductsCacheServices>().isValidTimeStamp(cachedProductRatingInformationTimestamp!, globalexpiryDate);
+    final isValidTime = getIt.call<ProductsCacheServices>().isValidTimeStamp(cachedProductRatingInformationTimestamp!, globalExpiryDate);
     print("is valid${isValidTime}");
     if(isValidTime){
       return Right(cachedProductRatingInformation.toEntity());
@@ -379,18 +497,41 @@ class ProductsRepositoryImp extends ProductsRepository {
   }
   
   @override
-  Future<Either> getCacheTopSellingProducts(int page) async{
-    final cachedTopSellingProduct = getIt.call<ProductsCacheServices>().getTopSellingProduct(page);
+  Future<List<ProductEntity>> getCacheTopSellingProducts() async{
+    final cachedTopSellingProduct = getIt.call<ProductsCacheServices>().getAllTopSellingProduct();
     if(cachedTopSellingProduct.isEmpty){
-      return const Left([]);
+      return const [];
     }
-    final cachedTopSellingProductTimestamp = getIt.call<ProductsCacheServices>().getTimeStampOfTopSellingProduct(page);
-    final isValidTime = getIt.call<ProductsCacheServices>().isValidTimeStamp(cachedTopSellingProductTimestamp!, globalexpiryDate);
+    final cachedTopSellingProductTimestamp = getIt.call<ProductsCacheServices>().getTimeStampOfTopSellingProduct(1);
+    final isValidTime = getIt.call<ProductsCacheServices>().isValidTimeStamp(cachedTopSellingProductTimestamp!, globalExpiryDateForDelete);
 
     if(isValidTime){
-      return Right(cachedTopSellingProduct.map((model)=>model.toEntity()));
+      return cachedTopSellingProduct.map((model)=>model.toEntity()).toList();
     }else{
-      return Left(cachedTopSellingProduct.map((model)=>model.toEntity()));
+      getIt.call<ProductsCacheServices>().clearTopSellingProduct();
+      return const [];
     }
 }
+
+  @override
+  bool isHaveEnoughDataInCache() {
+    return getIt.call<ProductsCacheServices>().isHaveEnoughData();
+  }
+  
+  @override
+  Future<List<ProductEntity>> getCacheFamiliarProducts(String productId) async{
+    final cachedFamiliarProduct = getIt.call<ProductsCacheServices>().getAllFamiliarProduct(productId);
+    if(cachedFamiliarProduct.isEmpty){
+      return const [];
+    }
+    final cachedFamiliarProductTimestamp = getIt.call<ProductsCacheServices>().getTimeStampOfFamiliarProduct(1,productId);
+    final isValidTime = getIt.call<ProductsCacheServices>().isValidTimeStamp(cachedFamiliarProductTimestamp!, globalExpiryDateForDelete);
+
+    if(isValidTime){
+      return cachedFamiliarProduct.map((model)=>model.toEntity()).toList();
+    }else{
+      getIt.call<ProductsCacheServices>().clearFamiliarProduct(productId);
+      return const [];
+    }
+  }
 }

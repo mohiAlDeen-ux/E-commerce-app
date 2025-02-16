@@ -619,6 +619,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Checkout`
+  String get check_out {
+    return Intl.message(
+      'Checkout',
+      name: 'check_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue shopping`
+  String get continue_shopping {
+    return Intl.message(
+      'Continue shopping',
+      name: 'continue_shopping',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Click the checkout button to complete the purchase process.`
+  String get click_the_checkout_button_to_complete_the_purchase_process {
+    return Intl.message(
+      'Click the checkout button to complete the purchase process.',
+      name: 'click_the_checkout_button_to_complete_the_purchase_process',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Added to cart`
+  String get added_to_cart {
+    return Intl.message(
+      'Added to cart',
+      name: 'added_to_cart',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

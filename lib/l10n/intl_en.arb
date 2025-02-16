@@ -55,7 +55,11 @@
     "size_guide":"Size guide",
     "check_stores":"Check stores",
     "store_pickup_availability":"Store pickup availability",
-    "select_a_size_to_check_store_doc":"Select a size to check store availability and In-Store pickup options."
+    "select_a_size_to_check_store_doc":"Select a size to check store availability and In-Store pickup options.",
+    "check_out":"Checkout",
+    "continue_shopping":"Continue shopping",
+    "click_the_checkout_button_to_complete_the_purchase_process":"Click the checkout button to complete the purchase process.",
+    "added_to_cart":"Added to cart"
     
 
 }

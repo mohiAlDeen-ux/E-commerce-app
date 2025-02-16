@@ -55,5 +55,12 @@
     "size_guide":"دليل المقاسات",
     "check_stores":"التحقق من المتاجر",
     "store_pickup_availability":"إمكانية الاستلام من المتجر",
-    "select_a_size_to_check_store_doc":".حدد المقاس للتحقق من توفر المنتج في المتجر وخيارات الاستلام داخل المتجر"
+    "select_a_size_to_check_store_doc":".حدد المقاس للتحقق من توفر المنتج في المتجر وخيارات الاستلام داخل المتجر",
+    "check_out":"الدفع",
+    "continue_shopping":"متابعة التسوق",
+    "click_the_checkout_button_to_complete_the_purchase_process":"انقر فوق زر الدفع لإكمال عملية الشراء",
+    "added_to_cart":"تمت الإضافة إلى السلة"
+
+
+
 }

@@ -10,7 +10,6 @@ class ProductRatingInformationsCubit extends Cubit<RatingInformationState>{
 
   Future<void> getRatingInformation(String id) async{
     emit(const LoadingRatingInformationsState());
-    //await Future.delayed(const Duration(seconds: 3));
     final cacheRatingInformationEither =  await getIt.call<GetCachedRatingInformationUsecase>().call(params: id);
     late final bool isLeft;
     final cacheRatingInformation = cacheRatingInformationEither.fold((data){

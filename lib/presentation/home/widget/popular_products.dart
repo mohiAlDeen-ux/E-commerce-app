@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/presentation/home/bloc/products/popular_product_state.dart';
+import 'package:flutter_application_1/common/bloc/product_list_with_pagination_and_cache/product_list_state.dart';
+import 'package:flutter_application_1/common/widget/product_list_skeleton.dart';
+import 'package:flutter_application_1/presentation/product/bloc/familiar_product_cubit.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
 import '../../../core/constant/constant.dart';
 import '../../../domain/product/entity/product_entity.dart';
-import '../skeleton/products_skelton.dart';
 import 'product_card.dart';
 import '../../product/pages/product_detail_screen.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -31,9 +32,12 @@ class _PopularProductsState extends State<PopularProducts> {
     super.dispose();
   }
 
-  void _onScroll() {
-    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-      context.read<PopularProductCubit>().loadPopularProduct();
+  void _onScroll() async{
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 50) {
+      context.read<PopularProductCubit>().loadProducts();
+      await Future.delayed(const Duration(seconds: 1));
+
+      
     }
   }
 
@@ -50,10 +54,10 @@ class _PopularProductsState extends State<PopularProducts> {
               ),
             ),
             const SizedBox(height: defaultPadding,),
-            BlocBuilder<PopularProductCubit, PopularState>(
+            BlocBuilder<PopularProductCubit, ProductsListState>(
               builder: (context, state) {
-                if(state is PopularInitial){
-                  return const ProductsSkelton();
+                if(state is ProductsInitial  || (state is ProductsLoading && state.products.isEmpty)){
+                  return const ProductListSkeleton();
                 }else{
                   final List<ProductEntity> _products = state.products;
                   return SizedBox(
@@ -61,12 +65,19 @@ class _PopularProductsState extends State<PopularProducts> {
                     child: ListView.builder(
                     controller: _scrollController,
                     scrollDirection: Axis.horizontal,
-                    itemCount: state is PopularLoading ? _products.length + 1: _products.length,
+                    itemCount: state is ProductsLoading ? _products.length + 1: _products.length,
                       itemBuilder: (BuildContext context, int index) { 
                         if (index < _products.length){
                           return Padding(
-                            padding: EdgeInsets.only(left: defaultPadding, right: index == _products.length - 1?defaultPadding:0 ),
-                            child: ProductCard(productEntity: _products[index], press: () => AppNavigator.push(context,ProductDetailScreen(productEntity:_products[index]))),  // here i pass the product as argument put in i need to fixid it by cubit
+                            padding: EdgeInsets.only(
+                              left: Directionality.of(context) == TextDirection.ltr? defaultPadding:0,
+                              right: Directionality.of(context) == TextDirection.rtl? defaultPadding:0,
+                            ),
+                            child: ProductCard(productEntity: _products[index], press: () =>  AppNavigator.push(
+                            context,  BlocProvider(
+                               create: (context) => FamiliarProductCubit(productId: _products[index].id),
+                                child: ProductDetailScreen(productEntity: _products[index]),
+                              ))),  // here i pass the product as argument put in i need to fixid it by cubit
                             );
                         }else{
                           return const Padding(

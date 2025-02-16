@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/common/bloc/product_list_with_pagination_and_cache/product_list_state.dart';
 import 'package:flutter_application_1/common/widget/custom_modal_bottom_sheet.dart';
+import 'package:flutter_application_1/common/widget/product_list_skeleton.dart';
 import 'package:flutter_application_1/generated/l10n.dart';
 import 'package:flutter_application_1/presentation/product/bloc/rating_information_state.dart';
 import 'package:flutter_application_1/presentation/product/pages/product_buy_now_screen.dart';
-import '../../../common/bloc/task/task_state.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
 import '../../../core/constant/constant.dart';
 import '../../../domain/product/entity/product_entity.dart';
-import '../../home/skeleton/product_card_skelton.dart';
 import '../../home/widget/product_card.dart';
 import '../bloc/book_mark_cubit.dart';
 import '../bloc/book_mark_state.dart';
@@ -22,50 +22,88 @@ import '../widget/review_card.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ProductDetailScreen extends StatelessWidget {
+class ProductDetailScreen extends StatefulWidget {
   ProductDetailScreen({super.key, required this.productEntity});
 
   ProductEntity productEntity;
+
+  @override
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
   final ScrollController _scrollController = ScrollController();
+  final ScrollController _horizontalScrollController =
+      ScrollController(); // New controller for horizontal list
+  bool canLoad = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _horizontalScrollController.addListener(() async {
+      if (canLoad) {
+        canLoad = false;
+        await _onScroll(widget.productEntity.id);
+        canLoad = true;
+      }
+    }); // Listen to horizontal scroll
+  }
+
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose(); // Dispose horizontal controller
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _onScroll(String productId) async {
+    if (_horizontalScrollController.position.pixels >=
+        _horizontalScrollController.position.maxScrollExtent - 50) {
+      await context.read<FamiliarProductCubit>().loadProducts();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ProductRatingInformationsCubit()..getRatingInformation(productEntity.id),
+          create: (context) => ProductRatingInformationsCubit()
+            ..getRatingInformation(widget.productEntity.id),
+        ),
+        BlocProvider.value(
+          value: context.read<FamiliarProductCubit>()..loadProducts(),
         ),
         BlocProvider(
-          create: (context) =>
-              FamiliarProductCubit()..getFamiliarProduct(productEntity.id),
-        ),
-        BlocProvider(
-          create: (context) => BookMarkCubit(productEntity),
+          create: (context) => BookMarkCubit(widget.productEntity),
         ),
       ],
       child: Scaffold(
-        bottomNavigationBar: productEntity.isAvaliable
+        bottomNavigationBar: widget.productEntity.isAvaliable
             ? CartButton(
-                price: productEntity.price,
+                price: widget.productEntity.price,
                 title: S.of(context).bay_now,
                 subTitle: S.of(context).unit_price,
                 press: () {
                   customModalBottomSheet(
                     context,
                     height: MediaQuery.of(context).size.height * 0.92,
-                    child: ProductBuyNowScreen(id:productEntity.id,image: productEntity.images[0],price: productEntity.price, title: productEntity.title,),
+                    child: ProductBuyNowScreen(
+                        productEntity: widget.productEntity),
                   );
                 })
             : NotifyMeCard(isNotify: false, onChanged: (isCheck) {}),
-        body: BlocBuilder<ProductRatingInformationsCubit, RatingInformationState>(
+        body:
+            BlocBuilder<ProductRatingInformationsCubit, RatingInformationState>(
           builder: (context, productState) {
             if (productState is! FailureRatingInformationsStateWithoutData) {
               return CustomScrollView(
+                controller: _scrollController,
                 slivers: [
                   BlocConsumer<BookMarkCubit, BookMarkState>(
                     listener: (context, state) {
                       if (state is BookmarkSuccessState) {
-                        productEntity = state.productEntity;
+                        widget.productEntity = state.productEntity;
                       }
                       if (state is BookmarkFaillState) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -111,12 +149,12 @@ class ProductDetailScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  ProductImages(images: productEntity.images),
+                  ProductImages(images: widget.productEntity.images),
                   Builder(builder: (context) {
                     return ProductInfo(
-                      brand: productEntity.brandName,
-                      title: productEntity.title,
-                      isAvaliable: productEntity.isAvaliable,
+                      brand: widget.productEntity.brandName,
+                      title: widget.productEntity.title,
+                      isAvaliable: widget.productEntity.isAvaliable,
                     );
                   }),
                   ProductListTile(
@@ -154,68 +192,84 @@ class ProductDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  BlocBuilder<FamiliarProductCubit, TaskState>(
-                      builder: (context, state) {
-                    if (state is SuccessState) {
-                      List<ProductEntity> familiarProduct = state.data;
-                      return SliverToBoxAdapter(
-                        child: SizedBox(
-                          height: 220,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: familiarProduct.length,
-                            itemBuilder: (context, index) => Padding(
-                              padding: EdgeInsets.only(
-                                  left: defaultPadding,
-                                  right: index == familiarProduct.length - 1
-                                      ? defaultPadding
-                                      : 0),
-                              child: ProductCard(
-                                productEntity: familiarProduct[index],
-                                press: () {
-                                  AppNavigator.push(
-                                      context,
-                                      ProductDetailScreen(
-                                          productEntity:
-                                              familiarProduct[index]));
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    } else if (state is FailureState) {
-                      return const SliverToBoxAdapter(
-                          child: CircularProgressIndicator());
-                    } else {
-                      return SliverToBoxAdapter(
-                        child: SizedBox(
-                          height: 220,
-                          child: ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            controller: _scrollController,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 5,
-                            itemBuilder: (context, index) => Padding(
-                              padding: EdgeInsets.only(
-                                  left: defaultPadding,
-                                  right: index == 4 ? defaultPadding : 0),
-                              child: const ProductCardSkelton(),
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                  })
+                  SliverToBoxAdapter(
+                    child: FamiliarProductList(horizontalScrollController: _horizontalScrollController,productId: widget.productEntity.id,),
+                  )
                 ],
               );
             } else {
-              print(productState.error); // here i dont have any data 
-              return const Center(child: Text("you are not connected or somethig worng happen.."));
+              print(productState.error); // here i dont have any data
+              return const Center(
+                  child:
+                      Text("you are not connected or somethig worng happen.."));
             }
           },
         ),
       ),
     );
+  }
+}
+
+class FamiliarProductList extends StatefulWidget {
+  final ScrollController horizontalScrollController;
+  final String productId;
+
+  const FamiliarProductList({required this.horizontalScrollController,required this.productId, super.key});
+
+  @override
+  State<FamiliarProductList> createState() => _FamiliarProductListState();
+}
+
+class _FamiliarProductListState extends State<FamiliarProductList> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<FamiliarProductCubit, ProductsListState>(
+        builder: (context, state) {
+      print("state is:$state");
+      if (state is ProductsInitial ||
+          (state is ProductsLoading && state.products.isEmpty)) {
+        return const  ProductListSkeleton();
+      } else {
+        List<ProductEntity> familiarProduct = state.products;
+        return  SizedBox(
+            height: 220,
+            child: ListView.builder(
+                controller: widget.horizontalScrollController,
+                scrollDirection: Axis.horizontal,
+                itemCount: state is ProductsLoading
+                    ? familiarProduct.length + 1
+                    : familiarProduct.length,
+                itemBuilder: (context, index) {
+                  if (index < familiarProduct.length) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                              left: Directionality.of(context) == TextDirection.ltr? defaultPadding:0,
+                              right: Directionality.of(context) == TextDirection.rtl? defaultPadding:0,
+                              ),
+                      child: ProductCard(
+                        productEntity: familiarProduct[index],
+                        press: () {
+                          AppNavigator.push(
+                              context,
+                              BlocProvider(
+                                create: (context) => FamiliarProductCubit(
+                                    productId: widget.productId),
+                                child: ProductDetailScreen(
+                                    productEntity: familiarProduct[index]),
+                              ));
+                        },
+                      ),
+                    );
+                  } else {
+                    return const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  }
+                }),
+          
+        );
+      }
+    });
   }
 }

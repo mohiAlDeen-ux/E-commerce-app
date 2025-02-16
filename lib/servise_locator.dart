@@ -2,11 +2,15 @@ import 'package:flutter_application_1/data/products/src/products_cache_services.
 import 'package:flutter_application_1/domain/categories/usecase/get_full_categories_usecase.dart';
 import 'package:flutter_application_1/domain/preferences/usecase/get_language_usecase.dart';
 import 'package:flutter_application_1/domain/preferences/usecase/set_language_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_cached_familiar_product_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_cached_flash_sell_products_usecase.dart';
 import 'package:flutter_application_1/domain/product/usecase/get_cached_paying_information_usecase.dart';
 import 'package:flutter_application_1/domain/product/usecase/get_cached_popular_products_usecase.dart';
 import 'package:flutter_application_1/domain/product/usecase/get_cached_rating_information_usecase.dart';
 import 'package:flutter_application_1/domain/product/usecase/get_cached_top_selling_products_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/get_flash_seling_product_usecase.dart';
 import 'package:flutter_application_1/domain/product/usecase/get_product_pying_information_usecase.dart';
+import 'package:flutter_application_1/domain/product/usecase/is_have_enough_data_in_cache_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'domain/auth/usecase/set_user_info_usecase.dart';
@@ -115,6 +119,8 @@ Future<void> setupServiceLocator() async{
 
   getIt.registerSingleton<GetTopSelingProductsUsecase>(GetTopSelingProductsUsecase());
 
+  getIt.registerSingleton<GetFlashSellProductsUsecase>(GetFlashSellProductsUsecase());
+
   getIt.registerSingleton<GetProductsPyCategoryUsecase>(GetProductsPyCategoryUsecase());
 
   getIt.registerSingleton<SetUserInfoUsecase>(SetUserInfoUsecase());
@@ -134,6 +140,12 @@ Future<void> setupServiceLocator() async{
   getIt.registerSingleton<GetCachedRatingInformationUsecase>(GetCachedRatingInformationUsecase());
 
   getIt.registerSingleton<GetCachedPayingInformationUsecase>(GetCachedPayingInformationUsecase());
+
+  getIt.registerSingleton<GetCachedFlashSellProductsUsecase>(GetCachedFlashSellProductsUsecase());
+
+  getIt.registerSingleton<IsHaveEnoughDataInCacheUsecase>(IsHaveEnoughDataInCacheUsecase());
+
+  getIt.registerSingleton<GetCachedFamiliarProductUsecase>(GetCachedFamiliarProductUsecase());
 
 
 }
