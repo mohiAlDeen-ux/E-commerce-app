@@ -1,0 +1,38 @@
+
+
+my problem:
+	i can save top and best in product because it change evey time.
+	the same product mabe contain more than one category.
+	i have cach
+
+8/2:
+	1/ i add the pagination fuctionality to top selling product //i need to chack if the 
+	   state is loading state and no product yet i need to show the skeleton 
+	2/ make skeleton not moved
+	3/ add the same fuctionality to popular product
+	4/ put this product in cach
+	5/ i put tow function to cubit the first is started to get all from the cash 
+		and another to get page
+
+
+i build the e-commerce mobile app with flutter framework and i have product in home screen i show three list  view the first one for popular product and the second one for top selling product and the third for flash sell product this information is coming from server and the product may include in many category in the same time my code is build in clean architecture how can i make caching for this product to handle the offline state and to reduce the communication with server
+
+
+
+i asume the page is not change when i finish i get it in my prin
+i asume the divice is connected
+
+9/2
+	after commit :i must move the demo data to sourse layar
+
+get product rating information:
+	in repo first i check is this rating information is exist in caching 
+	is exist i must show this 
+	then if the time statmp is oldest i need to refrech the date
+	i get the information from server 
+	refrech the date and show it 
+for paying info the same as rating info
+{"colors":[4278190080,4294198070,4294967040],"sizes":["X","XL","XLL"]}
+
+lib/presentation/product/pages/product_detail_screen.dart
+lib/presentation/card/pages/card.dart

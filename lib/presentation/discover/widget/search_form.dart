@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/config/theme/input_decoration_theme.dart';
+import '../../../core/config/theme/input_decoration_theme.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 

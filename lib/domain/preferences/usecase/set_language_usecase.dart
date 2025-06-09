@@ -1,6 +1,6 @@
-import 'package:flutter_application_1/core/usecase/usecase.dart';
-import 'package:flutter_application_1/domain/preferences/repository/preferences.dart';
-import 'package:flutter_application_1/servise_locator.dart';
+import '../../../core/usecase/usecase.dart';
+import '../repository/preferences.dart';
+import '../../../servise_locator.dart';
 
 class SetLanguageUsecase extends UseCase<void,String>{
   @override

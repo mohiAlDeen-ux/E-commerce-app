@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/language/language_cubit.dart';
-import 'package:flutter_application_1/common/bloc/language/language_state.dart';
+import 'package:flutter_application_1/presentation/auth/pages/choose_verification_method.dart';
+import '../../../common/bloc/language/language_cubit.dart';
+import '../../../common/bloc/language/language_state.dart';
 import '../../../common/bloc/button/button_cubit.dart';
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
@@ -66,7 +67,7 @@ class _SigninState extends State<Signin> {
                       child: TextButton(
                         child: const Text("Forgot password"),
                         onPressed: () {
-                          AppNavigator.push(context, EnterEmilToRecover());
+                          AppNavigator.push(context, ChooseVerificationMethod());
                         },
                       ),
                     ),

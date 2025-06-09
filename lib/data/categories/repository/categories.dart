@@ -1,11 +1,11 @@
-import 'package:flutter_application_1/domain/categories/entity/full_categories_entity.dart';
+import "package:dartz/dartz.dart";
 
+import '../../../domain/categories/entity/categories_entity.dart';
+import '../../../domain/categories/entity/full_categories_entity.dart';
+import '../../../domain/categories/repository/category.dart';
+import '../../../servise_locator.dart';
 import '../models/categories_models.dart';
 import '../src/categories_api_service.dart';
-import '../../../domain/categories/entity/categories_entity.dart';
-import '../../../domain/categories/repository/category.dart';
-import "package:dartz/dartz.dart";
-import '../../../servise_locator.dart';
 
 class CategoryRepositoryImp extends CategoryRepository{
   List<CategoryEntity> cachedCategories= [
@@ -59,7 +59,7 @@ class CategoryRepositoryImp extends CategoryRepository{
   
   @override
   Future<Either<String, dynamic>> getFullCategories() async{
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 4));
     return Right(cachedFullCategories);
     //return await getIt.call<CategoriesApiService>().getFullCategories();
   }

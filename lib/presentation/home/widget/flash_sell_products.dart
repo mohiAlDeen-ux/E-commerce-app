@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/product_list_with_pagination_and_cache/product_list_state.dart';
-import 'package:flutter_application_1/common/widget/product_list_skeleton.dart';
-import 'package:flutter_application_1/presentation/home/bloc/products/flash_sell_product_cubit.dart';
-import 'package:flutter_application_1/presentation/product/bloc/familiar_product_cubit.dart';
+import '../../../common/bloc/product_list_with_pagination_and_cache/product_list_state.dart';
+import '../../../common/widget/product_list_skeleton.dart';
+import '../bloc/products/flash_sell_product_cubit.dart';
+import '../../product/bloc/familiar_product_cubit.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
 import '../../../core/constant/constant.dart';
 import '../../../domain/product/entity/product_entity.dart';

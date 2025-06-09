@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter_application_1/data/products/models/paying_information_model.dart';
-import 'package:flutter_application_1/data/products/models/product_model.dart';
-import 'package:flutter_application_1/data/products/models/rating_information_model.dart';
+import '../models/paying_information_model.dart';
+import '../models/product_model.dart';
+import '../models/rating_information_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get_it/get_it.dart';
 

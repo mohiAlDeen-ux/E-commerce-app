@@ -1,7 +1,7 @@
 import "package:dartz/dartz.dart";
-import "package:flutter_application_1/data/products/models/get_familiar_product_req.dart";
-import "package:flutter_application_1/data/products/models/get_product_py_category_req.dart";
-import "package:flutter_application_1/domain/product/entity/product_entity.dart";
+import "../../../data/products/models/get_familiar_product_req.dart";
+import "../../../data/products/models/get_product_py_category_req.dart";
+import "../entity/product_entity.dart";
 
 abstract class ProductsRepository{
   // this methods is fech from interned and refrech the cach and return the data
@@ -9,8 +9,8 @@ abstract class ProductsRepository{
   Future<Either> getPopularProducts(int page);
   Future<Either> getFlashSellProducts(int page);
   Future<Either> getFamiliarProduct(GetFamiliarProductReq getFamiliarProduct);
-  Future<Either> getProductPyingInformation(String id);
-  Future<Either> getProductRatingInformation(String id);
+  Future<Either> getProductPyingInformation(String id);  ///
+  Future<Either> getProductRatingInformation(String id); ///
 
   // this methods is fech from cach
   Future<List<ProductEntity>> getCacheTopSellingProducts();

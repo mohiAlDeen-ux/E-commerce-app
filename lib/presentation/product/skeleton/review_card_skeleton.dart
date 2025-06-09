@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../common/widget/skeleton.dart';
 import '../../../core/constant/constant.dart';
 import '../widget/review_card.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ReviewCardSkeleton extends StatelessWidget {
   const ReviewCardSkeleton({super.key});

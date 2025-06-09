@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/button/button_cubit.dart';
-import 'package:flutter_application_1/common/bloc/error_masage/erorr_masage_cubit.dart';
-import 'package:flutter_application_1/common/widget/basic_reactive_button.dart';
-import 'package:flutter_application_1/common/widget/error_masage.dart';
-import 'package:flutter_application_1/generated/l10n.dart';
-import 'package:flutter_application_1/presentation/profile/widget/profile_image_with_edit_button.dart';
-import 'package:flutter_application_1/presentation/profile/widget/select_photo_options.dart';
+import '../../../common/bloc/button/button_cubit.dart';
+import '../../../common/bloc/error_masage/erorr_masage_cubit.dart';
+import '../../../common/widget/basic_reactive_button.dart';
+import '../../../common/widget/error_masage.dart';
+import '../../../generated/l10n.dart';
+import '../widget/profile_image_with_edit_button.dart';
+import '../widget/select_photo_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 

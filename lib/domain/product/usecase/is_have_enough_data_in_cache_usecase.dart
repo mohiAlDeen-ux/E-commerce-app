@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/data/products/repository/products.dart';
+import '../../../data/products/repository/products.dart';
 
 import '../../../core/usecase/usecase.dart';
 import '../../../servise_locator.dart';

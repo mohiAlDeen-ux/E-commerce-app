@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/config/theme/app_colors.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/generated/l10n.dart';
+import '../../../core/config/theme/app_colors.dart';
+import '../../../core/constant/constant.dart';
+import '../../../generated/l10n.dart';
 
 
 class SelectedSize extends StatelessWidget {

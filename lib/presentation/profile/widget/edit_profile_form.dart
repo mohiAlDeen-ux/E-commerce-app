@@ -1,5 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../common/bloc/task/task_state.dart';
+import '../../../core/constant/constant.dart';
 import '../../../data/auth/models/set_user_info_req.dart';
 import '../../../domain/auth/entity/gender.dart';
 import '../../../domain/auth/entity/user_entity.dart';
@@ -9,10 +13,6 @@ import 'email_text_filed.dart';
 import 'gender_option_filed.dart';
 import 'phone_number_text_filed.dart';
 import 'user_name_text_filed.dart';
-import '../../../core/constant/constant.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:dartz/dartz.dart';
 
 class EditProfileForm extends StatelessWidget {
   EditProfileForm({

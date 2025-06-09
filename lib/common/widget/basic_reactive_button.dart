@@ -49,7 +49,7 @@ class BasicReactiveButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: Size.fromHeight(height ?? 50),
       ),
-      child: Container(
+      child: SizedBox(
         height: height ?? 50,
         child: Center(
           child: content ?? Text(

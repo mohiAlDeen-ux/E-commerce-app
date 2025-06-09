@@ -1,7 +1,7 @@
-import 'package:flutter_application_1/domain/product/usecase/get_cached_paying_information_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_product_pying_information_usecase.dart';
-import 'package:flutter_application_1/presentation/product/bloc/paying_informatoin_state.dart';
-import 'package:flutter_application_1/servise_locator.dart';
+import '../../../domain/product/usecase/get_cached_paying_information_usecase.dart';
+import '../../../domain/product/usecase/get_product_pying_information_usecase.dart';
+import 'paying_informatoin_state.dart';
+import '../../../servise_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductPayingInformationsCubit extends Cubit<PayingInformationState>{

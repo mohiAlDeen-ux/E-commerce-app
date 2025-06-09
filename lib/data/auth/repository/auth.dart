@@ -1,14 +1,15 @@
 import 'package:dartz/dartz.dart';
-import '../models/set_user_info_req.dart';
-import '../models/confirm_verification_code_req.dart';
-import '../models/reset_password_py_old_password_req.dart';
-import '../models/reset_password_py_token_req.dart';
-import '../models/user.dart';
-import '../models/user_creational_req.dart';
-import '../models/user_signin_req.dart';
+
 import '../../../domain/auth/entity/gender.dart';
 import '../../../domain/auth/repository/auth.dart';
 import '../../../servise_locator.dart';
+import '../models/confirm_verification_code_req.dart';
+import '../models/reset_password_py_old_password_req.dart';
+import '../models/reset_password_py_token_req.dart';
+import '../models/set_user_info_req.dart';
+import '../models/user.dart';
+import '../models/user_creational_req.dart';
+import '../models/user_signin_req.dart';
 import '../src/auth_api_service.dart';
 import '../src/auth_local_service.dart';
 

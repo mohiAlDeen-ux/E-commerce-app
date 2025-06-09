@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/domain/categories/entity/categories_entity.dart';
+import '../../../core/constant/constant.dart';
+import '../../../domain/categories/entity/categories_entity.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 

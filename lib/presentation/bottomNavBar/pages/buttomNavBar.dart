@@ -1,13 +1,13 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/config/theme/app_colors.dart';
 import '../../../core/constant/constant.dart';
 import '../../bookmark/pages/bookmark.dart';
-import '../../card/pages/card.dart';
+import '../../card/pages/cart.dart';
 import '../../discover/pages/discover.dart';
 import '../../home/page/home.dart';
 import '../../profile/pages/profile.dart';
@@ -57,7 +57,7 @@ class BottomNavBarPage extends StatelessWidget {
               break;
 
             case NavState.CardScreen:
-              curentPage = CardPage();
+              curentPage = CartPage();
               break;
 
             case NavState.ProfileScreen:

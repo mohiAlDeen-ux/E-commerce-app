@@ -1,16 +1,27 @@
-import 'package:flutter_application_1/data/products/src/products_cache_services.dart';
-import 'package:flutter_application_1/domain/categories/usecase/get_full_categories_usecase.dart';
-import 'package:flutter_application_1/domain/preferences/usecase/get_language_usecase.dart';
-import 'package:flutter_application_1/domain/preferences/usecase/set_language_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_cached_familiar_product_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_cached_flash_sell_products_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_cached_paying_information_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_cached_popular_products_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_cached_rating_information_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_cached_top_selling_products_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_flash_seling_product_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_product_pying_information_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/is_have_enough_data_in_cache_usecase.dart';
+import 'package:flutter_application_1/data/cart/repository/cart.dart';
+import 'package:flutter_application_1/data/cart/src/cart_api_servises.dart';
+import 'package:flutter_application_1/domain/cart/repository/cart.dart';
+import 'package:flutter_application_1/domain/cart/usecase/add_cart_item_usecase.dart';
+import 'package:flutter_application_1/domain/cart/usecase/clear_cart_usecase.dart';
+import 'package:flutter_application_1/domain/cart/usecase/get_cart_usecase.dart';
+import 'package:flutter_application_1/domain/cart/usecase/place_order_usecase.dart';
+import 'package:flutter_application_1/domain/cart/usecase/update_cart_item_usecase.dart';
+import 'package:flutter_application_1/domain/cart/usecase/watch_cart_usecase.dart';
+import 'package:flutter_application_1/presentation/card/bloc/cart_bloc.dart';
+
+import 'data/products/src/products_cache_services.dart';
+import 'domain/categories/usecase/get_full_categories_usecase.dart';
+import 'domain/preferences/usecase/get_language_usecase.dart';
+import 'domain/preferences/usecase/set_language_usecase.dart';
+import 'domain/product/usecase/get_cached_familiar_product_usecase.dart';
+import 'domain/product/usecase/get_cached_flash_sell_products_usecase.dart';
+import 'domain/product/usecase/get_cached_paying_information_usecase.dart';
+import 'domain/product/usecase/get_cached_popular_products_usecase.dart';
+import 'domain/product/usecase/get_cached_rating_information_usecase.dart';
+import 'domain/product/usecase/get_cached_top_selling_products_usecase.dart';
+import 'domain/product/usecase/get_flash_seling_product_usecase.dart';
+import 'domain/product/usecase/get_product_pying_information_usecase.dart';
+import 'domain/product/usecase/is_have_enough_data_in_cache_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'domain/auth/usecase/set_user_info_usecase.dart';
@@ -47,6 +58,7 @@ import 'domain/product/usecase/get_product_rating_information_usecase.dart';
 import 'domain/product/usecase/get_products_py_category_usecase.dart';
 import 'domain/product/usecase/get_top_seling_products_usecase.dart';
 import 'domain/product/usecase/remove_product_from_bookmark_usecase.dart';
+import 'domain/cart/usecase/remove_cart_item_usecase.dart';
 
 import 'package:get_it/get_it.dart';
 
@@ -70,6 +82,7 @@ Future<void> setupServiceLocator() async{
 
   getIt.registerSingleton<ProductsCacheServices>(ProductsCacheServicesImp());
 
+  getIt.registerSingleton<CartApiServises>(CartApiServisesImp());
 
 
   //repository
@@ -80,6 +93,8 @@ Future<void> setupServiceLocator() async{
   getIt.registerSingleton<ProductsRepository>(ProductsRepositoryImp());
 
   getIt.registerSingleton<PreferencesRepository>(PreferencesRepositoryImp());
+
+  getIt.registerSingleton<CartRepository>(CartRepositoryImp());
 
 
   //usecase
@@ -146,6 +161,20 @@ Future<void> setupServiceLocator() async{
   getIt.registerSingleton<IsHaveEnoughDataInCacheUsecase>(IsHaveEnoughDataInCacheUsecase());
 
   getIt.registerSingleton<GetCachedFamiliarProductUsecase>(GetCachedFamiliarProductUsecase());
+
+  getIt.registerSingleton<GetCartUsecase>(GetCartUsecase());
+
+  getIt.registerSingleton<WatchCartUsecase>(WatchCartUsecase());
+
+  getIt.registerSingleton<AddCartItemUsecase>(AddCartItemUsecase());
+
+  getIt.registerSingleton<ClearCartUsecase>(ClearCartUsecase());
+
+  getIt.registerSingleton<PlaceOrderUsecase>(PlaceOrderUsecase());
+
+  getIt.registerSingleton<RemoveCartItemUsecase>(RemoveCartItemUsecase());
+
+  getIt.registerSingleton<UpdateCartItemUsecase>(UpdateCartItemUsecase());
 
 
 }

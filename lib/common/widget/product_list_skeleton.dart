@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/presentation/home/skeleton/product_card_skelton.dart';
+import '../../core/constant/constant.dart';
+import '../../presentation/home/skeleton/product_card_skelton.dart';
 
 class ProductListSkeleton extends StatelessWidget{
   const ProductListSkeleton({super.key});

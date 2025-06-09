@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/generated/l10n.dart';
+
 import '../../../common/helper/validat/validat.dart';
 import '../../../core/constant/constant.dart';
+import '../../../generated/l10n.dart';
 
 class UserNameTextFileld extends StatelessWidget {
   final String initialValue;

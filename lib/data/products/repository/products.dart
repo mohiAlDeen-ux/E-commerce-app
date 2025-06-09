@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/data/products/models/get_familiar_product_req.dart';
-import 'package:flutter_application_1/data/products/models/get_product_py_category_req.dart';
-import 'package:flutter_application_1/data/products/models/paying_information_model.dart';
-import 'package:flutter_application_1/data/products/models/product_model.dart';
-import 'package:flutter_application_1/data/products/src/products_cache_services.dart';
+import '../models/get_familiar_product_req.dart';
+import '../models/get_product_py_category_req.dart';
+import '../models/paying_information_model.dart';
+import '../models/product_model.dart';
+import '../src/products_cache_services.dart';
 import '../models/rating_information_model.dart';
 import '../src/products_api_services.dart';
 import '../../../domain/product/entity/product_entity.dart';
@@ -334,7 +334,7 @@ final List<ProductModel> _flashSellProducts = [
   @override
   Future<Either> getFamiliarProduct(GetFamiliarProductReq getFamiliarProduct) async {
     await Future.delayed(const Duration(seconds: 2));
-    final familiarProducts = familiarProducs.map((product) => product.toEntity());
+    final familiarProducts = familiarProducs.map((product) => product.toEntity()).toList();
     await getIt.call<ProductsCacheServices>().cacheFamiliarProduct(familiarProducs,getFamiliarProduct.page,getFamiliarProduct.productId);
     return Right(familiarProducts);
   }

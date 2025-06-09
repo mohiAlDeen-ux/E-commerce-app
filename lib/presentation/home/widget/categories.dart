@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 import 'package:flutter_svg/flutter_svg.dart';
 

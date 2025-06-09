@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/presentation/home/bloc/products/flash_sell_product_cubit.dart';
-import 'package:flutter_application_1/presentation/home/bloc/products/popular_product_cubit.dart';
-import 'package:flutter_application_1/presentation/home/bloc/products/top_selling_product_cubit.dart';
-import 'package:flutter_application_1/presentation/home/widget/flash_sell_products.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/products/flash_sell_product_cubit.dart';
+import '../bloc/products/popular_product_cubit.dart';
+import '../bloc/products/top_selling_product_cubit.dart';
+import '../widget/flash_sell_products.dart';
 import '../../../core/constant/constant.dart';
 import '../widget/categories.dart';
 import '../widget/offers_carousel.dart';

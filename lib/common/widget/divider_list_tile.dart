@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/assets/assets_depend_on_direction.dart';
+import '../assets/assets_depend_on_direction.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DividerListTile extends StatelessWidget {

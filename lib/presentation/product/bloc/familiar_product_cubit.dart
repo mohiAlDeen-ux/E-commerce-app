@@ -1,8 +1,8 @@
-import 'package:flutter_application_1/common/bloc/product_list_with_pagination_and_cache/product_list_state.dart';
-import 'package:flutter_application_1/data/products/models/get_familiar_product_req.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_cached_familiar_product_usecase.dart';
-import 'package:flutter_application_1/domain/product/usecase/get_familiar_product_usecase.dart';
-import 'package:flutter_application_1/servise_locator.dart';
+import '../../../common/bloc/product_list_with_pagination_and_cache/product_list_state.dart';
+import '../../../data/products/models/get_familiar_product_req.dart';
+import '../../../domain/product/usecase/get_cached_familiar_product_usecase.dart';
+import '../../../domain/product/usecase/get_familiar_product_usecase.dart';
+import '../../../servise_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
@@ -15,15 +15,12 @@ class FamiliarProductCubit extends Cubit<ProductsListState>{
 
   Future<void> loadProducts() async {
     if (_page == 3){
-      print("emit page is 3");
       emit(ProductsLoading(products: state.products, hasReachedMax: state.hasReachedMax));
     }
    
     if (state is ProductsError || state.hasReachedMax || _isLoading) {
-      print("no no no");
       return;
     }
-     print(_page);
     _isLoading = true;
     final oldState = state;
     emit(ProductsLoading(products: state.products, hasReachedMax: state.hasReachedMax));

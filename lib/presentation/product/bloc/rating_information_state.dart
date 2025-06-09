@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/domain/product/entity/rating_informatioin_entity.dart';
+import '../../../domain/product/entity/rating_informatioin_entity.dart';
 
 abstract class RatingInformationState{
   final RatingInformatioinEntity? ratingInformatioinEntity;

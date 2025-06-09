@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_application_1/common/bloc/internet/internet_state.dart';
+import 'internet_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 

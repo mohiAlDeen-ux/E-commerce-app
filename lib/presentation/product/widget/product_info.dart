@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/generated/l10n.dart';
-import 'package:flutter_application_1/presentation/product/bloc/rating_information_state.dart';
+import '../../../generated/l10n.dart';
+import '../bloc/rating_information_state.dart';
 import '../../../common/widget/skeleton.dart';
 import '../../../core/config/theme/app_colors.dart';
 import '../../../core/constant/constant.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/helper/navigation/app_navigator.dart';
-import 'package:flutter_application_1/common/widget/netword_image_with_loader.dart';
-import 'package:flutter_application_1/presentation/profile/bloc/image_cubit.dart';
+import '../../../common/helper/navigation/app_navigator.dart';
+import '../../../common/widget/netword_image_with_loader.dart';
+import '../bloc/image_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/image_state.dart';

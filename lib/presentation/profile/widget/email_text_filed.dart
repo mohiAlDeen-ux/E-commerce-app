@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/generated/l10n.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../common/helper/validat/validat.dart';
 import '../../../core/constant/constant.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import '../../../generated/l10n.dart';
 
 // ignore: must_be_immutable
 class EmailTextField extends StatelessWidget {

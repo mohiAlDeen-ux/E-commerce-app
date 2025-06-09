@@ -1,6 +1,6 @@
 import "package:dartz/dartz.dart";
-import "package:flutter_application_1/data/products/models/get_product_py_category_req.dart";
-import "package:http/http.dart" as http;
+
+import "../models/get_product_py_category_req.dart";
 
 abstract class ProductsApiServices{
   Future<Either> getProductsPyCategory(GetProductPyCategoryReq category);

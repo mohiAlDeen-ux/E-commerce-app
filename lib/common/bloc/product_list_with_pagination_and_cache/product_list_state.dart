@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/domain/product/entity/product_entity.dart';
+import '../../../domain/product/entity/product_entity.dart';
 
 abstract class ProductsListState {
   final List<ProductEntity> products;

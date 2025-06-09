@@ -1,7 +1,7 @@
-import 'package:flutter_application_1/common/bloc/language/language_state.dart';
-import 'package:flutter_application_1/domain/preferences/usecase/get_language_usecase.dart';
-import 'package:flutter_application_1/domain/preferences/usecase/set_language_usecase.dart';
-import 'package:flutter_application_1/servise_locator.dart';
+import 'language_state.dart';
+import '../../../domain/preferences/usecase/get_language_usecase.dart';
+import '../../../domain/preferences/usecase/set_language_usecase.dart';
+import '../../../servise_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 

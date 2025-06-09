@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import "package:dartz/dartz.dart";
+import "package:http/http.dart" as http;
+
 import '../../../core/constant/urls_constant.dart';
 import '../models/categories_models.dart';
-import "package:http/http.dart" as http;
-import "package:dartz/dartz.dart";
 
 abstract class CategoriesApiService{
   Future<Either<String,List<CategoryModels>>>  getCategories();

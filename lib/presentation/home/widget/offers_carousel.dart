@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
 import '../../../common/widget/M/banner_m_style_1.dart';
 import '../../../common/widget/M/banner_m_style_2.dart';
 import '../../../common/widget/M/banner_m_style_3.dart';

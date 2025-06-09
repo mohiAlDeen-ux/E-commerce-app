@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/domain/product/entity/product_entity.dart';
+import '../entity/product_entity.dart';
 
 import '../../../core/usecase/usecase.dart';
 import '../repository/products.dart';

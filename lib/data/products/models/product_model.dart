@@ -1,13 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-import 'package:flutter_application_1/data/products/models/paying_information_model.dart';
 import 'package:flutter_application_1/domain/product/entity/product_entity.dart';
-
-import 'rating_information_model.dart';
 
 class ProductModel {
   bool bookmark;
-  final isAvaliable;
+  final bool isAvaliable;
   final String id;
   final String brandName;
   final String title;

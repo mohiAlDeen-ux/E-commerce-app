@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/task/task_state.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/domain/categories/entity/full_categories_entity.dart';
-import 'package:flutter_application_1/generated/l10n.dart';
-import 'package:flutter_application_1/presentation/discover/bloc/full_categoriy_cubit.dart';
-import 'package:flutter_application_1/presentation/discover/widget/expansion_category.dart';
-import 'package:flutter_application_1/presentation/discover/widget/search_form.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../common/bloc/task/task_state.dart';
+import '../../../core/constant/constant.dart';
+import '../../../domain/categories/entity/full_categories_entity.dart';
+import '../../../generated/l10n.dart';
+import '../bloc/full_categoriy_cubit.dart';
+import '../widget/expansion_category.dart';
+import '../widget/search_form.dart';
 
 class DiscoverPage extends StatelessWidget {
   const DiscoverPage({super.key});
@@ -51,10 +52,10 @@ class DiscoverPage extends StatelessWidget {
                   );
                 }
                 else if(state is LoadingState){
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }else{
                   
-                  return Text("error");
+                  return const Text("error");
                 }
               })
             ],

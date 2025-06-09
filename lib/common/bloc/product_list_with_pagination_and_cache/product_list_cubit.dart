@@ -1,5 +1,5 @@
-import 'package:flutter_application_1/common/bloc/product_list_with_pagination_and_cache/product_list_state.dart';
-import 'package:flutter_application_1/core/usecase/usecase.dart';
+import 'product_list_state.dart';
+import '../../../core/usecase/usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class ProductsCubit extends Cubit<ProductsListState> {

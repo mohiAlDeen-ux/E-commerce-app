@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/assets/assets_depend_on_direction.dart';
+import '../../../common/assets/assets_depend_on_direction.dart';
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/widget/netword_image_with_loader.dart';
 import '../../../core/config/theme/app_colors.dart';

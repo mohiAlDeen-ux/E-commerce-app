@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/constant/constant.dart';
-import 'package:flutter_application_1/generated/l10n.dart';
+import '../../../core/constant/constant.dart';
+import '../../../generated/l10n.dart';
 
 
 class UnitPrice extends StatelessWidget {

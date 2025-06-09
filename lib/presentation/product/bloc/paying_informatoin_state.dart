@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/domain/product/entity/paying_information_entity.dart';
+import '../../../domain/product/entity/paying_information_entity.dart';
 
 
 abstract class PayingInformationState{

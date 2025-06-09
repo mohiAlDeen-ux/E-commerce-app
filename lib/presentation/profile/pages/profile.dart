@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/common/bloc/language/language_cubit.dart';
-import 'package:flutter_application_1/domain/auth/entity/gender.dart';
+import '../../../common/bloc/language/language_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_application_1/generated/l10n.dart';
+import '../../../generated/l10n.dart';
 
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/helper/navigation/app_navigator.dart';

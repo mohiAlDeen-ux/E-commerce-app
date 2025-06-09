@@ -1,7 +1,8 @@
-import '../../../core/usecase/usecase.dart';
 import 'package:dartz/dartz.dart';
-import '../repository/products.dart';
+
+import '../../../core/usecase/usecase.dart';
 import '../../../servise_locator.dart';
+import '../repository/products.dart';
 
 class GetTopSelingProductsUsecase extends UseCase<Either,int>{
   @override

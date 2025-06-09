@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/data/products/models/get_product_py_category_req.dart';
+import '../../../data/products/models/get_product_py_category_req.dart';
 
 import '../../../core/usecase/usecase.dart';
 import 'package:dartz/dartz.dart';

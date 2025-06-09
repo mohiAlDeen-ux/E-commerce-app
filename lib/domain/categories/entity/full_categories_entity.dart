@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/domain/categories/entity/categories_entity.dart';
+import 'categories_entity.dart';
 
 class FullCategoryEntity {
   String categoryName;
