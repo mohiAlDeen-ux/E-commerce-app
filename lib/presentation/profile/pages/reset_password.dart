@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/domain/auth/usecase/reset_password_py_old_password.dart';
+import 'package:flutter_application_1/servise_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/bloc/button/button_cubit.dart';
@@ -7,23 +9,17 @@ import '../../../common/bloc/task/task_state.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
 import '../../../common/widget/basic_reactive_button.dart';
 import '../../../core/constant/constant.dart';
-import '../../../data/auth/models/reset_password_py_token_req.dart';
-import '../../../domain/auth/usecase/reset_password_py_token.dart';
 import '../../../common/bloc/error_masage/erorr_masage_cubit.dart';
 import '../../../common/widget/error_masage.dart';
 import '../widget/reset_password_forms.dart';
 
-class ResetPassword extends StatelessWidget {
-  final String token;
-
-  ResetPassword({super.key, required this.token});
+class ResetPasswordPage extends StatelessWidget {
+  ResetPasswordPage({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    print(token);
-
     ResetPasswordForms resetPasswordForms =
         ResetPasswordForms(formKey: _formKey);
 
@@ -38,10 +34,12 @@ class ResetPassword extends StatelessWidget {
       ],
       child: BlocListener<ButtonCubit, TaskState>(
         listener: (context, buttonState) {
-          if(buttonState is SuccessState){
+          if (buttonState is SuccessState) {
             print("navigator in reset password page to home page");
-          }else if(buttonState is FailureState){
-            context.read<ErrorMasageCubit>().showError(buttonState.error.toString());
+          } else if (buttonState is FailureState) {
+            context
+                .read<ErrorMasageCubit>()
+                .showError(buttonState.error.toString());
           }
         },
         child: Scaffold(
@@ -77,18 +75,16 @@ class ResetPassword extends StatelessWidget {
                           style: TextStyle(fontSize: 15),
                         ),
                         const SizedBox(height: defaultPadding * 2),
-                        resetPasswordForms.build(context),
-
-                        ErrorMasage(),
-
+                        resetPasswordForms,
+                        const ErrorMasage(),
                         const Spacer(),
-                        Container(
+                        SizedBox(
                           height: 55,
                           child: Builder(builder: (context) {
                             return BasicReactiveButton(
                                 onPressed: () {
-                                  Either passwordReq =
-                                      resetPasswordForms.getPassword(); ///////////////
+                                  Either passwordReq = resetPasswordForms
+                                      .getResetPasswordReq(); ///////////////
                                   passwordReq.fold((errorMasage) {
                                     if (errorMasage == "not equal") {
                                       context.read<ErrorMasageCubit>().showError(
@@ -96,8 +92,9 @@ class ResetPassword extends StatelessWidget {
                                     }
                                   }, (returnedPassword) {
                                     context.read<ButtonCubit>().execute(
-                                        ResetPasswordPyTokenUseCase(),
-                                        ResetPasswordPyTokenReq(token: token, newPassword: returnedPassword) );
+                                        getIt.call<
+                                            ResetPasswordPyOldPasswordUseCase>(),
+                                        returnedPassword);
                                   });
                                 },
                                 content: const Text("Change Password"));

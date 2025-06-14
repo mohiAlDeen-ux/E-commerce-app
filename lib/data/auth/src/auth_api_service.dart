@@ -1,112 +1,164 @@
+import "package:cloud_firestore/cloud_firestore.dart";
 import "package:dartz/dartz.dart";
+import "package:firebase_auth/firebase_auth.dart";
+import "package:flutter_application_1/core/error/failures.dart";
 import "../models/set_user_info_req.dart";
-import "package:http/http.dart" as http;
-
-import "../../../core/constant/urls_constant.dart";
-import "../models/confirm_verification_code_req.dart";
 import "../models/reset_password_py_old_password_req.dart";
-import "../models/reset_password_py_token_req.dart";
 import "../models/user_creational_req.dart";
 import "../models/user_signin_req.dart";
+import '../models/user.dart';
 
-abstract class AuthApiService{
-  Future<Either> signin(UserSigninReq params);
-  Future<Either> signup(UserCreationalReq params);
-  Future<Either> getUser(String token);
-  Future<Either> resetPasswordPyToken(ResetPasswordPyTokenReq params);
-  Future<Either> resetPasswordPyOldPassword(ResetPasswordPyOldPasswordReq params);
-  Future<Either> confirmVerificationCode(ConfirmVerificationCodeReq params);
-  Future<Either> sentVerificationCode(String email);
-  Future<Either> setUserInfo(SetUserInfoReq userInfo);
+abstract class AuthApiService {
+  Future<Either<Failure, void>> signin(UserSigninReq params);
+  Future<Either<Failure, void>> signup(UserCreationalReq params);
+  Future<Either<Failure, void>> resetPasswordPyOldPassword(
+      ResetPasswordPyOldPasswordReq params);
+  Future<Either<Failure, void>> sendPasswordResetEmail(String email);
+  Future<Either<Failure, void>> setUserInfo(SetUserInfoReq userInfo);
+  Future<bool> isLogIn();
+  Future<Either<Failure, UserModel>> getUser();
+  Future<Either<Failure, void>> logOut();
 }
 
-class AuthApiServiceImp extends AuthApiService{
+class AuthApiServiceImp extends AuthApiService {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   @override
-  Future<Either> getUser(String token) async{
-    Uri url = Uri.parse(UrlsConstant.getUser);
-
-    await Future.delayed(const Duration(seconds: 2));
-
-    return const Left("UnimplementedError");
-
+  Future<bool> isLogIn() async {
+    return auth.currentUser != null;
   }
 
   @override
-  Future<Either> signin(UserSigninReq params) async{
-    Uri url = Uri.parse(UrlsConstant.login);
-
-    await Future.delayed(Duration(seconds: 2));
-    return Left("eeee");
-
-
-    try{
-      http.Response response =  await http.post(url,body: params.toMap());
-      if(response.statusCode != 200){
-        return const Left("wrong email or password");
-      }
-
-      return Right(response);
-
-    }catch(error){
-      return const Left("network erorruuuuuu");
-    }
-
-  }
-
-  @override
-  Future<Either> signup(UserCreationalReq params) async{
-    Uri url = Uri.parse(UrlsConstant.signup);
-
-
-    try{
-      http.Response response =  await http.post(url,body: params.toMap());
-      if(response.statusCode != 200){
-
-      return const Left("Wrong value");
-      }
-
-      return Right(response);
-
-    } catch(error){
-      return const Left("network erorr");
+  Future<Either<Failure, void>> logOut() async {
+    try {
+      await auth.signOut();
+      return const Right(null);
+    } catch (e) {
+      return const Left(AuthFailure("Logout failed"));
     }
   }
-  
-  @override
-  Future<Either> confirmVerificationCode(ConfirmVerificationCodeReq params) async{ //should return the token
-    Uri url = Uri.parse(UrlsConstant.confirmVerificationCode);
 
-    await Future.delayed(const Duration(seconds: 2));
-    return const Right("UnimplementedError");
-  }
-  
   @override
-  Future<Either> sentVerificationCode(String email) async{
-    Uri url = Uri.parse(UrlsConstant.sendVerificationCode);
+  Future<Either<Failure, UserModel>> getUser() async {
+    if (!await isLogIn()) {
+      return const Left(UserNotLoggedInFailure());
+    }
 
-    await Future.delayed(const Duration(seconds: 2));
-    return const Right("UnimplementedError");
-  }
-  
-  @override
-  Future<Either> resetPasswordPyToken(ResetPasswordPyTokenReq params) async{
-    Uri url = Uri.parse(UrlsConstant.resetPassword);
+    try {
+      final user = auth.currentUser!;
+      final doc = await firestore.collection('Users').doc(user.uid).get();
 
-    await Future.delayed(const Duration(seconds: 2));
+      if (!doc.exists) {
+        return const Left(UserNotFoundFailure());
+      }
 
-    return const Left("UnimplementedError");
-  }
-  
-  @override
-  Future<Either> resetPasswordPyOldPassword(ResetPasswordPyOldPasswordReq params) {
-    // TODO: implement resetPasswordPyOldPassword
-    throw UnimplementedError();
-  }
-  
-  @override
-  Future<Either> setUserInfo(SetUserInfoReq userInfo) {
-    // TODO: implement setUserInfo
-    throw UnimplementedError();
+      final userData = doc.data()!..addAll({"email": user.email});
+      return Right(UserModel.fromMap(userData));
+    } catch (e) {
+      return const Left(ServerFailure());
+    }
   }
 
+  @override
+  Future<Either<Failure, void>> signin(UserSigninReq params) async {
+    try {
+      await auth.signInWithEmailAndPassword(
+        email: params.email,
+        password: params.password,
+      );
+      return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(
+        switch (e.code) {
+          'invalid-email' => const InvalidEmailFailure(),
+          'wrong-password' ||
+          'invalid-credential' =>
+            const WrongPasswordFailure(),
+          'user-not-found' => const UserNotFoundFailure(),
+          _ => const ServerFailure(),
+        },
+      );
+    } catch (e) {
+      return const Left(UnexpectedFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> signup(UserCreationalReq params) async {
+    try {
+      final credential = await auth.createUserWithEmailAndPassword(
+        email: params.email,
+        password: params.password,
+      );
+
+      await firestore.collection('Users').doc(credential.user!.uid).set({
+        "userName": params.userName,
+      });
+
+      return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(
+        switch (e.code) {
+          'weak-password' => const WeakPasswordFailure(),
+          'email-already-in-use' => const EmailInUseFailure(),
+          _ => const ServerFailure(),
+        },
+      );
+    } catch (e) {
+      return const Left(UnexpectedFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> resetPasswordPyOldPassword(
+      ResetPasswordPyOldPasswordReq params) async {
+    final user = auth.currentUser;
+    if (user == null) return const Left(UserNotLoggedInFailure());
+
+    try {
+      final credential = EmailAuthProvider.credential(
+        email: user.email!,
+        password: params.oldPassword,
+      );
+
+      await user.reauthenticateWithCredential(credential);
+      await user.updatePassword(params.newPassword);
+      return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(
+        switch (e.code) {
+          'wrong-password' => const WrongPasswordFailure(),
+          'requires-recent-login' => const RequiresRecentLoginFailure(),
+          _ => const ServerFailure(),
+        },
+      );
+    } catch (e) {
+      return const Left(UnexpectedFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> setUserInfo(SetUserInfoReq userInfo) async {
+    // here i can return the current user from the set user info req class and email from current user... and show the image like image.file antile i wait for get the image from internet I may do this later
+    try {
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(auth.currentUser?.uid)
+          .set(userInfo.toMap(), SetOptions(merge: true));
+      return const Right(null);
+    } catch (error) {
+      return const Left(SetUserInfoFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> sendPasswordResetEmail(String email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      return const Right(null);
+    } catch (e) {
+      return const Left(ServerFailure());
+    }
+  }
 }

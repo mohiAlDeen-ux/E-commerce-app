@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/bottomNavBar/pages/bottom_nav_bar.dart';
 import '../../../common/bloc/button/button_cubit.dart';
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
@@ -17,14 +18,14 @@ import '../../on_board/pages/on_board.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart' show Either;
 
-class Signup extends StatefulWidget {
-  const Signup({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<Signup> createState() => _SignupState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _SignupState extends State<Signup> {
+class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -106,7 +107,7 @@ class _SignupState extends State<Signup> {
                     BlocListener<ButtonCubit, TaskState>(
                         listener: (context, state) {
                       if (state is SuccessState) {
-                        //AppNavigator
+                        AppNavigator.pushAndRemove(context, BottomNavBarPage());
                       } else if (state is FailureState) {
                         context
                             .read<ErrorMasageCubit>()
@@ -139,7 +140,7 @@ class _SignupState extends State<Signup> {
                         const Text("Do you have an account?"),
                         TextButton(
                           onPressed: () {
-                            AppNavigator.push(context, const Signin());
+                            AppNavigator.push(context, const SigninPage());
                           },
                           child: const Text("Log in"),
                         )

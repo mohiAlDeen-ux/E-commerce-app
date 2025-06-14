@@ -3,8 +3,6 @@ import 'package:flutter_application_1/data/cart/models/cart_item_models.dart';
 import 'package:flutter_application_1/data/cart/models/cart_models.dart';
 import "dart:convert";
 
-import 'package:flutter_application_1/domain/cart/entity/cart_entity.dart';
-
 String jsonExample = '''{
   "id": "cart_home_333",
   "userId": "user_home_99",

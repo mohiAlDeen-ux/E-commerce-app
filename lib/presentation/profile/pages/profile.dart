@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/auth/pages/signin.dart';
+import 'package:flutter_application_1/presentation/profile/bloc/log_out_cubit.dart';
 import '../../../common/bloc/language/language_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,6 +28,9 @@ class ProfilePage extends StatelessWidget {
         BlocProvider(
           create: (context) => UserCubit()..getUser(),
         ),
+        BlocProvider(
+          create: (context) => LogOutCubit(),
+        ),
       ],
       child: Scaffold(
         body: ListView(
@@ -47,6 +52,7 @@ class ProfilePage extends StatelessWidget {
 
             BlocBuilder<UserCubit, TaskState>(
               builder: (context, state) {
+                print(state);
                 if (state is SuccessState) {
                   UserEntity userEntity = state.data;
                   if (userEntity.isPro == false) {
@@ -69,6 +75,9 @@ class ProfilePage extends StatelessWidget {
                     return Container();
                   }
                 } else {
+                  if (state is FailureState) {
+                    print(state.error);
+                  }
                   return Container();
                 }
               },
@@ -178,7 +187,7 @@ class ProfilePage extends StatelessWidget {
                                       (BuildContext context, int index) {
                                     final localCode = S.delegate
                                         .supportedLocales[index].languageCode;
-                                    late final localName;
+                                    late final String localName;
                                     switch (localCode) {
                                       case 'ar':
                                         localName = "عربي";
@@ -238,24 +247,51 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: defaultPadding),
 
             // Log Out
-            ListTile(
-              onTap: () {},
-              minLeadingWidth: 24,
-              leading: SvgPicture.asset(
-                "assets/icons/Logout.svg",
-                height: 24,
-                width: 24,
-                colorFilter: const ColorFilter.mode(
-                  errorColor,
-                  BlendMode.srcIn,
+            BlocListener<LogOutCubit, TaskState>(
+                listener: (BuildContext context, TaskState logOutState) {
+              if (logOutState is SuccessState) {
+                AppNavigator.pushAndRemove(context, const SigninPage());
+              }
+            }, child: Builder(builder: (context) {
+              return ListTile(
+                onTap: () async {
+                  showDialog(
+                      context: context,
+                      builder: (context2) => AlertDialog(
+                            title: const Text("log out"),
+                            content: const Text("Do you want to log out"),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text("Cancel"),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  await context.read<LogOutCubit>().logOut();
+                                },
+                                child: const Text("Log Out",
+                                    style: TextStyle(color: Colors.red)),
+                              ),
+                            ],
+                          ));
+                },
+                minLeadingWidth: 24,
+                leading: SvgPicture.asset(
+                  "assets/icons/Logout.svg",
+                  height: 24,
+                  width: 24,
+                  colorFilter: const ColorFilter.mode(
+                    errorColor,
+                    BlendMode.srcIn,
+                  ),
                 ),
-              ),
-              title: Text(
-                S.of(context).log_out,
-                style:
-                    const TextStyle(color: errorColor, fontSize: 14, height: 1),
-              ),
-            )
+                title: Text(
+                  S.of(context).log_out,
+                  style: const TextStyle(
+                      color: errorColor, fontSize: 14, height: 1),
+                ),
+              );
+            }))
           ],
         ),
       ),

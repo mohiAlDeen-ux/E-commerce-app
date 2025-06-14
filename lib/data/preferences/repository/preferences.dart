@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:dartz/dartz.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../domain/preferences/repository/preferences.dart';

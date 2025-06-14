@@ -45,32 +45,30 @@ class BottomNavBarPage extends StatelessWidget {
         builder: (context, navState) {
           switch (navState) {
             case NavState.HomeScreen:
-              curentPage = HomePage();
+              curentPage = const HomePage();
               break;
 
             case NavState.DiscoverScreen:
-              curentPage = DiscoverPage();
+              curentPage = const DiscoverPage();
               break;
 
             case NavState.BookmarkScreen:
-              curentPage = BookmarkPage();
+              curentPage = const BookmarkPage();
               break;
 
             case NavState.CardScreen:
-              curentPage = CartPage();
+              curentPage = const CartPage();
               break;
 
             case NavState.ProfileScreen:
-              curentPage = ProfilePage();
+              curentPage = const ProfilePage();
               break;
 
             default:
-              curentPage = Container(
-                child: Text("default"),
-              );
+              curentPage = const Text("default");
               break;
           }
-          ;
+          
 
           return Scaffold(
             appBar: AppBar(
@@ -91,7 +89,7 @@ class BottomNavBarPage extends StatelessWidget {
               actions: [
                 IconButton(
                   onPressed: () {
-                    //Navigator.pushNamed(context, searchScreenRoute);
+                    
                   },
                   icon: SvgPicture.asset(
                     "assets/icons/Search.svg",
@@ -103,7 +101,7 @@ class BottomNavBarPage extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    //Navigator.pushNamed(context, notificationsScreenRoute);
+                    
                   },
                   icon: SvgPicture.asset(
                     "assets/icons/Notification.svg",

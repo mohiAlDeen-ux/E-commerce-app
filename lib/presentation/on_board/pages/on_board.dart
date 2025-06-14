@@ -3,7 +3,7 @@ import '../../../common/helper/navigation/app_navigator.dart';
 import '../../../common/widget/dot_indicators.dart';
 import '../../../core/constant/constant.dart';
 import '../../auth/pages/signin.dart';
-import '../../bottomNavBar/pages/buttomNavBar.dart';
+import '../../bottomNavBar/pages/bottom_nav_bar.dart';
 import '../bloc/on_board_cubit.dart';
 import '../bloc/on_board_state.dart';
 import 'package:flutter_svg/svg.dart';
@@ -78,7 +78,7 @@ class _MyWidgetState extends State<OnBoardPage> {
       child: BlocListener<OnBoardCubit, OnBoardState>(
         listener: (context, state) {
           if(state is UnAuthState){
-            AppNavigator.pushAndRemove(context, Signin());
+            AppNavigator.pushAndRemove(context, SigninPage());
           }else if(state is AuthState){
             AppNavigator.pushAndRemove(context, BottomNavBarPage());
           }

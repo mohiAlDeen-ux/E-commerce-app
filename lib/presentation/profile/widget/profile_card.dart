@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/common/widget/skeleton.dart';
 import '../../../common/assets/assets_depend_on_direction.dart';
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/widget/netword_image_with_loader.dart';
@@ -25,18 +26,22 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserCubit, TaskState>(
-      builder: (context2, state) {
-        if (state is SuccessState){
+    return BlocBuilder<UserCubit, TaskState>(builder: (context2, state) {
+      if (state is SuccessState) {
         UserEntity user = state.data;
+        print(user.profileImage);
         return ListTile(
           onTap: press,
           leading: CircleAvatar(
             radius: 28,
-            child: NetworkImageWithLoader(
-              src: user.profileImage,
-              radius: 100,
-            ),
+            child: user.profileImage == ""
+                ? const Skeleton(
+                    radious: 28,
+                  )
+                : NetworkImageWithLoader(
+                    src: user.profileImage,
+                    radius: 100,
+                  ),
           ),
           title: Row(
             children: [
@@ -79,10 +84,11 @@ class ProfileCard extends StatelessWidget {
                 )
               : null,
         );
-      }else{
-        return ProfileCardSkeleton(isShowArrow: isShowArrow,);
+      } else {
+        return ProfileCardSkeleton(
+          isShowArrow: isShowArrow,
+        );
       }
-      }
-    );
+    });
   }
 }

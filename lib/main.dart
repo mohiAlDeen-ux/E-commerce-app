@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'common/bloc/internet/internet_cubit.dart';
 import 'common/bloc/language/language_cubit.dart';
 import 'common/bloc/language/language_state.dart';
@@ -7,7 +8,6 @@ import 'generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/config/theme/app_theme.dart';
-import 'presentation/bottomNavBar/pages/buttomNavBar.dart';
 import 'presentation/splash/pages/splash.dart';
 import 'servise_locator.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,8 +19,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
 );
-
+  await dotenv.load(fileName: ".env");
   await setupServiceLocator();
+  
 
   final languageCode =  await getIt.call<GetLanguageUsecase>().call();
   final locale = Locale(languageCode);
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
 
             title: 'E-commerce app',
             theme: AppTheme.lightTheme(context),
-            home: BottomNavBarPage(),
+            home: const SplashPage(),
           );
         },
       ),

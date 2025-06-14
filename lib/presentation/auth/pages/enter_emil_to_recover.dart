@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/domain/auth/usecase/send_password_reset_email_usecase.dart';
+import 'package:flutter_application_1/presentation/auth/pages/confirm_page.dart';
+import 'package:flutter_application_1/servise_locator.dart';
 import '../../../common/bloc/button/button_cubit.dart';
 import '../../../common/bloc/task/task_state.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
 import '../../../common/widget/basic_reactive_button.dart';
 import '../../../core/constant/constant.dart';
-import '../../../domain/auth/usecase/sent_verification_code_usecase.dart';
 import '../../../common/bloc/error_masage/erorr_masage_cubit.dart';
-import 'enter_verification_code.dart';
 import '../widget/email_text_field.dart';
 import '../../../common/widget/error_masage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:dartz/dartz.dart';
 
-class EnterEmilToRecover extends StatelessWidget {
-  EnterEmilToRecover({super.key});
+class EnterEmilToRecoverPage extends StatelessWidget {
+  EnterEmilToRecoverPage({super.key});
   final formKey = GlobalKey<FormState>();
   String? email;
 
@@ -36,9 +36,8 @@ class EnterEmilToRecover extends StatelessWidget {
       child: BlocListener<ButtonCubit, TaskState>(
         listener: (context, state) {
           if(state is SuccessState){
-           //print(email);
            AppNavigator.push(
-           context, EnterVerificationCode(email: email!,));
+           context, const ConfirmPage());
           }else if(state is FailureState){
             print(state.error);
             context.read<ErrorMasageCubit>().showError(state.error);
@@ -95,7 +94,7 @@ class EnterEmilToRecover extends StatelessWidget {
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
                                   formKey.currentState!.save();
-                                  context.read<ButtonCubit>().execute(SentVerificationCodeUsecase(),email!);
+                                  context.read<ButtonCubit>().execute(getIt.call<SendPasswordResetEmailUsecase>(),email!);//
                                 }
                               });
                         }),

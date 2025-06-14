@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/presentation/auth/pages/choose_verification_method.dart';
+import 'package:flutter_application_1/presentation/bottomNavBar/pages/bottom_nav_bar.dart';
 import '../../../common/bloc/language/language_cubit.dart';
 import '../../../common/bloc/language/language_state.dart';
 import '../../../common/bloc/button/button_cubit.dart';
@@ -15,14 +15,14 @@ import '../../../common/widget/error_masage.dart';
 import '../widget/siginin_forms.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Signin extends StatefulWidget {
-  const Signin({super.key});
+class SigninPage extends StatefulWidget {
+  const SigninPage({super.key});
 
   @override
-  State<Signin> createState() => _SigninState();
+  State<SigninPage> createState() => _SigninPageState();
 }
 
-class _SigninState extends State<Signin> {
+class _SigninPageState extends State<SigninPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -67,7 +67,7 @@ class _SigninState extends State<Signin> {
                       child: TextButton(
                         child: const Text("Forgot password"),
                         onPressed: () {
-                          AppNavigator.push(context, ChooseVerificationMethod());
+                          AppNavigator.push(context, EnterEmilToRecoverPage());
                         },
                       ),
                     ),
@@ -83,7 +83,7 @@ class _SigninState extends State<Signin> {
                               .read<ErrorMasageCubit>()
                               .showError(state.error);
                         } else if (state is SuccessState) {
-                          //Navigatior
+                          AppNavigator.pushAndRemove(context, BottomNavBarPage());
                           context.read<ErrorMasageCubit>().showError("test");
                         }
                       },
@@ -106,7 +106,7 @@ class _SigninState extends State<Signin> {
                         const Text("Don't have an account?"),
                         TextButton(
                           onPressed: () {
-                            AppNavigator.push(context, Signup());
+                            AppNavigator.push(context, SignupPage());
                           },
                           child: const Text("Sign up"),
                         )

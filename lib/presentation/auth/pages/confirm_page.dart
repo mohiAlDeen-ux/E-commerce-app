@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/auth/pages/signin.dart';
 import '../../../common/helper/navigation/app_navigator.dart';
 import '../../../core/constant/constant.dart';
-import '../widget/email_text_field.dart';
 
-class ChooseVerificationMethod extends StatelessWidget {
-  const ChooseVerificationMethod({super.key});
+class ConfirmPage extends StatelessWidget {
+  const ConfirmPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ChooseVerificationMethod extends StatelessWidget {
                   children: [
                     const SizedBox(height: defaultPadding),
                     Text(
-                      "Choose verification method",
+                      "Password reset message sent successfully",
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge!
@@ -37,20 +37,18 @@ class ChooseVerificationMethod extends StatelessWidget {
                     ),
                     const SizedBox(height: defaultPadding),
                     const Text(
-                      "we'll send you a verification code to reset your password",
+                      "We have sent you a password reset email. Please check your email to reset your password.",
                       style: TextStyle(fontSize: 15),
                     ),
                     const SizedBox(
                       height: defaultPadding * 2,
                     ),
-                    Expanded(
-                        child: EmailTextField(
-                      onSavedFunction: null,
-                    )),
                     const Spacer(),
                     ElevatedButton(
-                      onPressed: () {},
-                      child: const Text("Next"),
+                      onPressed: () {
+                        AppNavigator.push(context, const SigninPage());
+                      },
+                      child: const Text("OK"),
                     ),
                   ],
                 ),

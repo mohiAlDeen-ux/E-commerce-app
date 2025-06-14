@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/bottomNavBar/pages/bottom_nav_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,10 +22,11 @@ class SplashPage extends StatelessWidget {
             AppNavigator.pushReplacement(context, const OnBoardPage());
             
           }else if(state is AuthState){
-            AppNavigator.pushAndRemove(context, const BottomAppBar());
+            print("i am auth");
+            AppNavigator.pushAndRemove(context, BottomNavBarPage());
 
           }else if(state is UnAuthState){
-            AppNavigator.pushAndRemove(context, const Signin());
+            AppNavigator.pushAndRemove(context, const SigninPage());
 
           }
         },

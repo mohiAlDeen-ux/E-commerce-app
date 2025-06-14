@@ -72,8 +72,6 @@ class EditProfileForm extends StatelessWidget {
           BirthDayDateFiled(onSavedFunction: saveBirthDayDate ,initialDate: userEntity.birthDate,),
           const SizedBox(height: defaultPadding,),
           PhoneNumberTextFiled(initialPhoneNumber: userEntity.phoneNumber,onSavedFunction: savePhoneNumber,)
-
-
         ],
       ),
     );

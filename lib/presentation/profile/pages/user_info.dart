@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/profile/pages/reset_password.dart';
 import '../../../generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:intl/intl.dart";
@@ -92,7 +93,7 @@ class UserInfo extends StatelessWidget {
                       child: ProfileInfoListTile(
                         infoName: S.of(context).date_of_birth,
                         value: Text(
-                            state is SuccessState ? DateFormat.yMMMd('en_US')
+                            state is SuccessState && state.data.birthDate != null ? DateFormat.yMMMd('en_US')
                                 .format(state.data.birthDate)
                                 .toString():"",
                             style: Theme.of(context).textTheme.titleSmall),
@@ -101,7 +102,7 @@ class UserInfo extends StatelessWidget {
                     SliverToBoxAdapter(
                       child: ProfileInfoListTile(
                         infoName: S.of(context).phone_number,
-                        value: Text(state is SuccessState ? state.data.phoneNumber:" ",
+                        value: Text(state is SuccessState && state.data.phoneNumber != null ? state.data.phoneNumber:" ",
                             style: Theme.of(context).textTheme.titleSmall),
                       ),
                     ),
@@ -124,7 +125,9 @@ class UserInfo extends StatelessWidget {
                         showBottomDivider: false,
                         infoName: S.of(context).password,
                         value: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            AppNavigator.push(context,ResetPasswordPage());
+                          },
                           style: const ButtonStyle(
                               padding: WidgetStatePropertyAll(EdgeInsets.zero)),
                           child: Text(

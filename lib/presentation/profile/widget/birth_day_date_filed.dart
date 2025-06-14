@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class BirthDayDateFiled extends StatelessWidget {
-  final DateTime initialDate;
+  final DateTime? initialDate;
   void Function(DateTime?) onSavedFunction;
 
   TextEditingController _controller = TextEditingController();
@@ -13,7 +13,8 @@ class BirthDayDateFiled extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _controller.text = DateFormat.yMMMd('en_US').format(initialDate).toString();
+
+    _controller.text = initialDate != null? DateFormat.yMMMd('en_US').format(initialDate!).toString():"";
     return TextFormField(
       controller: _controller,
       textInputAction: TextInputAction.next,

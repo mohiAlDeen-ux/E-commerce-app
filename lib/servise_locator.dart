@@ -1,5 +1,8 @@
+import 'package:flutter_application_1/data/auth/src/cloudinary_server.dart';
 import 'package:flutter_application_1/data/cart/repository/cart.dart';
 import 'package:flutter_application_1/data/cart/src/cart_api_servises.dart';
+import 'package:flutter_application_1/domain/auth/usecase/log_out_usecase.dart';
+import 'package:flutter_application_1/domain/auth/usecase/send_password_reset_email_usecase.dart';
 import 'package:flutter_application_1/domain/cart/repository/cart.dart';
 import 'package:flutter_application_1/domain/cart/usecase/add_cart_item_usecase.dart';
 import 'package:flutter_application_1/domain/cart/usecase/clear_cart_usecase.dart';
@@ -28,7 +31,6 @@ import 'domain/auth/usecase/set_user_info_usecase.dart';
 
 import 'data/auth/repository/auth.dart';
 import 'data/auth/src/auth_api_service.dart';
-import 'data/auth/src/auth_local_service.dart';
 import 'data/categories/repository/categories.dart';
 import 'data/categories/src/categories_api_service.dart';
 import 'data/preferences/repository/preferences.dart';
@@ -36,12 +38,9 @@ import 'data/preferences/src/preferences_local_services.dart';
 import 'data/products/repository/products.dart';
 import 'data/products/src/products_api_services.dart';
 import 'domain/auth/repository/auth.dart';
-import 'domain/auth/usecase/confirm_verification_code.dart';
 import 'domain/auth/usecase/get_user_usecase.dart';
 import 'domain/auth/usecase/is_logged_in_usecase.dart';
 import 'domain/auth/usecase/reset_password_py_old_password.dart';
-import 'domain/auth/usecase/sent_verification_code_usecase.dart';
-import 'domain/auth/usecase/reset_password_py_token.dart';
 import 'domain/auth/usecase/signin_usecase.dart';
 import 'domain/auth/usecase/signup_usecase.dart';
 import 'domain/categories/repository/category.dart';
@@ -72,8 +71,6 @@ Future<void> setupServiceLocator() async{
   //service
   getIt.registerSingleton<AuthApiService>(AuthApiServiceImp());
 
-  getIt.registerSingleton<AuthLocalService>(AuthLocalServiceImp());
-
   getIt.registerSingleton<CategoriesApiService>(CategoriesApiServiceImp());
 
   getIt.registerSingleton<ProductsApiServices>(ProductsApiServicesImp());
@@ -87,6 +84,8 @@ Future<void> setupServiceLocator() async{
 
   //repository
   getIt.registerSingleton<AuthRepository>(AuthRepositoryImp());
+
+  getIt.registerSingleton<CloudinaryService>(CloudinaryServiceImp());
 
   getIt.registerSingleton<CategoryRepository>(CategoryRepositoryImp());
 
@@ -105,12 +104,6 @@ Future<void> setupServiceLocator() async{
   getIt.registerSingleton<SigninUsecase>(SigninUsecase());
 
   getIt.registerSingleton<SignupUsecase>(SignupUsecase());
-
-  getIt.registerSingleton<SentVerificationCodeUsecase>(SentVerificationCodeUsecase());
-
-  getIt.registerSingleton<ConfirmVerificationCodeUsecase>(ConfirmVerificationCodeUsecase());
-
-  getIt.registerSingleton<ResetPasswordPyTokenUseCase>(ResetPasswordPyTokenUseCase());
 
   getIt.registerSingleton<ResetPasswordPyOldPasswordUseCase>(ResetPasswordPyOldPasswordUseCase());
 
@@ -175,6 +168,11 @@ Future<void> setupServiceLocator() async{
   getIt.registerSingleton<RemoveCartItemUsecase>(RemoveCartItemUsecase());
 
   getIt.registerSingleton<UpdateCartItemUsecase>(UpdateCartItemUsecase());
+
+  getIt.registerSingleton<LogOutUsecase>(LogOutUsecase());
+
+  getIt.registerSingleton<SendPasswordResetEmailUsecase>(SendPasswordResetEmailUsecase());
+
 
 
 }
